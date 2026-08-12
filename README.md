@@ -1,5 +1,6 @@
 # godot-zig
 
+> [!NOTE]
 > Disclaimer: this package is currently 100% AI-generated. Review, test, and audit it carefully before using it in production.
 
 A small Zig foundation layer for writing [Godot GDExtension](https://docs.godotengine.org/en/stable/tutorials/scripting/gdextension/index.html) libraries against Godot's C API.
