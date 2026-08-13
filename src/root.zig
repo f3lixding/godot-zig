@@ -6,6 +6,7 @@ pub const class = @import("class.zig");
 pub const input = @import("input.zig");
 pub const variant = @import("variant.zig");
 pub const collections = @import("collections.zig");
+pub const log = @import("log.zig");
 pub const generated = @import("generated/root.zig");
 pub const extension = @import("extension.zig");
 
@@ -47,6 +48,7 @@ comptime {
     _ = class;
     _ = variant;
     _ = collections;
+    _ = log;
     _ = generated;
     _ = extension;
 }
@@ -55,4 +57,5 @@ test {
     _ = @import("types.zig");
     _ = @import("api.zig");
     _ = @import("class.zig");
+    _ = @import("log.zig");
 }

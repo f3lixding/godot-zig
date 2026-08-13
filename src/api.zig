@@ -18,6 +18,13 @@ pub const Interface = struct {
     mem_realloc: c.GDExtensionInterfaceMemRealloc = null,
     mem_free: c.GDExtensionInterfaceMemFree = null,
 
+    print_error: c.GDExtensionInterfacePrintError = null,
+    print_error_with_message: c.GDExtensionInterfacePrintErrorWithMessage = null,
+    print_warning: c.GDExtensionInterfacePrintWarning = null,
+    print_warning_with_message: c.GDExtensionInterfacePrintWarningWithMessage = null,
+    print_script_error: c.GDExtensionInterfacePrintScriptError = null,
+    print_script_error_with_message: c.GDExtensionInterfacePrintScriptErrorWithMessage = null,
+
     classdb_construct_object: c.GDExtensionInterfaceClassdbConstructObject = null,
     classdb_get_method_bind: c.GDExtensionInterfaceClassdbGetMethodBind = null,
     classdb_register_extension_class6: c.GDExtensionInterfaceClassdbRegisterExtensionClass6 = null,
@@ -58,6 +65,12 @@ pub const Interface = struct {
         self.mem_alloc = proc(c.GDExtensionInterfaceMemAlloc, get_proc_address, "mem_alloc");
         self.mem_realloc = proc(c.GDExtensionInterfaceMemRealloc, get_proc_address, "mem_realloc");
         self.mem_free = proc(c.GDExtensionInterfaceMemFree, get_proc_address, "mem_free");
+        self.print_error = proc(c.GDExtensionInterfacePrintError, get_proc_address, "print_error");
+        self.print_error_with_message = proc(c.GDExtensionInterfacePrintErrorWithMessage, get_proc_address, "print_error_with_message");
+        self.print_warning = proc(c.GDExtensionInterfacePrintWarning, get_proc_address, "print_warning");
+        self.print_warning_with_message = proc(c.GDExtensionInterfacePrintWarningWithMessage, get_proc_address, "print_warning_with_message");
+        self.print_script_error = proc(c.GDExtensionInterfacePrintScriptError, get_proc_address, "print_script_error");
+        self.print_script_error_with_message = proc(c.GDExtensionInterfacePrintScriptErrorWithMessage, get_proc_address, "print_script_error_with_message");
         self.classdb_construct_object = proc(c.GDExtensionInterfaceClassdbConstructObject, get_proc_address, "classdb_construct_object");
         self.classdb_get_method_bind = proc(c.GDExtensionInterfaceClassdbGetMethodBind, get_proc_address, "classdb_get_method_bind");
         self.classdb_register_extension_class6 = proc(c.GDExtensionInterfaceClassdbRegisterExtensionClass6, get_proc_address, "classdb_register_extension_class6");

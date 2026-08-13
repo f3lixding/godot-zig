@@ -162,6 +162,36 @@ if (!camera.isNull()) {
 }
 ```
 
+## Logging
+
+Godot's GDExtension logging functions are available through `godot.log` after initialization:
+
+```zig
+godot.log.warn("Something looks suspicious", .{
+    .function = @src().fn_name,
+    .file = @src().file,
+    .line = @src().line,
+});
+
+godot.log.errMsg("Failed to build mesh", "surface 0 had no vertex array", .{
+    .function = @src().fn_name,
+    .file = @src().file,
+    .line = @src().line,
+    .editor_notify = true,
+});
+```
+
+Available helpers:
+
+```zig
+godot.log.err(...)
+godot.log.errMsg(...)
+godot.log.warn(...)
+godot.log.warnMsg(...)
+godot.log.scriptErr(...)
+godot.log.scriptErrMsg(...)
+```
+
 ## Raw API escape hatch
 
 The raw C API is always available:
