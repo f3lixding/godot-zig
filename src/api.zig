@@ -36,9 +36,14 @@ pub const Interface = struct {
 
     global_get_singleton: c.GDExtensionInterfaceGlobalGetSingleton = null,
 
+    variant_destroy: c.GDExtensionInterfaceVariantDestroy = null,
     variant_get_ptr_constructor: c.GDExtensionInterfaceVariantGetPtrConstructor = null,
     variant_get_ptr_destructor: c.GDExtensionInterfaceVariantGetPtrDestructor = null,
     variant_get_ptr_operator_evaluator: c.GDExtensionInterfaceVariantGetPtrOperatorEvaluator = null,
+    variant_get_ptr_builtin_method: c.GDExtensionInterfaceVariantGetPtrBuiltinMethod = null,
+    variant_get_ptr_indexed_getter: c.GDExtensionInterfaceVariantGetPtrIndexedGetter = null,
+    variant_get_ptr_indexed_setter: c.GDExtensionInterfaceVariantGetPtrIndexedSetter = null,
+    variant_get_type: c.GDExtensionInterfaceVariantGetType = null,
     get_variant_from_type_constructor: c.GDExtensionInterfaceGetVariantFromTypeConstructor = null,
     get_variant_to_type_constructor: c.GDExtensionInterfaceGetVariantToTypeConstructor = null,
 
@@ -68,9 +73,14 @@ pub const Interface = struct {
         self.object_get_instance_id = proc(c.GDExtensionInterfaceObjectGetInstanceId, get_proc_address, "object_get_instance_id");
         self.object_destroy = proc(c.GDExtensionInterfaceObjectDestroy, get_proc_address, "object_destroy");
         self.global_get_singleton = proc(c.GDExtensionInterfaceGlobalGetSingleton, get_proc_address, "global_get_singleton");
+        self.variant_destroy = proc(c.GDExtensionInterfaceVariantDestroy, get_proc_address, "variant_destroy");
         self.variant_get_ptr_constructor = proc(c.GDExtensionInterfaceVariantGetPtrConstructor, get_proc_address, "variant_get_ptr_constructor");
         self.variant_get_ptr_destructor = proc(c.GDExtensionInterfaceVariantGetPtrDestructor, get_proc_address, "variant_get_ptr_destructor");
         self.variant_get_ptr_operator_evaluator = proc(c.GDExtensionInterfaceVariantGetPtrOperatorEvaluator, get_proc_address, "variant_get_ptr_operator_evaluator");
+        self.variant_get_ptr_builtin_method = proc(c.GDExtensionInterfaceVariantGetPtrBuiltinMethod, get_proc_address, "variant_get_ptr_builtin_method");
+        self.variant_get_ptr_indexed_getter = proc(c.GDExtensionInterfaceVariantGetPtrIndexedGetter, get_proc_address, "variant_get_ptr_indexed_getter");
+        self.variant_get_ptr_indexed_setter = proc(c.GDExtensionInterfaceVariantGetPtrIndexedSetter, get_proc_address, "variant_get_ptr_indexed_setter");
+        self.variant_get_type = proc(c.GDExtensionInterfaceVariantGetType, get_proc_address, "variant_get_type");
         self.get_variant_from_type_constructor = proc(c.GDExtensionInterfaceGetVariantFromTypeConstructor, get_proc_address, "get_variant_from_type_constructor");
         self.get_variant_to_type_constructor = proc(c.GDExtensionInterfaceGetVariantToTypeConstructor, get_proc_address, "get_variant_to_type_constructor");
         self.string_new_with_utf8_chars = proc(c.GDExtensionInterfaceStringNewWithUtf8Chars, get_proc_address, "string_new_with_utf8_chars");

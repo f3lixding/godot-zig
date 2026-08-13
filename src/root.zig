@@ -4,6 +4,9 @@ pub const types = @import("types.zig");
 pub const object = @import("object.zig");
 pub const class = @import("class.zig");
 pub const input = @import("input.zig");
+pub const variant = @import("variant.zig");
+pub const collections = @import("collections.zig");
+pub const generated = @import("generated/root.zig");
 pub const extension = @import("extension.zig");
 
 pub const StringName = types.StringName;
@@ -26,16 +29,25 @@ pub const Transform3D = types.Transform3D;
 pub const Projection = types.Projection;
 pub const Color = types.Color;
 pub const Object = object.Object;
-pub const Node = object.Node;
-pub const Node3D = object.Node3D;
-pub const CharacterBody3D = object.CharacterBody3D;
-pub const Input = input.Input;
+pub const Node = generated.classes.Node;
+pub const Node3D = generated.classes.Node3D;
+pub const MeshInstance3D = generated.classes.MeshInstance3D;
+pub const Mesh = generated.classes.Mesh;
+pub const CharacterBody3D = generated.classes.CharacterBody3D;
+pub const Array = collections.Array;
+pub const PackedVector3Array = collections.PackedVector3Array;
+pub const PackedInt32Array = collections.PackedInt32Array;
+pub const Input = generated.classes.Input;
 pub const Key = input.Key;
 pub const MouseMode = input.MouseMode;
+pub const input_helpers = input;
 
 comptime {
     _ = api;
     _ = class;
+    _ = variant;
+    _ = collections;
+    _ = generated;
     _ = extension;
 }
 

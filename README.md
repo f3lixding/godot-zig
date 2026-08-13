@@ -123,11 +123,11 @@ const godot = @import("godot_zig");
 fn physicsProcess(self: *MyBody, delta: f64) callconv(.c) void {
     const body = godot.CharacterBody3D.init(self.object);
 
-    var velocity = body.velocity();
+    var velocity = body.@"get_velocity"();
     velocity.y -= 9.8 * @as(f32, @floatCast(delta));
 
-    body.setVelocity(velocity);
-    _ = body.moveAndSlide();
+    body.@"set_velocity"(velocity);
+    _ = body.@"move_and_slide"();
 }
 ```
 
@@ -136,29 +136,29 @@ fn physicsProcess(self: *MyBody, delta: f64) callconv(.c) void {
 ```zig
 const input = godot.Input.singleton();
 
-if (input.isPhysicalKeyPressed(.space)) {
+if (godot.input_helpers.isPhysicalKeyPressed(input, .space)) {
     // jump
 }
 
-const movement = input.wasdVector();
+const movement = godot.input_helpers.wasdVector(input);
 ```
 
 Mouse mode:
 
 ```zig
-godot.Input.singleton().setMouseMode(.captured);
-godot.Input.singleton().setMouseMode(.visible);
+godot.input_helpers.setMouseMode(godot.Input.singleton(), .captured);
+godot.input_helpers.setMouseMode(godot.Input.singleton(), .visible);
 ```
 
 ## Node helpers
 
 ```zig
 const node = godot.Node.init(self.object);
-const camera = node.findChild("Camera3D", true, false);
+const camera = node.@"find_child"("Camera3D", true, false);
 
 if (!camera.isNull()) {
-    const camera_3d = godot.Node3D.init(camera.ptr);
-    camera_3d.setRotationDegrees(.{ .x = -20, .y = 0, .z = 0 });
+    const camera_3d = godot.Node3D.init(camera.object.ptr);
+    camera_3d.@"set_rotation_degrees"(.{ .x = -20, .y = 0, .z = 0 });
 }
 ```
 
@@ -186,4 +186,18 @@ zig build test
 
 ## Notes
 
-This is not yet a generated complete binding. Some high-level wrappers rely on Godot method hashes, which are version-sensitive. The long-term direction is to generate exhaustive class wrappers from Godot's `extension_api.json`.
+This package now includes an experimental generated class layer from Godot's `extension_api.json`:
+
+```sh
+./tools/generate_bindings.pl extension_api.json src/generated
+```
+
+Generated classes live under:
+
+```zig
+godot.generated.classes.MeshInstance3D
+godot.generated.classes.Mesh
+godot.generated.classes.Node
+```
+
+A few common aliases, such as `godot.MeshInstance3D` and `godot.Mesh`, point at the generated classes. The generator is intentionally conservative: it skips vararg/static methods, limits generated methods to simple supported argument/return types, and still needs broader builtin type support before it can be considered complete.

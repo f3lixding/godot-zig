@@ -17,6 +17,16 @@ pub const Callable = extern struct { data: [16]u8 };
 pub const Signal = extern struct { data: [16]u8 };
 pub const Dictionary = extern struct { data: [8]u8 };
 pub const Array = extern struct { data: [8]u8 };
+pub const PackedByteArray = extern struct { data: [8]u8 };
+pub const PackedInt32Array = extern struct { data: [8]u8 };
+pub const PackedInt64Array = extern struct { data: [8]u8 };
+pub const PackedFloat32Array = extern struct { data: [8]u8 };
+pub const PackedFloat64Array = extern struct { data: [8]u8 };
+pub const PackedStringArray = extern struct { data: [8]u8 };
+pub const PackedVector2Array = extern struct { data: [8]u8 };
+pub const PackedVector3Array = extern struct { data: [8]u8 };
+pub const PackedColorArray = extern struct { data: [8]u8 };
+pub const PackedVector4Array = extern struct { data: [8]u8 };
 
 pub const Vector2 = extern struct {
     x: f32 = 0,
@@ -70,6 +80,9 @@ test "common Godot ABI sizes" {
     try std.testing.expectEqual(@as(usize, 8), @sizeOf(StringName));
     try std.testing.expectEqual(@as(usize, 8), @sizeOf(String));
     try std.testing.expectEqual(@as(usize, 24), @sizeOf(Variant));
+    try std.testing.expectEqual(@as(usize, 8), @sizeOf(Array));
+    try std.testing.expectEqual(@as(usize, 8), @sizeOf(PackedVector3Array));
+    try std.testing.expectEqual(@as(usize, 8), @sizeOf(PackedInt32Array));
     try std.testing.expectEqual(@as(usize, 8), @sizeOf(Vector2));
     try std.testing.expectEqual(@as(usize, 12), @sizeOf(Vector3));
 }
