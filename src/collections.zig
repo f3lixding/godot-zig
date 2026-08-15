@@ -36,7 +36,7 @@ pub const Array = struct {
     pub fn size(self: *Array) i64 {
         const method = builtinMethod(c.GDEXTENSION_VARIANT_TYPE_ARRAY, "size", 3173160232);
         var out: i64 = 0;
-        method(&self.value, null, &out, 0);
+        method.?(&self.value, null, &out, 0);
         return out;
     }
 
@@ -45,7 +45,7 @@ pub const Array = struct {
         var idx = index;
         const args = [_]c.GDExtensionConstTypePtr{&idx};
         var out: types.Variant = undefined;
-        method(&self.value, &args, &out, 1);
+        method.?(&self.value, &args, &out, 1);
         return .{ .value = out };
     }
 
@@ -76,7 +76,7 @@ pub const PackedVector3Array = struct {
     pub fn size(self: *PackedVector3Array) i64 {
         const method = builtinMethod(c.GDEXTENSION_VARIANT_TYPE_PACKED_VECTOR3_ARRAY, "size", 3173160232);
         var out: i64 = 0;
-        method(&self.value, null, &out, 0);
+        method.?(&self.value, null, &out, 0);
         return out;
     }
 
@@ -85,7 +85,7 @@ pub const PackedVector3Array = struct {
         var idx = index;
         const args = [_]c.GDExtensionConstTypePtr{&idx};
         var out: types.Vector3 = .{};
-        method(&self.value, &args, &out, 1);
+        method.?(&self.value, &args, &out, 1);
         return out;
     }
 };
@@ -100,7 +100,7 @@ pub const PackedInt32Array = struct {
     pub fn size(self: *PackedInt32Array) i64 {
         const method = builtinMethod(c.GDEXTENSION_VARIANT_TYPE_PACKED_INT32_ARRAY, "size", 3173160232);
         var out: i64 = 0;
-        method(&self.value, null, &out, 0);
+        method.?(&self.value, null, &out, 0);
         return out;
     }
 
@@ -109,7 +109,7 @@ pub const PackedInt32Array = struct {
         var idx = index;
         const args = [_]c.GDExtensionConstTypePtr{&idx};
         var out: i64 = 0;
-        method(&self.value, &args, &out, 1);
+        method.?(&self.value, &args, &out, 1);
         return out;
     }
 };

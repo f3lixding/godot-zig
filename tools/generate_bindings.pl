@@ -124,7 +124,7 @@ for my $cl (sort { $a->{name} cmp $b->{name} } @{$json->{classes}}) {
     } else {
       my $st = storage_type($ret_t);
       print $out "        var out: $st = undefined;\n";
-      print $out "        api_mod.godot.object_method_bind_ptrcall.?(method, self.object.ptr, " . (@args ? "&args" : "null") . ", &out);\n";
+      print $out "        api_mod.godot.object_method_bind_ptrcall.?(method, self.object.ptr, " . (@args ? "&args" : "null") . ", \@ptrCast(&out));\n";
       print $out "        return " . wrap_return($ret_t, 'out') . ";\n";
     }
     print $out "    }\n\n";
