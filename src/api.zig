@@ -113,7 +113,7 @@ pub const Interface = struct {
 
     pub fn stringName(self: *const Interface, text: [:0]const u8) StringName {
         var value: StringName = undefined;
-        self.string_name_new_with_utf8_chars_and_len.?(&value, text.ptr, text.len);
+        self.string_name_new_with_utf8_chars_and_len.?(&value, text.ptr, @intCast(text.len));
         return value;
     }
 
@@ -125,7 +125,7 @@ pub const Interface = struct {
 
     pub fn string(self: *const Interface, text: [:0]const u8) String {
         var value: String = undefined;
-        self.string_new_with_utf8_chars_and_len.?(&value, text.ptr, text.len);
+        self.string_new_with_utf8_chars_and_len.?(&value, text.ptr, @intCast(text.len));
         return value;
     }
 
