@@ -37,7 +37,7 @@ pub const Variant = struct {
     pub fn toBuiltin(self: *Variant, comptime T: type, comptime variant_type: c.GDExtensionVariantType) T {
         var out: T = undefined;
         const ctor = api_mod.godot.get_variant_to_type_constructor.?(variant_type).?;
-        ctor(&out, &self.value);
+        ctor(@ptrCast(&out), @constCast(@ptrCast(&self.value)));
         return out;
     }
 

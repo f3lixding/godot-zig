@@ -91,7 +91,7 @@ pub const PackedVector3Array = struct {
     pub fn size(self: *PackedVector3Array) i64 {
         const method = builtinMethod(c.GDEXTENSION_VARIANT_TYPE_PACKED_VECTOR3_ARRAY, "size", 3173160232);
         var out: i64 = 0;
-        method.?(self.ptr(), null, &out, 0);
+        method.?(@constCast(self.ptr()), null, &out, 0);
         return out;
     }
 
@@ -128,7 +128,7 @@ pub const PackedInt32Array = struct {
     pub fn size(self: *PackedInt32Array) i64 {
         const method = builtinMethod(c.GDEXTENSION_VARIANT_TYPE_PACKED_INT32_ARRAY, "size", 3173160232);
         var out: i64 = 0;
-        method.?(self.ptr(), null, &out, 0);
+        method.?(@constCast(self.ptr()), null, &out, 0);
         return out;
     }
 
