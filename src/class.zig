@@ -17,7 +17,12 @@ pub fn variantType(comptime ret: MethodReturn) c.GDExtensionVariantType {
 }
 
 pub fn ReturnZig(comptime ret: MethodReturn) type {
-    return switch (ret) { .void => void, .bool => bool, .int => i64, .float => f64 };
+    return switch (ret) {
+        .void => void,
+        .bool => bool,
+        .int => i64,
+        .float => f64,
+    };
 }
 
 pub fn makePropertyInfo(name_text: [:0]const u8, ty: c.GDExtensionVariantType, class_text: [:0]const u8) c.GDExtensionPropertyInfo {
@@ -43,9 +48,18 @@ fn writeVariant(out: c.GDExtensionVariantPtr, comptime kind: MethodReturn, value
     if (kind == .void) return;
     const ctor = api_mod.godot.get_variant_from_type_constructor.?(variantType(kind)).?;
     switch (kind) {
-        .bool => { var v: u8 = @intFromBool(value); ctor(out, &v); },
-        .int => { var v: i64 = value; ctor(out, &v); },
-        .float => { var v: f64 = value; ctor(out, &v); },
+        .bool => {
+            var v: u8 = @intFromBool(value);
+            ctor(out, &v);
+        },
+        .int => {
+            var v: i64 = value;
+            ctor(out, &v);
+        },
+        .float => {
+            var v: f64 = value;
+            ctor(out, &v);
+        },
         .void => {},
     }
 }
@@ -82,7 +96,8 @@ pub fn Method0(comptime T: type, comptime ret: MethodReturn, comptime function: 
 pub fn Virtual0(comptime T: type, comptime function: *const fn (*T) callconv(.c) void) type {
     return struct {
         pub fn ptrcall(_: ?*anyopaque, instance: c.GDExtensionClassInstancePtr, args: [*c]const c.GDExtensionConstTypePtr, out: c.GDExtensionTypePtr) callconv(.c) void {
-            _ = args; _ = out;
+            _ = args;
+            _ = out;
             const self: *T = @ptrCast(@alignCast(instance.?));
             function(self);
         }
@@ -140,7 +155,10 @@ pub fn NativeClass(comptime T: type, comptime parent_name_text: [:0]const u8, co
         }
 
         pub fn free(_: ?*anyopaque, instance: c.GDExtensionClassInstancePtr) callconv(.c) void {
-            if (instance != null) api_mod.godot.free(instance.?);
+            if (instance) |int| {
+                api_mod.godot.free(int);
+                @call(int, "deinit", .{});
+            }
         }
 
         pub fn register() void {
