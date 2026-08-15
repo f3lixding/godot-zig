@@ -155,9 +155,10 @@ pub fn NativeClass(comptime T: type, comptime parent_name_text: [:0]const u8, co
         }
 
         pub fn free(_: ?*anyopaque, instance: c.GDExtensionClassInstancePtr) callconv(.c) void {
-            if (instance) |int| {
-                api_mod.godot.free(int);
-                @call(int, "deinit", .{});
+            if (instance) |raw| {
+                const self: *T = @ptrCast(@alignCast(raw));
+                if (@hasDecl(T, "deinit")) self.deinit();
+                api_mod.godot.free(self);
             }
         }
 
