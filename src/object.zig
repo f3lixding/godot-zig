@@ -1,5 +1,7 @@
+const std = @import("std");
 const c = @import("c.zig").c;
 const api_mod = @import("api.zig");
+const types = @import("types.zig");
 const Variant = @import("variant.zig").Variant;
 
 /// Minimal raw object handle used by generated class wrappers.
@@ -35,31 +37,31 @@ pub const Object = struct {
     }
 
     pub fn callVariant0(self: Object, method: c.GDExtensionMethodBindPtr) Variant {
-        var out: @import("types.zig").Variant = undefined;
-        var err: c.GDExtensionCallError = undefined;
+        var out: types.Variant = std.mem.zeroes(types.Variant);
+        var err: c.GDExtensionCallError = std.mem.zeroes(c.GDExtensionCallError);
         api_mod.godot.object_method_bind_call.?(method, self.ptr, null, 0, &out, &err);
         return .{ .value = out };
     }
 
     pub fn callVariant1(self: Object, method: c.GDExtensionMethodBindPtr, arg0: *const Variant) Variant {
-        var out: @import("types.zig").Variant = undefined;
-        var err: c.GDExtensionCallError = undefined;
+        var out: types.Variant = std.mem.zeroes(types.Variant);
+        var err: c.GDExtensionCallError = std.mem.zeroes(c.GDExtensionCallError);
         const args = [_]c.GDExtensionConstVariantPtr{&arg0.value};
         api_mod.godot.object_method_bind_call.?(method, self.ptr, &args, 1, &out, &err);
         return .{ .value = out };
     }
 
     pub fn callVariant2(self: Object, method: c.GDExtensionMethodBindPtr, arg0: *const Variant, arg1: *const Variant) Variant {
-        var out: @import("types.zig").Variant = undefined;
-        var err: c.GDExtensionCallError = undefined;
+        var out: types.Variant = std.mem.zeroes(types.Variant);
+        var err: c.GDExtensionCallError = std.mem.zeroes(c.GDExtensionCallError);
         const args = [_]c.GDExtensionConstVariantPtr{ &arg0.value, &arg1.value };
         api_mod.godot.object_method_bind_call.?(method, self.ptr, &args, 2, &out, &err);
         return .{ .value = out };
     }
 
     pub fn callVariant3(self: Object, method: c.GDExtensionMethodBindPtr, arg0: *const Variant, arg1: *const Variant, arg2: *const Variant) Variant {
-        var out: @import("types.zig").Variant = undefined;
-        var err: c.GDExtensionCallError = undefined;
+        var out: types.Variant = std.mem.zeroes(types.Variant);
+        var err: c.GDExtensionCallError = std.mem.zeroes(c.GDExtensionCallError);
         const args = [_]c.GDExtensionConstVariantPtr{ &arg0.value, &arg1.value, &arg2.value };
         api_mod.godot.object_method_bind_call.?(method, self.ptr, &args, 3, &out, &err);
         return .{ .value = out };

@@ -1,3 +1,4 @@
+const std = @import("std");
 const c = @import("c.zig").c;
 const api_mod = @import("api.zig");
 const types = @import("types.zig");
@@ -44,7 +45,7 @@ pub const Array = struct {
         const method = builtinMethod(c.GDEXTENSION_VARIANT_TYPE_ARRAY, "get", 708700221);
         var idx = index;
         const args = [_]c.GDExtensionConstTypePtr{&idx};
-        var out: types.Variant = undefined;
+        var out: types.Variant = std.mem.zeroes(types.Variant);
         method.?(&self.value, &args, &out, 1);
         return .{ .value = out };
     }
