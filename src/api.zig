@@ -48,6 +48,7 @@ pub const Interface = struct {
     variant_get_ptr_destructor: c.GDExtensionInterfaceVariantGetPtrDestructor = null,
     variant_get_ptr_operator_evaluator: c.GDExtensionInterfaceVariantGetPtrOperatorEvaluator = null,
     variant_get_ptr_builtin_method: c.GDExtensionInterfaceVariantGetPtrBuiltinMethod = null,
+    variant_get_ptr_internal_getter: c.GDExtensionInterfaceGetVariantGetInternalPtrFunc = null,
     variant_get_ptr_indexed_getter: c.GDExtensionInterfaceVariantGetPtrIndexedGetter = null,
     variant_get_ptr_indexed_setter: c.GDExtensionInterfaceVariantGetPtrIndexedSetter = null,
     variant_get_type: c.GDExtensionInterfaceVariantGetType = null,
@@ -59,6 +60,9 @@ pub const Interface = struct {
     string_name_new_with_latin1_chars: c.GDExtensionInterfaceStringNameNewWithLatin1Chars = null,
     string_name_new_with_utf8_chars: c.GDExtensionInterfaceStringNameNewWithUtf8Chars = null,
     string_name_new_with_utf8_chars_and_len: c.GDExtensionInterfaceStringNameNewWithUtf8CharsAndLen = null,
+
+    packed_vector3_array_operator_index_const: c.GDExtensionInterfacePackedVector3ArrayOperatorIndexConst = null,
+    packed_int32_array_operator_index_const: c.GDExtensionInterfacePackedInt32ArrayOperatorIndexConst = null,
 
     pub fn load(self: *Interface, get_proc_address: c.GDExtensionInterfaceGetProcAddress, library: c.GDExtensionClassLibraryPtr) void {
         self.* = .{ .get_proc_address = get_proc_address, .library = library };
@@ -91,6 +95,7 @@ pub const Interface = struct {
         self.variant_get_ptr_destructor = proc(c.GDExtensionInterfaceVariantGetPtrDestructor, get_proc_address, "variant_get_ptr_destructor");
         self.variant_get_ptr_operator_evaluator = proc(c.GDExtensionInterfaceVariantGetPtrOperatorEvaluator, get_proc_address, "variant_get_ptr_operator_evaluator");
         self.variant_get_ptr_builtin_method = proc(c.GDExtensionInterfaceVariantGetPtrBuiltinMethod, get_proc_address, "variant_get_ptr_builtin_method");
+        self.variant_get_ptr_internal_getter = proc(c.GDExtensionInterfaceGetVariantGetInternalPtrFunc, get_proc_address, "variant_get_ptr_internal_getter");
         self.variant_get_ptr_indexed_getter = proc(c.GDExtensionInterfaceVariantGetPtrIndexedGetter, get_proc_address, "variant_get_ptr_indexed_getter");
         self.variant_get_ptr_indexed_setter = proc(c.GDExtensionInterfaceVariantGetPtrIndexedSetter, get_proc_address, "variant_get_ptr_indexed_setter");
         self.variant_get_type = proc(c.GDExtensionInterfaceVariantGetType, get_proc_address, "variant_get_type");
@@ -101,6 +106,8 @@ pub const Interface = struct {
         self.string_name_new_with_latin1_chars = proc(c.GDExtensionInterfaceStringNameNewWithLatin1Chars, get_proc_address, "string_name_new_with_latin1_chars");
         self.string_name_new_with_utf8_chars = proc(c.GDExtensionInterfaceStringNameNewWithUtf8Chars, get_proc_address, "string_name_new_with_utf8_chars");
         self.string_name_new_with_utf8_chars_and_len = proc(c.GDExtensionInterfaceStringNameNewWithUtf8CharsAndLen, get_proc_address, "string_name_new_with_utf8_chars_and_len");
+        self.packed_vector3_array_operator_index_const = proc(c.GDExtensionInterfacePackedVector3ArrayOperatorIndexConst, get_proc_address, "packed_vector3_array_operator_index_const");
+        self.packed_int32_array_operator_index_const = proc(c.GDExtensionInterfacePackedInt32ArrayOperatorIndexConst, get_proc_address, "packed_int32_array_operator_index_const");
     }
 
     pub fn alloc(self: *const Interface, comptime T: type) *T {

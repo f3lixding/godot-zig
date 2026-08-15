@@ -55,61 +55,85 @@ pub const Array = struct {
 
     pub fn vertices(self: *Array) PackedVector3Array {
         var v = self.getMeshArray(.vertex);
-        defer v.destroy();
         return v.toPackedVector3Array();
     }
 
     pub fn indices(self: *Array) PackedInt32Array {
         var v = self.getMeshArray(.index);
-        defer v.destroy();
         return v.toPackedInt32Array();
     }
 };
 
 pub const PackedVector3Array = struct {
-    value: types.PackedVector3Array,
+    value: types.PackedVector3Array = undefined,
+    variant_value: ?types.Variant = null,
+    internal: ?c.GDExtensionConstTypePtr = null,
+
+    pub fn fromVariant(variant: *Variant) PackedVector3Array {
+        const getter = api_mod.godot.variant_get_ptr_internal_getter.?(c.GDEXTENSION_VARIANT_TYPE_PACKED_VECTOR3_ARRAY).?;
+        const internal = getter(&variant.value);
+        return .{ .variant_value = variant.value, .internal = internal };
+    }
+
+    fn ptr(self: *PackedVector3Array) c.GDExtensionConstTypePtr {
+        return self.internal orelse &self.value;
+    }
 
     pub fn destroy(self: *PackedVector3Array) void {
-        api_mod.godot.destroy(c.GDEXTENSION_VARIANT_TYPE_PACKED_VECTOR3_ARRAY, &self.value);
+        if (self.variant_value) |*v| {
+            api_mod.godot.variant_destroy.?(v);
+            self.variant_value = null;
+        } else {
+            api_mod.godot.destroy(c.GDEXTENSION_VARIANT_TYPE_PACKED_VECTOR3_ARRAY, &self.value);
+        }
     }
 
     pub fn size(self: *PackedVector3Array) i64 {
         const method = builtinMethod(c.GDEXTENSION_VARIANT_TYPE_PACKED_VECTOR3_ARRAY, "size", 3173160232);
         var out: i64 = 0;
-        method.?(&self.value, null, &out, 0);
+        method.?(self.ptr(), null, &out, 0);
         return out;
     }
 
     pub fn get(self: *PackedVector3Array, index: i64) types.Vector3 {
-        const method = builtinMethod(c.GDEXTENSION_VARIANT_TYPE_PACKED_VECTOR3_ARRAY, "get", 1394941017);
-        var idx = index;
-        const args = [_]c.GDExtensionConstTypePtr{&idx};
-        var out: types.Vector3 = .{};
-        method.?(&self.value, &args, &out, 1);
-        return out;
+        const p = api_mod.godot.packed_vector3_array_operator_index_const.?(self.ptr(), index);
+        return @as(*const types.Vector3, @ptrCast(@alignCast(p))).*;
     }
 };
 
 pub const PackedInt32Array = struct {
-    value: types.PackedInt32Array,
+    value: types.PackedInt32Array = undefined,
+    variant_value: ?types.Variant = null,
+    internal: ?c.GDExtensionConstTypePtr = null,
+
+    pub fn fromVariant(variant: *Variant) PackedInt32Array {
+        const getter = api_mod.godot.variant_get_ptr_internal_getter.?(c.GDEXTENSION_VARIANT_TYPE_PACKED_INT32_ARRAY).?;
+        const internal = getter(&variant.value);
+        return .{ .variant_value = variant.value, .internal = internal };
+    }
+
+    fn ptr(self: *PackedInt32Array) c.GDExtensionConstTypePtr {
+        return self.internal orelse &self.value;
+    }
 
     pub fn destroy(self: *PackedInt32Array) void {
-        api_mod.godot.destroy(c.GDEXTENSION_VARIANT_TYPE_PACKED_INT32_ARRAY, &self.value);
+        if (self.variant_value) |*v| {
+            api_mod.godot.variant_destroy.?(v);
+            self.variant_value = null;
+        } else {
+            api_mod.godot.destroy(c.GDEXTENSION_VARIANT_TYPE_PACKED_INT32_ARRAY, &self.value);
+        }
     }
 
     pub fn size(self: *PackedInt32Array) i64 {
         const method = builtinMethod(c.GDEXTENSION_VARIANT_TYPE_PACKED_INT32_ARRAY, "size", 3173160232);
         var out: i64 = 0;
-        method.?(&self.value, null, &out, 0);
+        method.?(self.ptr(), null, &out, 0);
         return out;
     }
 
-    pub fn get(self: *PackedInt32Array, index: i64) i64 {
-        const method = builtinMethod(c.GDEXTENSION_VARIANT_TYPE_PACKED_INT32_ARRAY, "get", 4103005248);
-        var idx = index;
-        const args = [_]c.GDExtensionConstTypePtr{&idx};
-        var out: i64 = 0;
-        method.?(&self.value, &args, &out, 1);
-        return out;
+    pub fn get(self: *PackedInt32Array, index: i64) i32 {
+        const p = api_mod.godot.packed_int32_array_operator_index_const.?(self.ptr(), index);
+        return p.*;
     }
 };

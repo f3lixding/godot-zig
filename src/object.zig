@@ -1,5 +1,6 @@
 const c = @import("c.zig").c;
 const api_mod = @import("api.zig");
+const Variant = @import("variant.zig").Variant;
 
 /// Minimal raw object handle used by generated class wrappers.
 ///
@@ -31,5 +32,36 @@ pub const Object = struct {
 
     pub fn ptrcall(self: Object, method: c.GDExtensionMethodBindPtr, args: ?[*]const c.GDExtensionConstTypePtr, ret: c.GDExtensionTypePtr) void {
         api_mod.godot.object_method_bind_ptrcall.?(method, self.ptr, if (args) |a| a else null, ret);
+    }
+
+    pub fn callVariant0(self: Object, method: c.GDExtensionMethodBindPtr) Variant {
+        var out: @import("types.zig").Variant = undefined;
+        var err: c.GDExtensionCallError = undefined;
+        api_mod.godot.object_method_bind_call.?(method, self.ptr, null, 0, &out, &err);
+        return .{ .value = out };
+    }
+
+    pub fn callVariant1(self: Object, method: c.GDExtensionMethodBindPtr, arg0: *const Variant) Variant {
+        var out: @import("types.zig").Variant = undefined;
+        var err: c.GDExtensionCallError = undefined;
+        const args = [_]c.GDExtensionConstVariantPtr{&arg0.value};
+        api_mod.godot.object_method_bind_call.?(method, self.ptr, &args, 1, &out, &err);
+        return .{ .value = out };
+    }
+
+    pub fn callVariant2(self: Object, method: c.GDExtensionMethodBindPtr, arg0: *const Variant, arg1: *const Variant) Variant {
+        var out: @import("types.zig").Variant = undefined;
+        var err: c.GDExtensionCallError = undefined;
+        const args = [_]c.GDExtensionConstVariantPtr{ &arg0.value, &arg1.value };
+        api_mod.godot.object_method_bind_call.?(method, self.ptr, &args, 2, &out, &err);
+        return .{ .value = out };
+    }
+
+    pub fn callVariant3(self: Object, method: c.GDExtensionMethodBindPtr, arg0: *const Variant, arg1: *const Variant, arg2: *const Variant) Variant {
+        var out: @import("types.zig").Variant = undefined;
+        var err: c.GDExtensionCallError = undefined;
+        const args = [_]c.GDExtensionConstVariantPtr{ &arg0.value, &arg1.value, &arg2.value };
+        api_mod.godot.object_method_bind_call.?(method, self.ptr, &args, 3, &out, &err);
+        return .{ .value = out };
     }
 };
