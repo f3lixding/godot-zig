@@ -29,9 +29,10 @@ pub const PackedByteArray = struct {
     }
 
     pub fn fromVariant(variant: *Variant) PackedByteArray {
-        const getter = api_mod.godot.variant_get_ptr_internal_getter.?(c.GDEXTENSION_VARIANT_TYPE_PACKED_BYTE_ARRAY).?;
-        const internal = getter(&variant.value);
-        return .{ .variant_value = variant.value, .internal = internal };
+        var value: types.PackedByteArray = std.mem.zeroes(types.PackedByteArray);
+        const ctor = api_mod.godot.get_variant_to_type_constructor.?(c.GDEXTENSION_VARIANT_TYPE_PACKED_BYTE_ARRAY).?;
+        ctor(@ptrCast(&value), @constCast(@ptrCast(&variant.value)));
+        return .{ .value = value, .variant_value = variant.value };
     }
 
     fn ptr(self: *PackedByteArray) c.GDExtensionConstTypePtr {
@@ -44,6 +45,7 @@ pub const PackedByteArray = struct {
 
     pub fn destroy(self: *PackedByteArray) void {
         if (self.variant_value) |*v| {
+            api_mod.godot.destroy(c.GDEXTENSION_VARIANT_TYPE_PACKED_BYTE_ARRAY, &self.value);
             api_mod.godot.variant_destroy.?(v);
             self.variant_value = null;
         } else {
