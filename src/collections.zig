@@ -11,12 +11,12 @@ fn builtinMethod(comptime variant_type: c.GDExtensionVariantType, name: [:0]cons
 }
 
 pub const PackedByteArray = struct {
-    value: types.PackedByteArray = undefined,
+    value: types.PackedByteArray = std.mem.zeroes(types.PackedByteArray),
     variant_value: ?types.Variant = null,
     internal: ?c.GDExtensionConstTypePtr = null,
 
     pub fn init() PackedByteArray {
-        var value: types.PackedByteArray = undefined;
+        var value: types.PackedByteArray = std.mem.zeroes(types.PackedByteArray);
         api_mod.godot.variant_get_ptr_constructor.?(c.GDEXTENSION_VARIANT_TYPE_PACKED_BYTE_ARRAY, 0).?(&value, null);
         return .{ .value = value };
     }
@@ -132,7 +132,7 @@ pub const Array = struct {
 };
 
 pub const PackedVector3Array = struct {
-    value: types.PackedVector3Array = undefined,
+    value: types.PackedVector3Array = std.mem.zeroes(types.PackedVector3Array),
     variant_value: ?types.Variant = null,
     internal: ?c.GDExtensionConstTypePtr = null,
 
@@ -169,7 +169,7 @@ pub const PackedVector3Array = struct {
 };
 
 pub const PackedInt32Array = struct {
-    value: types.PackedInt32Array = undefined,
+    value: types.PackedInt32Array = std.mem.zeroes(types.PackedInt32Array),
     variant_value: ?types.Variant = null,
     internal: ?c.GDExtensionConstTypePtr = null,
 

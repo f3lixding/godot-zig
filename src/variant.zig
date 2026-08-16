@@ -1,3 +1,4 @@
+const std = @import("std");
 const c = @import("c.zig").c;
 const api_mod = @import("api.zig");
 const types = @import("types.zig");
@@ -6,21 +7,21 @@ pub const Variant = struct {
     value: types.Variant,
 
     pub fn fromInt(value: i64) Variant {
-        var out: types.Variant = undefined;
+        var out: types.Variant = std.mem.zeroes(types.Variant);
         var v = value;
         api_mod.godot.get_variant_from_type_constructor.?(c.GDEXTENSION_VARIANT_TYPE_INT).?(&out, &v);
         return .{ .value = out };
     }
 
     pub fn fromBool(value: bool) Variant {
-        var out: types.Variant = undefined;
+        var out: types.Variant = std.mem.zeroes(types.Variant);
         var v: u8 = @intFromBool(value);
         api_mod.godot.get_variant_from_type_constructor.?(c.GDEXTENSION_VARIANT_TYPE_BOOL).?(&out, &v);
         return .{ .value = out };
     }
 
     pub fn fromFloat(value: f64) Variant {
-        var out: types.Variant = undefined;
+        var out: types.Variant = std.mem.zeroes(types.Variant);
         var v = value;
         api_mod.godot.get_variant_from_type_constructor.?(c.GDEXTENSION_VARIANT_TYPE_FLOAT).?(&out, &v);
         return .{ .value = out };
@@ -35,7 +36,7 @@ pub const Variant = struct {
     }
 
     pub fn toBuiltin(self: *Variant, comptime T: type, comptime variant_type: c.GDExtensionVariantType) T {
-        var out: T = undefined;
+        var out: T = std.mem.zeroes(T);
         const ctor = api_mod.godot.get_variant_to_type_constructor.?(variant_type).?;
         ctor(@ptrCast(&out), @constCast(@ptrCast(&self.value)));
         return out;

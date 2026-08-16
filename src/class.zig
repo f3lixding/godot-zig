@@ -121,7 +121,7 @@ pub fn registerMethod0(comptime T: type, class_name_text: [:0]const u8, method_n
     defer api_mod.godot.destroy(c.GDEXTENSION_VARIANT_TYPE_STRING_NAME, &method_name);
     defer api_mod.godot.destroy(c.GDEXTENSION_VARIANT_TYPE_STRING_NAME, &class_name);
 
-    var return_info: c.GDExtensionPropertyInfo = undefined;
+    var return_info: c.GDExtensionPropertyInfo = std.mem.zeroes(c.GDExtensionPropertyInfo);
     var info: c.GDExtensionClassMethodInfo = std.mem.zeroes(c.GDExtensionClassMethodInfo);
     info.name = &method_name;
     info.call_func = Method0(T, ret, function).call;

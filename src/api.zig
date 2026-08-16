@@ -123,19 +123,19 @@ pub const Interface = struct {
     }
 
     pub fn stringName(self: *const Interface, text: [:0]const u8) StringName {
-        var value: StringName = undefined;
+        var value: StringName = std.mem.zeroes(StringName);
         self.string_name_new_with_utf8_chars_and_len.?(&value, text.ptr, @intCast(text.len));
         return value;
     }
 
     pub fn stringNameLatin1(self: *const Interface, text: [*:0]const u8) StringName {
-        var value: StringName = undefined;
+        var value: StringName = std.mem.zeroes(StringName);
         self.string_name_new_with_latin1_chars.?(&value, text, 0);
         return value;
     }
 
     pub fn string(self: *const Interface, text: [:0]const u8) String {
-        var value: String = undefined;
+        var value: String = std.mem.zeroes(String);
         self.string_new_with_utf8_chars_and_len.?(&value, text.ptr, @intCast(text.len));
         return value;
     }
