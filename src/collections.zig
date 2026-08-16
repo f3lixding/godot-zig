@@ -29,23 +29,25 @@ pub const PackedByteArray = struct {
     }
 
     pub fn fromVariant(variant: *Variant) PackedByteArray {
-        var value: types.PackedByteArray = std.mem.zeroes(types.PackedByteArray);
-        const ctor = api_mod.godot.get_variant_to_type_constructor.?(c.GDEXTENSION_VARIANT_TYPE_PACKED_BYTE_ARRAY).?;
-        ctor(@ptrCast(&value), @constCast(@ptrCast(&variant.value)));
-        return .{ .value = value, .variant_value = variant.value };
+        var variant_copy: types.Variant = std.mem.zeroes(types.Variant);
+        api_mod.godot.variant_new_copy.?(&variant_copy, &variant.value);
+        return .{ .variant_value = variant_copy };
     }
 
-    fn ptr(self: *PackedByteArray) c.GDExtensionConstTypePtr {
+    pub fn ptr(self: *PackedByteArray) c.GDExtensionConstTypePtr {
+        if (self.variant_value) |*v| {
+            const getter = api_mod.godot.variant_get_ptr_internal_getter.?(c.GDEXTENSION_VARIANT_TYPE_PACKED_BYTE_ARRAY).?;
+            return getter(v);
+        }
         return self.internal orelse &self.value;
     }
 
-    fn mutPtr(self: *PackedByteArray) c.GDExtensionTypePtr {
+    pub fn mutPtr(self: *PackedByteArray) c.GDExtensionTypePtr {
         return @constCast(self.ptr());
     }
 
     pub fn destroy(self: *PackedByteArray) void {
         if (self.variant_value) |*v| {
-            api_mod.godot.destroy(c.GDEXTENSION_VARIANT_TYPE_PACKED_BYTE_ARRAY, &self.value);
             api_mod.godot.variant_destroy.?(v);
             self.variant_value = null;
         } else {

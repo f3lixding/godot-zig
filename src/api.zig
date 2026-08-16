@@ -43,6 +43,7 @@ pub const Interface = struct {
 
     global_get_singleton: c.GDExtensionInterfaceGlobalGetSingleton = null,
 
+    variant_new_copy: c.GDExtensionInterfaceVariantNewCopy = null,
     variant_destroy: c.GDExtensionInterfaceVariantDestroy = null,
     variant_get_ptr_constructor: c.GDExtensionInterfaceVariantGetPtrConstructor = null,
     variant_get_ptr_destructor: c.GDExtensionInterfaceVariantGetPtrDestructor = null,
@@ -92,6 +93,7 @@ pub const Interface = struct {
         self.object_get_instance_id = proc(c.GDExtensionInterfaceObjectGetInstanceId, get_proc_address, "object_get_instance_id");
         self.object_destroy = proc(c.GDExtensionInterfaceObjectDestroy, get_proc_address, "object_destroy");
         self.global_get_singleton = proc(c.GDExtensionInterfaceGlobalGetSingleton, get_proc_address, "global_get_singleton");
+        self.variant_new_copy = proc(c.GDExtensionInterfaceVariantNewCopy, get_proc_address, "variant_new_copy");
         self.variant_destroy = proc(c.GDExtensionInterfaceVariantDestroy, get_proc_address, "variant_destroy");
         self.variant_get_ptr_constructor = proc(c.GDExtensionInterfaceVariantGetPtrConstructor, get_proc_address, "variant_get_ptr_constructor");
         self.variant_get_ptr_destructor = proc(c.GDExtensionInterfaceVariantGetPtrDestructor, get_proc_address, "variant_get_ptr_destructor");
