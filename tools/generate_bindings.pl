@@ -41,7 +41,7 @@ my %zig_builtin = (
   bool => 'bool', int => 'i64', float => 'f64', String => 'types.String', StringName => 'types.StringName',
   Vector2 => 'types.Vector2', Vector2i => 'types.Vector2i', Vector3 => 'types.Vector3', Vector3i => 'types.Vector3i',
   Vector4 => 'types.Vector4', Vector4i => 'types.Vector4i', Color => 'types.Color', Dictionary => 'types.Dictionary',
-  Array => 'collections.Array', PackedVector3Array => 'collections.PackedVector3Array', PackedInt32Array => 'collections.PackedInt32Array',
+  Array => 'collections.Array', PackedByteArray => 'collections.PackedByteArray', PackedVector3Array => 'collections.PackedVector3Array', PackedInt32Array => 'collections.PackedInt32Array',
 );
 
 sub type_name { my ($t)=@_; return undef unless defined $t; $t =~ s/^typedarray::/Array/; return $t; }
@@ -54,14 +54,15 @@ sub zig_type {
 sub storage_type {
   my ($t)=@_; $t=type_name($t);
   return 'u8' if defined($t) && $t eq 'bool';
-  return $zig_builtin{$t} if defined($t) && exists $zig_builtin{$t} && $t !~ /^(Array|PackedVector3Array|PackedInt32Array)$/;
+  return $zig_builtin{$t} if defined($t) && exists $zig_builtin{$t} && $t !~ /^(Array|PackedByteArray|PackedVector3Array|PackedInt32Array)$/;
   return 'types.Array' if defined($t) && $t eq 'Array';
+  return 'types.PackedByteArray' if defined($t) && $t eq 'PackedByteArray';
   return 'types.PackedVector3Array' if defined($t) && $t eq 'PackedVector3Array';
   return 'types.PackedInt32Array' if defined($t) && $t eq 'PackedInt32Array';
   return 'c.GDExtensionObjectPtr' if defined($t) && $class{$t};
   return undef;
 }
-sub is_complex_return { my ($t)=@_; $t=type_name($t); return defined($t) && ($class{$t} || $t eq 'Array' || $t eq 'Dictionary' || $t eq 'String' || $t eq 'StringName' || $t eq 'PackedVector3Array' || $t eq 'PackedInt32Array'); }
+sub is_complex_return { my ($t)=@_; $t=type_name($t); return defined($t) && ($class{$t} || $t eq 'Array' || $t eq 'Dictionary' || $t eq 'String' || $t eq 'StringName' || $t eq 'PackedByteArray' || $t eq 'PackedVector3Array' || $t eq 'PackedInt32Array'); }
 sub wrap_return {
   my ($t, $expr)=@_; $t=type_name($t);
   return "$expr != 0" if $t eq 'bool';
@@ -75,6 +76,7 @@ sub wrap_variant_return {
   return "$var.toDictionary()" if $t eq 'Dictionary';
   return "$var.toString()" if $t eq 'String';
   return "$var.toStringName()" if $t eq 'StringName';
+  return "$var.toPackedByteArray()" if $t eq 'PackedByteArray';
   return "$var.toPackedVector3Array()" if $t eq 'PackedVector3Array';
   return "$var.toPackedInt32Array()" if $t eq 'PackedInt32Array';
   return ".init($var.toObjectPtr())" if $class{$t};
@@ -90,7 +92,7 @@ sub variant_arg_expr {
 sub arg_expr {
   my ($t, $name)=@_; $t=type_name($t);
   return "\@intFromBool($name)" if $t eq 'bool';
-  return "$name.value" if $t eq 'Array' || $t eq 'PackedVector3Array' || $t eq 'PackedInt32Array';
+  return "$name.value" if $t eq 'Array' || $t eq 'PackedByteArray' || $t eq 'PackedVector3Array' || $t eq 'PackedInt32Array';
   return "$name.object.ptr" if $class{$t};
   return $name;
 }
@@ -158,7 +160,7 @@ for my $cl (sort { $a->{name} cmp $b->{name} } @{$json->{classes}}) {
         elsif (@vargs == 3) { print $out "        var ret = self.object.callVariant3(method, &v0, &v1, &v2);\n"; }
         else { $vok = 0; }
         if ($vok) {
-          if (type_name($ret_t) ne 'PackedVector3Array' && type_name($ret_t) ne 'PackedInt32Array') { print $out "        defer ret.destroy();\n"; }
+          if (type_name($ret_t) ne 'PackedByteArray' && type_name($ret_t) ne 'PackedVector3Array' && type_name($ret_t) ne 'PackedInt32Array') { print $out "        defer ret.destroy();\n"; }
           print $out "        return " . wrap_variant_return($ret_t, 'ret') . ";\n";
         }
       }

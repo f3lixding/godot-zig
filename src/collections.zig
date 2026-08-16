@@ -10,6 +10,72 @@ fn builtinMethod(comptime variant_type: c.GDExtensionVariantType, name: [:0]cons
     return api_mod.godot.variant_get_ptr_builtin_method.?(variant_type, &method_name, hash).?;
 }
 
+pub const PackedByteArray = struct {
+    value: types.PackedByteArray = undefined,
+    variant_value: ?types.Variant = null,
+    internal: ?c.GDExtensionConstTypePtr = null,
+
+    pub fn init() PackedByteArray {
+        var value: types.PackedByteArray = undefined;
+        api_mod.godot.variant_get_ptr_constructor.?(c.GDEXTENSION_VARIANT_TYPE_PACKED_BYTE_ARRAY, 0).?(&value, null);
+        return .{ .value = value };
+    }
+
+    pub fn fromSlice(bytes: []const u8) PackedByteArray {
+        var array = init();
+        _ = array.resize(@intCast(bytes.len));
+        for (bytes, 0..) |byte, i| array.set(@intCast(i), byte);
+        return array;
+    }
+
+    pub fn fromVariant(variant: *Variant) PackedByteArray {
+        const getter = api_mod.godot.variant_get_ptr_internal_getter.?(c.GDEXTENSION_VARIANT_TYPE_PACKED_BYTE_ARRAY).?;
+        const internal = getter(&variant.value);
+        return .{ .variant_value = variant.value, .internal = internal };
+    }
+
+    fn ptr(self: *PackedByteArray) c.GDExtensionConstTypePtr {
+        return self.internal orelse &self.value;
+    }
+
+    fn mutPtr(self: *PackedByteArray) c.GDExtensionTypePtr {
+        return @constCast(self.ptr());
+    }
+
+    pub fn destroy(self: *PackedByteArray) void {
+        if (self.variant_value) |*v| {
+            api_mod.godot.variant_destroy.?(v);
+            self.variant_value = null;
+        } else {
+            api_mod.godot.destroy(c.GDEXTENSION_VARIANT_TYPE_PACKED_BYTE_ARRAY, &self.value);
+        }
+    }
+
+    pub fn size(self: *PackedByteArray) i64 {
+        const method = builtinMethod(c.GDEXTENSION_VARIANT_TYPE_PACKED_BYTE_ARRAY, "size", 3173160232);
+        var out: i64 = 0;
+        method.?(self.mutPtr(), null, &out, 0);
+        return out;
+    }
+
+    pub fn resize(self: *PackedByteArray, new_size: i64) i64 {
+        const method = builtinMethod(c.GDEXTENSION_VARIANT_TYPE_PACKED_BYTE_ARRAY, "resize", 848867239);
+        var size_arg = new_size;
+        const args = [_]c.GDExtensionConstTypePtr{&size_arg};
+        var out: i64 = 0;
+        method.?(&self.value, &args, &out, 1);
+        return out;
+    }
+
+    pub fn get(self: *PackedByteArray, index: i64) u8 {
+        return api_mod.godot.packed_byte_array_operator_index_const.?(self.ptr(), index).*;
+    }
+
+    pub fn set(self: *PackedByteArray, index: i64, value: u8) void {
+        api_mod.godot.packed_byte_array_operator_index.?(self.mutPtr(), index).* = value;
+    }
+};
+
 pub const Array = struct {
     value: types.Array,
 

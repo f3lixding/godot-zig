@@ -36,6 +36,7 @@ pub const MeshInstance3D = generated.classes.MeshInstance3D;
 pub const Mesh = generated.classes.Mesh;
 pub const CharacterBody3D = generated.classes.CharacterBody3D;
 pub const Array = collections.Array;
+pub const PackedByteArray = collections.PackedByteArray;
 pub const PackedVector3Array = collections.PackedVector3Array;
 pub const PackedInt32Array = collections.PackedInt32Array;
 pub const Input = generated.classes.Input;

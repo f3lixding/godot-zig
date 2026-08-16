@@ -61,6 +61,10 @@ pub const Variant = struct {
         return .{ .value = self.toBuiltin(types.Array, c.GDEXTENSION_VARIANT_TYPE_ARRAY) };
     }
 
+    pub fn toPackedByteArray(self: *Variant) @import("collections.zig").PackedByteArray {
+        return @import("collections.zig").PackedByteArray.fromVariant(self);
+    }
+
     pub fn toPackedVector3Array(self: *Variant) @import("collections.zig").PackedVector3Array {
         return @import("collections.zig").PackedVector3Array.fromVariant(self);
     }
