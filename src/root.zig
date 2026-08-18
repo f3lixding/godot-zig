@@ -59,4 +59,5 @@ test {
     _ = @import("api.zig");
     _ = @import("class.zig");
     _ = @import("log.zig");
+    _ = @import("generated_tests.zig");
 }
