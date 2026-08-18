@@ -67,7 +67,7 @@ pub const PackedByteArray = struct {
         var size_arg = new_size;
         const args = [_]c.GDExtensionConstTypePtr{&size_arg};
         var out: i64 = 0;
-        method.?(&self.value, &args, &out, 1);
+        method.?(self.mutPtr(), &args, &out, 1);
         return out;
     }
 
