@@ -133,7 +133,7 @@ for my $cl (sort { $a->{name} cmp $b->{name} } @{$json->{classes}}) {
       if (!defined($zt) || !defined($st)) { $ok=0; last; }
       push @arg_z, "arg$i: $zt";
       push @arg_store, "        var a$i: $st = " . arg_expr($t, "arg$i") . ";\n";
-      push @arg_call, "&a$i";
+      push @arg_call, $class{$t} ? "\@ptrCast(&a$i)" : "&a$i";
     }
     next unless $ok;
     if (is_complex_return($ret_t)) {
