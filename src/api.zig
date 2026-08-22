@@ -64,6 +64,7 @@ pub const Interface = struct {
 
     packed_byte_array_operator_index: c.GDExtensionInterfacePackedByteArrayOperatorIndex = null,
     packed_byte_array_operator_index_const: c.GDExtensionInterfacePackedByteArrayOperatorIndexConst = null,
+    packed_vector3_array_operator_index: c.GDExtensionInterfacePackedVector3ArrayOperatorIndex = null,
     packed_vector3_array_operator_index_const: c.GDExtensionInterfacePackedVector3ArrayOperatorIndexConst = null,
     packed_int32_array_operator_index_const: c.GDExtensionInterfacePackedInt32ArrayOperatorIndexConst = null,
 
@@ -112,6 +113,7 @@ pub const Interface = struct {
         self.string_name_new_with_utf8_chars_and_len = proc(c.GDExtensionInterfaceStringNameNewWithUtf8CharsAndLen, get_proc_address, "string_name_new_with_utf8_chars_and_len");
         self.packed_byte_array_operator_index = proc(c.GDExtensionInterfacePackedByteArrayOperatorIndex, get_proc_address, "packed_byte_array_operator_index");
         self.packed_byte_array_operator_index_const = proc(c.GDExtensionInterfacePackedByteArrayOperatorIndexConst, get_proc_address, "packed_byte_array_operator_index_const");
+        self.packed_vector3_array_operator_index = proc(c.GDExtensionInterfacePackedVector3ArrayOperatorIndex, get_proc_address, "packed_vector3_array_operator_index");
         self.packed_vector3_array_operator_index_const = proc(c.GDExtensionInterfacePackedVector3ArrayOperatorIndexConst, get_proc_address, "packed_vector3_array_operator_index_const");
         self.packed_int32_array_operator_index_const = proc(c.GDExtensionInterfacePackedInt32ArrayOperatorIndexConst, get_proc_address, "packed_int32_array_operator_index_const");
     }
