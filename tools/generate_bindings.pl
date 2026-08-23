@@ -31,6 +31,7 @@ my %builtin_variant = (
   Vector4 => 'c.GDEXTENSION_VARIANT_TYPE_VECTOR4',
   Vector4i => 'c.GDEXTENSION_VARIANT_TYPE_VECTOR4I',
   Color => 'c.GDEXTENSION_VARIANT_TYPE_COLOR',
+  AABB => 'c.GDEXTENSION_VARIANT_TYPE_AABB',
   Array => 'c.GDEXTENSION_VARIANT_TYPE_ARRAY',
   Dictionary => 'c.GDEXTENSION_VARIANT_TYPE_DICTIONARY',
   PackedVector3Array => 'c.GDEXTENSION_VARIANT_TYPE_PACKED_VECTOR3_ARRAY',
@@ -40,7 +41,7 @@ my %builtin_variant = (
 my %zig_builtin = (
   bool => 'bool', int => 'i64', float => 'f64', String => 'types.String', StringName => 'types.StringName',
   Vector2 => 'types.Vector2', Vector2i => 'types.Vector2i', Vector3 => 'types.Vector3', Vector3i => 'types.Vector3i',
-  Vector4 => 'types.Vector4', Vector4i => 'types.Vector4i', Color => 'types.Color', Dictionary => 'types.Dictionary',
+  Vector4 => 'types.Vector4', Vector4i => 'types.Vector4i', Color => 'types.Color', AABB => 'types.AABB', Dictionary => 'types.Dictionary',
   Array => 'collections.Array', PackedByteArray => 'collections.PackedByteArray', PackedVector3Array => 'collections.PackedVector3Array', PackedInt32Array => 'collections.PackedInt32Array',
 );
 

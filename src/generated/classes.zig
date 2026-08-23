@@ -5766,6 +5766,21 @@ pub const ArrayMesh = struct {
         api_mod.godot.object_method_bind_ptrcall.?(method, self.object.ptr, null, null);
     }
 
+    pub fn @"set_custom_aabb"(self: ArrayMesh, arg0: types.AABB) void {
+        const method = methodBind(godot_class_name, "set_custom_aabb", 259215842);
+        var a0: types.AABB = arg0;
+        const args = [_]c.GDExtensionConstTypePtr{ &a0 };
+        _ = &args;
+        api_mod.godot.object_method_bind_ptrcall.?(method, self.object.ptr, &args, null);
+    }
+
+    pub fn @"get_custom_aabb"(self: ArrayMesh) types.AABB {
+        const method = methodBind(godot_class_name, "get_custom_aabb", 1068685055);
+        var out: types.AABB = std.mem.zeroes(types.AABB);
+        api_mod.godot.object_method_bind_ptrcall.?(method, self.object.ptr, null, @ptrCast(&out));
+        return out;
+    }
+
     pub fn @"set_shadow_mesh"(self: ArrayMesh, arg0: ArrayMesh) void {
         const method = methodBind(godot_class_name, "set_shadow_mesh", 3377897901);
         var a0: c.GDExtensionObjectPtr = arg0.object.ptr;
@@ -13529,6 +13544,14 @@ pub const CPUParticles3D = struct {
         api_mod.godot.object_method_bind_ptrcall.?(method, self.object.ptr, &args, null);
     }
 
+    pub fn @"set_visibility_aabb"(self: CPUParticles3D, arg0: types.AABB) void {
+        const method = methodBind(godot_class_name, "set_visibility_aabb", 259215842);
+        var a0: types.AABB = arg0;
+        const args = [_]c.GDExtensionConstTypePtr{ &a0 };
+        _ = &args;
+        api_mod.godot.object_method_bind_ptrcall.?(method, self.object.ptr, &args, null);
+    }
+
     pub fn @"set_lifetime_randomness"(self: CPUParticles3D, arg0: f64) void {
         const method = methodBind(godot_class_name, "set_lifetime_randomness", 373806689);
         var a0: f64 = arg0;
@@ -13614,6 +13637,13 @@ pub const CPUParticles3D = struct {
     pub fn @"get_randomness_ratio"(self: CPUParticles3D) f64 {
         const method = methodBind(godot_class_name, "get_randomness_ratio", 1740695150);
         var out: f64 = std.mem.zeroes(f64);
+        api_mod.godot.object_method_bind_ptrcall.?(method, self.object.ptr, null, @ptrCast(&out));
+        return out;
+    }
+
+    pub fn @"get_visibility_aabb"(self: CPUParticles3D) types.AABB {
+        const method = methodBind(godot_class_name, "get_visibility_aabb", 1068685055);
+        var out: types.AABB = std.mem.zeroes(types.AABB);
         api_mod.godot.object_method_bind_ptrcall.?(method, self.object.ptr, null, @ptrCast(&out));
         return out;
     }
@@ -13728,6 +13758,13 @@ pub const CPUParticles3D = struct {
         const args = [_]c.GDExtensionConstTypePtr{ &a0, &a1 };
         _ = &args;
         api_mod.godot.object_method_bind_ptrcall.?(method, self.object.ptr, &args, null);
+    }
+
+    pub fn @"capture_aabb"(self: CPUParticles3D) types.AABB {
+        const method = methodBind(godot_class_name, "capture_aabb", 1068685055);
+        var out: types.AABB = std.mem.zeroes(types.AABB);
+        api_mod.godot.object_method_bind_ptrcall.?(method, self.object.ptr, null, @ptrCast(&out));
+        return out;
     }
 
     pub fn @"set_direction"(self: CPUParticles3D, arg0: types.Vector3) void {
@@ -40096,6 +40133,14 @@ pub const GPUParticles3D = struct {
         api_mod.godot.object_method_bind_ptrcall.?(method, self.object.ptr, &args, null);
     }
 
+    pub fn @"set_visibility_aabb"(self: GPUParticles3D, arg0: types.AABB) void {
+        const method = methodBind(godot_class_name, "set_visibility_aabb", 259215842);
+        var a0: types.AABB = arg0;
+        const args = [_]c.GDExtensionConstTypePtr{ &a0 };
+        _ = &args;
+        api_mod.godot.object_method_bind_ptrcall.?(method, self.object.ptr, &args, null);
+    }
+
     pub fn @"set_use_local_coordinates"(self: GPUParticles3D, arg0: bool) void {
         const method = methodBind(godot_class_name, "set_use_local_coordinates", 2586408642);
         var a0: u8 = @intFromBool(arg0);
@@ -40205,6 +40250,13 @@ pub const GPUParticles3D = struct {
     pub fn @"get_randomness_ratio"(self: GPUParticles3D) f64 {
         const method = methodBind(godot_class_name, "get_randomness_ratio", 1740695150);
         var out: f64 = std.mem.zeroes(f64);
+        api_mod.godot.object_method_bind_ptrcall.?(method, self.object.ptr, null, @ptrCast(&out));
+        return out;
+    }
+
+    pub fn @"get_visibility_aabb"(self: GPUParticles3D) types.AABB {
+        const method = methodBind(godot_class_name, "get_visibility_aabb", 1068685055);
+        var out: types.AABB = std.mem.zeroes(types.AABB);
         api_mod.godot.object_method_bind_ptrcall.?(method, self.object.ptr, null, @ptrCast(&out));
         return out;
     }
@@ -40367,6 +40419,13 @@ pub const GPUParticles3D = struct {
         const args = [_]c.GDExtensionConstTypePtr{ &a0 };
         _ = &args;
         api_mod.godot.object_method_bind_ptrcall.?(method, self.object.ptr, &args, null);
+    }
+
+    pub fn @"capture_aabb"(self: GPUParticles3D) types.AABB {
+        const method = methodBind(godot_class_name, "capture_aabb", 1068685055);
+        var out: types.AABB = std.mem.zeroes(types.AABB);
+        api_mod.godot.object_method_bind_ptrcall.?(method, self.object.ptr, null, @ptrCast(&out));
+        return out;
     }
 
     pub fn @"set_trail_enabled"(self: GPUParticles3D, arg0: bool) void {
@@ -41442,6 +41501,21 @@ pub const GeometryInstance3D = struct {
         var out: u8 = std.mem.zeroes(u8);
         api_mod.godot.object_method_bind_ptrcall.?(method, self.object.ptr, null, @ptrCast(&out));
         return out != 0;
+    }
+
+    pub fn @"set_custom_aabb"(self: GeometryInstance3D, arg0: types.AABB) void {
+        const method = methodBind(godot_class_name, "set_custom_aabb", 259215842);
+        var a0: types.AABB = arg0;
+        const args = [_]c.GDExtensionConstTypePtr{ &a0 };
+        _ = &args;
+        api_mod.godot.object_method_bind_ptrcall.?(method, self.object.ptr, &args, null);
+    }
+
+    pub fn @"get_custom_aabb"(self: GeometryInstance3D) types.AABB {
+        const method = methodBind(godot_class_name, "get_custom_aabb", 1068685055);
+        var out: types.AABB = std.mem.zeroes(types.AABB);
+        api_mod.godot.object_method_bind_ptrcall.?(method, self.object.ptr, null, @ptrCast(&out));
+        return out;
     }
 
 };
@@ -43365,6 +43439,13 @@ pub const GridMapEditorPlugin = struct {
     pub fn @"clear_selection"(self: GridMapEditorPlugin) void {
         const method = methodBind(godot_class_name, "clear_selection", 3218959716);
         api_mod.godot.object_method_bind_ptrcall.?(method, self.object.ptr, null, null);
+    }
+
+    pub fn @"get_selection"(self: GridMapEditorPlugin) types.AABB {
+        const method = methodBind(godot_class_name, "get_selection", 1068685055);
+        var out: types.AABB = std.mem.zeroes(types.AABB);
+        api_mod.godot.object_method_bind_ptrcall.?(method, self.object.ptr, null, @ptrCast(&out));
+        return out;
     }
 
     pub fn @"has_selection"(self: GridMapEditorPlugin) bool {
@@ -53291,6 +53372,13 @@ pub const Mesh = struct {
         api_mod.godot.object_method_bind_ptrcall.?(method, self.object.ptr, &args, null);
     }
 
+    pub fn @"_get_aabb"(self: Mesh) types.AABB {
+        const method = methodBind(godot_class_name, "_get_aabb", 1068685055);
+        var out: types.AABB = std.mem.zeroes(types.AABB);
+        api_mod.godot.object_method_bind_ptrcall.?(method, self.object.ptr, null, @ptrCast(&out));
+        return out;
+    }
+
     pub fn @"set_lightmap_size_hint"(self: Mesh, arg0: types.Vector2i) void {
         const method = methodBind(godot_class_name, "set_lightmap_size_hint", 1130785943);
         var a0: types.Vector2i = arg0;
@@ -53302,6 +53390,13 @@ pub const Mesh = struct {
     pub fn @"get_lightmap_size_hint"(self: Mesh) types.Vector2i {
         const method = methodBind(godot_class_name, "get_lightmap_size_hint", 3690982128);
         var out: types.Vector2i = std.mem.zeroes(types.Vector2i);
+        api_mod.godot.object_method_bind_ptrcall.?(method, self.object.ptr, null, @ptrCast(&out));
+        return out;
+    }
+
+    pub fn @"get_aabb"(self: Mesh) types.AABB {
+        const method = methodBind(godot_class_name, "get_aabb", 1068685055);
+        var out: types.AABB = std.mem.zeroes(types.AABB);
         api_mod.godot.object_method_bind_ptrcall.?(method, self.object.ptr, null, @ptrCast(&out));
         return out;
     }
@@ -54893,6 +54988,28 @@ pub const MultiMesh = struct {
     pub fn @"reset_instances_physics_interpolation"(self: MultiMesh) void {
         const method = methodBind(godot_class_name, "reset_instances_physics_interpolation", 3218959716);
         api_mod.godot.object_method_bind_ptrcall.?(method, self.object.ptr, null, null);
+    }
+
+    pub fn @"set_custom_aabb"(self: MultiMesh, arg0: types.AABB) void {
+        const method = methodBind(godot_class_name, "set_custom_aabb", 259215842);
+        var a0: types.AABB = arg0;
+        const args = [_]c.GDExtensionConstTypePtr{ &a0 };
+        _ = &args;
+        api_mod.godot.object_method_bind_ptrcall.?(method, self.object.ptr, &args, null);
+    }
+
+    pub fn @"get_custom_aabb"(self: MultiMesh) types.AABB {
+        const method = methodBind(godot_class_name, "get_custom_aabb", 1068685055);
+        var out: types.AABB = std.mem.zeroes(types.AABB);
+        api_mod.godot.object_method_bind_ptrcall.?(method, self.object.ptr, null, @ptrCast(&out));
+        return out;
+    }
+
+    pub fn @"get_aabb"(self: MultiMesh) types.AABB {
+        const method = methodBind(godot_class_name, "get_aabb", 1068685055);
+        var out: types.AABB = std.mem.zeroes(types.AABB);
+        api_mod.godot.object_method_bind_ptrcall.?(method, self.object.ptr, null, @ptrCast(&out));
+        return out;
     }
 
 };
@@ -57570,6 +57687,21 @@ pub const NavigationMesh = struct {
         return out != 0;
     }
 
+    pub fn @"set_filter_baking_aabb"(self: NavigationMesh, arg0: types.AABB) void {
+        const method = methodBind(godot_class_name, "set_filter_baking_aabb", 259215842);
+        var a0: types.AABB = arg0;
+        const args = [_]c.GDExtensionConstTypePtr{ &a0 };
+        _ = &args;
+        api_mod.godot.object_method_bind_ptrcall.?(method, self.object.ptr, &args, null);
+    }
+
+    pub fn @"get_filter_baking_aabb"(self: NavigationMesh) types.AABB {
+        const method = methodBind(godot_class_name, "get_filter_baking_aabb", 1068685055);
+        var out: types.AABB = std.mem.zeroes(types.AABB);
+        api_mod.godot.object_method_bind_ptrcall.?(method, self.object.ptr, null, @ptrCast(&out));
+        return out;
+    }
+
     pub fn @"set_filter_baking_aabb_offset"(self: NavigationMesh, arg0: types.Vector3) void {
         const method = methodBind(godot_class_name, "set_filter_baking_aabb_offset", 3460891852);
         var a0: types.Vector3 = arg0;
@@ -57840,6 +57972,13 @@ pub const NavigationMeshSourceGeometryData3D = struct {
         var ret = self.object.callVariant0(method);
         defer ret.destroy();
         return ret.toArray();
+    }
+
+    pub fn @"get_bounds"(self: NavigationMeshSourceGeometryData3D) types.AABB {
+        const method = methodBind(godot_class_name, "get_bounds", 1021181044);
+        var out: types.AABB = std.mem.zeroes(types.AABB);
+        api_mod.godot.object_method_bind_ptrcall.?(method, self.object.ptr, null, @ptrCast(&out));
+        return out;
     }
 
 };
@@ -59194,6 +59333,13 @@ pub const NavigationRegion3D = struct {
         var out: u8 = std.mem.zeroes(u8);
         api_mod.godot.object_method_bind_ptrcall.?(method, self.object.ptr, null, @ptrCast(&out));
         return out != 0;
+    }
+
+    pub fn @"get_bounds"(self: NavigationRegion3D) types.AABB {
+        const method = methodBind(godot_class_name, "get_bounds", 1068685055);
+        var out: types.AABB = std.mem.zeroes(types.AABB);
+        api_mod.godot.object_method_bind_ptrcall.?(method, self.object.ptr, null, @ptrCast(&out));
+        return out;
     }
 
 };
@@ -71207,6 +71353,14 @@ pub const PhysicsServer3DRenderingServerHandler = struct {
         api_mod.godot.object_method_bind_ptrcall.?(method, self.object.ptr, &args, null);
     }
 
+    pub fn @"_set_aabb"(self: PhysicsServer3DRenderingServerHandler, arg0: types.AABB) void {
+        const method = methodBind(godot_class_name, "_set_aabb", 259215842);
+        var a0: types.AABB = arg0;
+        const args = [_]c.GDExtensionConstTypePtr{ &a0 };
+        _ = &args;
+        api_mod.godot.object_method_bind_ptrcall.?(method, self.object.ptr, &args, null);
+    }
+
     pub fn @"set_vertex"(self: PhysicsServer3DRenderingServerHandler, arg0: i64, arg1: types.Vector3) void {
         const method = methodBind(godot_class_name, "set_vertex", 1530502735);
         var a0: i64 = arg0;
@@ -71221,6 +71375,14 @@ pub const PhysicsServer3DRenderingServerHandler = struct {
         var a0: i64 = arg0;
         var a1: types.Vector3 = arg1;
         const args = [_]c.GDExtensionConstTypePtr{ &a0, &a1 };
+        _ = &args;
+        api_mod.godot.object_method_bind_ptrcall.?(method, self.object.ptr, &args, null);
+    }
+
+    pub fn @"set_aabb"(self: PhysicsServer3DRenderingServerHandler, arg0: types.AABB) void {
+        const method = methodBind(godot_class_name, "set_aabb", 259215842);
+        var a0: types.AABB = arg0;
+        const args = [_]c.GDExtensionConstTypePtr{ &a0 };
         _ = &args;
         api_mod.godot.object_method_bind_ptrcall.?(method, self.object.ptr, &args, null);
     }
@@ -72059,6 +72221,14 @@ pub const PlaceholderMesh = struct {
     pub fn init(ptr: c.GDExtensionObjectPtr) PlaceholderMesh { return .{ .object = .init(ptr) }; }
     pub fn isNull(self: PlaceholderMesh) bool { return self.object.isNull(); }
     pub fn asObject(self: PlaceholderMesh) GodotObject { return self.object; }
+
+    pub fn @"set_aabb"(self: PlaceholderMesh, arg0: types.AABB) void {
+        const method = methodBind(godot_class_name, "set_aabb", 259215842);
+        var a0: types.AABB = arg0;
+        const args = [_]c.GDExtensionConstTypePtr{ &a0 };
+        _ = &args;
+        api_mod.godot.object_method_bind_ptrcall.?(method, self.object.ptr, &args, null);
+    }
 
 };
 
@@ -73595,6 +73765,21 @@ pub const PrimitiveMesh = struct {
         var ret = self.object.callVariant0(method);
         defer ret.destroy();
         return ret.toArray();
+    }
+
+    pub fn @"set_custom_aabb"(self: PrimitiveMesh, arg0: types.AABB) void {
+        const method = methodBind(godot_class_name, "set_custom_aabb", 259215842);
+        var a0: types.AABB = arg0;
+        const args = [_]c.GDExtensionConstTypePtr{ &a0 };
+        _ = &args;
+        api_mod.godot.object_method_bind_ptrcall.?(method, self.object.ptr, &args, null);
+    }
+
+    pub fn @"get_custom_aabb"(self: PrimitiveMesh) types.AABB {
+        const method = methodBind(godot_class_name, "get_custom_aabb", 1068685055);
+        var out: types.AABB = std.mem.zeroes(types.AABB);
+        api_mod.godot.object_method_bind_ptrcall.?(method, self.object.ptr, null, @ptrCast(&out));
+        return out;
     }
 
     pub fn @"set_flip_faces"(self: PrimitiveMesh, arg0: bool) void {
@@ -91389,6 +91574,13 @@ pub const SurfaceTool = struct {
         api_mod.godot.object_method_bind_ptrcall.?(method, self.object.ptr, null, null);
     }
 
+    pub fn @"get_aabb"(self: SurfaceTool) types.AABB {
+        const method = methodBind(godot_class_name, "get_aabb", 1068685055);
+        var out: types.AABB = std.mem.zeroes(types.AABB);
+        api_mod.godot.object_method_bind_ptrcall.?(method, self.object.ptr, null, @ptrCast(&out));
+        return out;
+    }
+
     pub fn @"generate_lod"(self: SurfaceTool, arg0: f64, arg1: i64) collections.PackedInt32Array {
         const method = methodBind(godot_class_name, "generate_lod", 1938056459);
         var a0: f64 = arg0;
@@ -106146,6 +106338,14 @@ pub const VisibleOnScreenNotifier3D = struct {
     pub fn isNull(self: VisibleOnScreenNotifier3D) bool { return self.object.isNull(); }
     pub fn asObject(self: VisibleOnScreenNotifier3D) GodotObject { return self.object; }
 
+    pub fn @"set_aabb"(self: VisibleOnScreenNotifier3D, arg0: types.AABB) void {
+        const method = methodBind(godot_class_name, "set_aabb", 259215842);
+        var a0: types.AABB = arg0;
+        const args = [_]c.GDExtensionConstTypePtr{ &a0 };
+        _ = &args;
+        api_mod.godot.object_method_bind_ptrcall.?(method, self.object.ptr, &args, null);
+    }
+
     pub fn @"is_on_screen"(self: VisibleOnScreenNotifier3D) bool {
         const method = methodBind(godot_class_name, "is_on_screen", 36873697);
         var out: u8 = std.mem.zeroes(u8);
@@ -106162,6 +106362,13 @@ pub const VisualInstance3D = struct {
     pub fn init(ptr: c.GDExtensionObjectPtr) VisualInstance3D { return .{ .object = .init(ptr) }; }
     pub fn isNull(self: VisualInstance3D) bool { return self.object.isNull(); }
     pub fn asObject(self: VisualInstance3D) GodotObject { return self.object; }
+
+    pub fn @"_get_aabb"(self: VisualInstance3D) types.AABB {
+        const method = methodBind(godot_class_name, "_get_aabb", 1068685055);
+        var out: types.AABB = std.mem.zeroes(types.AABB);
+        api_mod.godot.object_method_bind_ptrcall.?(method, self.object.ptr, null, @ptrCast(&out));
+        return out;
+    }
 
     pub fn @"set_layer_mask"(self: VisualInstance3D, arg0: i64) void {
         const method = methodBind(godot_class_name, "set_layer_mask", 1286410249);
@@ -106225,6 +106432,13 @@ pub const VisualInstance3D = struct {
         var out: u8 = std.mem.zeroes(u8);
         api_mod.godot.object_method_bind_ptrcall.?(method, self.object.ptr, null, @ptrCast(&out));
         return out != 0;
+    }
+
+    pub fn @"get_aabb"(self: VisualInstance3D) types.AABB {
+        const method = methodBind(godot_class_name, "get_aabb", 1068685055);
+        var out: types.AABB = std.mem.zeroes(types.AABB);
+        api_mod.godot.object_method_bind_ptrcall.?(method, self.object.ptr, null, @ptrCast(&out));
+        return out;
     }
 
 };
@@ -109652,6 +109866,13 @@ pub const VoxelGIData = struct {
     pub fn init(ptr: c.GDExtensionObjectPtr) VoxelGIData { return .{ .object = .init(ptr) }; }
     pub fn isNull(self: VoxelGIData) bool { return self.object.isNull(); }
     pub fn asObject(self: VoxelGIData) GodotObject { return self.object; }
+
+    pub fn @"get_bounds"(self: VoxelGIData) types.AABB {
+        const method = methodBind(godot_class_name, "get_bounds", 1068685055);
+        var out: types.AABB = std.mem.zeroes(types.AABB);
+        api_mod.godot.object_method_bind_ptrcall.?(method, self.object.ptr, null, @ptrCast(&out));
+        return out;
+    }
 
     pub fn @"get_octree_size"(self: VoxelGIData) types.Vector3 {
         const method = methodBind(godot_class_name, "get_octree_size", 3360562783);
