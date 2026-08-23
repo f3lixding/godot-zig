@@ -3,6 +3,32 @@ const c = @import("c.zig").c;
 const api_mod = @import("api.zig");
 const types = @import("types.zig");
 const Variant = @import("variant.zig").Variant;
+const signal = @import("signal.zig");
+
+pub const Callable = struct {
+    value: types.Callable,
+
+    pub fn fromObjectMethod(object: Object, method_name_text: [:0]const u8) Callable {
+        var out: types.Callable = std.mem.zeroes(types.Callable);
+        var raw_object = object.ptr;
+        var method_name = api_mod.godot.stringName(method_name_text);
+        defer api_mod.godot.destroy(c.GDEXTENSION_VARIANT_TYPE_STRING_NAME, &method_name);
+
+        const args = [_]c.GDExtensionConstTypePtr{ @ptrCast(&raw_object), &method_name };
+        const constructor = api_mod.godot.variant_get_ptr_constructor.?(
+            c.GDEXTENSION_VARIANT_TYPE_CALLABLE,
+            2,
+        ).?;
+        constructor(&out, &args);
+        return .{ .value = out };
+    }
+
+    pub fn destroy(self: *Callable) void {
+        api_mod.godot.destroy(c.GDEXTENSION_VARIANT_TYPE_CALLABLE, &self.value);
+    }
+};
+
+pub const SignalCallError = error{SignalCallFailed};
 
 /// Minimal raw object handle used by generated class wrappers.
 ///
@@ -66,4 +92,78 @@ pub const Object = struct {
         api_mod.godot.object_method_bind_call.?(method, self.ptr, &args, 3, &out, &err);
         return .{ .value = out };
     }
+
+    pub fn connectSignal(self: Object, comptime Signal: type, callable: Callable) i64 {
+        const method = api_mod.godot.bind("Object", "connect", 1518946055);
+        var signal_name = api_mod.godot.stringName(signal.name(Signal));
+        defer api_mod.godot.destroy(c.GDEXTENSION_VARIANT_TYPE_STRING_NAME, &signal_name);
+        var callable_value = callable.value;
+        var flags: i64 = 0;
+        const args = [_]c.GDExtensionConstTypePtr{ &signal_name, &callable_value, &flags };
+        var result: i64 = 0;
+        self.ptrcall(method, &args, &result);
+        return result;
+    }
+
+    pub fn disconnectSignal(self: Object, comptime Signal: type, callable: Callable) void {
+        const method = api_mod.godot.bind("Object", "disconnect", 1874754934);
+        var signal_name = api_mod.godot.stringName(signal.name(Signal));
+        defer api_mod.godot.destroy(c.GDEXTENSION_VARIANT_TYPE_STRING_NAME, &signal_name);
+        var callable_value = callable.value;
+        const args = [_]c.GDExtensionConstTypePtr{ &signal_name, &callable_value };
+        self.ptrcall(method, &args, null);
+    }
+
+    pub fn emitSignal(self: Object, comptime Signal: type, payload: Signal) SignalCallError!i64 {
+        const fields = @typeInfo(Signal).@"struct".fields;
+        var variants: [fields.len + 1]Variant = undefined;
+
+        var signal_name = api_mod.godot.stringName(signal.name(Signal));
+        defer api_mod.godot.destroy(c.GDEXTENSION_VARIANT_TYPE_STRING_NAME, &signal_name);
+        variants[0] = Variant.fromStringName(signal_name);
+        inline for (fields, 0..) |field, i| {
+            variants[i + 1] = Variant.from(@field(payload, field.name));
+        }
+        defer inline for (&variants) |*variant| variant.destroy();
+
+        var args: [fields.len + 1]c.GDExtensionConstVariantPtr = undefined;
+        inline for (&variants, 0..) |*variant, i| {
+            args[i] = &variant.value;
+        }
+
+        const method = api_mod.godot.bind("Object", "emit_signal", 4047867050);
+        var result_value: types.Variant = std.mem.zeroes(types.Variant);
+        var call_error: c.GDExtensionCallError = std.mem.zeroes(c.GDExtensionCallError);
+        api_mod.godot.object_method_bind_call.?(
+            method,
+            self.ptr,
+            &args,
+            @intCast(args.len),
+            &result_value,
+            &call_error,
+        );
+        if (call_error.@"error" != c.GDEXTENSION_CALL_OK) {
+            return error.SignalCallFailed;
+        }
+
+        var result = Variant{ .value = result_value };
+        defer result.destroy();
+        return result.to(i64);
+    }
 };
+
+const TestSignal = struct {
+    pub const signal_name: [:0]const u8 = "test_signal";
+    point: types.Vector3,
+    strength: f64,
+};
+
+fn compileSignalApi(object: Object, callable: Callable, payload: TestSignal) void {
+    _ = object.connectSignal(TestSignal, callable);
+    _ = object.emitSignal(TestSignal, payload) catch return;
+    object.disconnectSignal(TestSignal, callable);
+}
+
+test "typed signal object API compiles" {
+    _ = &compileSignalApi;
+}

@@ -27,6 +27,49 @@ pub const Variant = struct {
         return .{ .value = out };
     }
 
+    pub fn fromVector2(value: types.Vector2) Variant {
+        return fromBuiltin(value, c.GDEXTENSION_VARIANT_TYPE_VECTOR2);
+    }
+
+    pub fn fromVector3(value: types.Vector3) Variant {
+        return fromBuiltin(value, c.GDEXTENSION_VARIANT_TYPE_VECTOR3);
+    }
+
+    pub fn fromVector4(value: types.Vector4) Variant {
+        return fromBuiltin(value, c.GDEXTENSION_VARIANT_TYPE_VECTOR4);
+    }
+
+    pub fn fromColor(value: types.Color) Variant {
+        return fromBuiltin(value, c.GDEXTENSION_VARIANT_TYPE_COLOR);
+    }
+
+    pub fn fromStringName(value: types.StringName) Variant {
+        return fromBuiltin(value, c.GDEXTENSION_VARIANT_TYPE_STRING_NAME);
+    }
+
+    fn fromBuiltin(value: anytype, variant_type: c.GDExtensionVariantType) Variant {
+        var out: types.Variant = std.mem.zeroes(types.Variant);
+        var input = value;
+        api_mod.godot.get_variant_from_type_constructor.?(variant_type).?(&out, &input);
+        return .{ .value = out };
+    }
+
+    pub fn from(value: anytype) Variant {
+        const T = @TypeOf(value);
+        return switch (T) {
+            bool => fromBool(value),
+            f32 => fromFloat(@floatCast(value)),
+            f64 => fromFloat(value),
+            i8, i16, i32, i64, u8, u16, u32 => fromInt(@intCast(value)),
+            types.Vector2 => fromVector2(value),
+            types.Vector3 => fromVector3(value),
+            types.Vector4 => fromVector4(value),
+            types.Color => fromColor(value),
+            types.StringName => fromStringName(value),
+            else => @compileError("unsupported Variant conversion from " ++ @typeName(T)),
+        };
+    }
+
     pub fn destroy(self: *Variant) void {
         api_mod.godot.variant_destroy.?(&self.value);
     }
@@ -35,14 +78,28 @@ pub const Variant = struct {
         return api_mod.godot.variant_get_type.?(&self.value);
     }
 
-    pub fn toBuiltin(self: *Variant, comptime T: type, comptime variant_type: c.GDExtensionVariantType) T {
+    pub fn toBuiltin(self: *const Variant, comptime T: type, comptime variant_type: c.GDExtensionVariantType) T {
         var out: T = std.mem.zeroes(T);
         const ctor = api_mod.godot.get_variant_to_type_constructor.?(variant_type).?;
-        ctor(@ptrCast(&out), @constCast(@ptrCast(&self.value)));
+        ctor(@ptrCast(&out), @ptrCast(@constCast(&self.value)));
         return out;
     }
 
-    pub fn toObjectPtr(self: *Variant) c.GDExtensionObjectPtr {
+    pub fn to(self: *const Variant, comptime T: type) T {
+        return switch (T) {
+            bool => self.toBuiltin(u8, c.GDEXTENSION_VARIANT_TYPE_BOOL) != 0,
+            f32 => @floatCast(self.toBuiltin(f64, c.GDEXTENSION_VARIANT_TYPE_FLOAT)),
+            f64 => self.toBuiltin(f64, c.GDEXTENSION_VARIANT_TYPE_FLOAT),
+            i8, i16, i32, i64, u8, u16, u32 => @intCast(self.toBuiltin(i64, c.GDEXTENSION_VARIANT_TYPE_INT)),
+            types.Vector2 => self.toBuiltin(types.Vector2, c.GDEXTENSION_VARIANT_TYPE_VECTOR2),
+            types.Vector3 => self.toBuiltin(types.Vector3, c.GDEXTENSION_VARIANT_TYPE_VECTOR3),
+            types.Vector4 => self.toBuiltin(types.Vector4, c.GDEXTENSION_VARIANT_TYPE_VECTOR4),
+            types.Color => self.toBuiltin(types.Color, c.GDEXTENSION_VARIANT_TYPE_COLOR),
+            else => @compileError("unsupported Variant conversion to " ++ @typeName(T)),
+        };
+    }
+
+    pub fn toObjectPtr(self: *const Variant) c.GDExtensionObjectPtr {
         return self.toBuiltin(c.GDExtensionObjectPtr, c.GDEXTENSION_VARIANT_TYPE_OBJECT);
     }
 

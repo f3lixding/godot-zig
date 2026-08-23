@@ -5,6 +5,7 @@ pub const object = @import("object.zig");
 pub const class = @import("class.zig");
 pub const input = @import("input.zig");
 pub const variant = @import("variant.zig");
+pub const signal = @import("signal.zig");
 pub const collections = @import("collections.zig");
 pub const log = @import("log.zig");
 pub const generated = @import("generated/root.zig");
@@ -30,6 +31,7 @@ pub const Transform3D = types.Transform3D;
 pub const Projection = types.Projection;
 pub const Color = types.Color;
 pub const Object = object.Object;
+pub const Callable = object.Callable;
 pub const Node = generated.classes.Node;
 pub const Node3D = generated.classes.Node3D;
 pub const MeshInstance3D = generated.classes.MeshInstance3D;
@@ -48,6 +50,7 @@ comptime {
     _ = api;
     _ = class;
     _ = variant;
+    _ = signal;
     _ = collections;
     _ = log;
     _ = generated;
@@ -58,6 +61,7 @@ test {
     _ = @import("types.zig");
     _ = @import("api.zig");
     _ = @import("class.zig");
+    _ = @import("signal.zig");
     _ = @import("log.zig");
     _ = @import("generated_tests.zig");
 }

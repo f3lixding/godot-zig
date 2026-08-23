@@ -2,6 +2,8 @@ const std = @import("std");
 const c = @import("c.zig").c;
 const api_mod = @import("api.zig");
 const types = @import("types.zig");
+const Variant = @import("variant.zig").Variant;
+const signal = @import("signal.zig");
 
 pub const BindingCallbacks = c.GDExtensionInstanceBindingCallbacks{ .create_callback = null, .free_callback = null, .reference_callback = null };
 
@@ -115,6 +117,119 @@ pub fn Virtual1Float(comptime T: type, comptime function: *const fn (*T, f64) ca
     };
 }
 
+fn signalPtrArgument(comptime T: type, raw: c.GDExtensionConstTypePtr) T {
+    return switch (T) {
+        bool => @as(*const u8, @ptrCast(@alignCast(raw.?))).* != 0,
+        f32 => @floatCast(@as(*const f64, @ptrCast(@alignCast(raw.?))).*),
+        f64 => @as(*const f64, @ptrCast(@alignCast(raw.?))).*,
+        i8, i16, i32, i64, u8, u16, u32 => @intCast(@as(*const i64, @ptrCast(@alignCast(raw.?))).*),
+        types.Vector2, types.Vector3, types.Vector4, types.Color => @as(*const T, @ptrCast(@alignCast(raw.?))).*,
+        else => @compileError("unsupported signal method argument: " ++ @typeName(T)),
+    };
+}
+
+fn SignalMethod(comptime T: type, comptime Signal: type, comptime function: anytype) type {
+    const Function = @typeInfo(@TypeOf(function)).pointer.child;
+    const function_info = @typeInfo(Function).@"fn";
+    const fields = @typeInfo(Signal).@"struct".fields;
+
+    comptime {
+        if (function_info.params.len != fields.len + 1) {
+            @compileError("signal receiver method must take self followed by every signal field");
+        }
+        if (function_info.params[0].type.? != *T) {
+            @compileError("signal receiver method has the wrong self type");
+        }
+        for (fields, 0..) |field, i| {
+            if (function_info.params[i + 1].type.? != field.type) {
+                @compileError("signal receiver argument does not match field " ++ field.name);
+            }
+        }
+        if (function_info.return_type.? != void) {
+            @compileError("signal receiver method must return void");
+        }
+    }
+
+    return struct {
+        pub fn call(_: ?*anyopaque, instance: c.GDExtensionClassInstancePtr, args: [*c]const c.GDExtensionConstVariantPtr, argc: c.GDExtensionInt, _: c.GDExtensionVariantPtr, err: [*c]c.GDExtensionCallError) callconv(.c) void {
+            if (argc != fields.len) {
+                err.*.@"error" = if (argc > fields.len) c.GDEXTENSION_CALL_ERROR_TOO_MANY_ARGUMENTS else c.GDEXTENSION_CALL_ERROR_TOO_FEW_ARGUMENTS;
+                err.*.expected = @intCast(fields.len);
+                return;
+            }
+
+            var function_args: std.meta.ArgsTuple(Function) = undefined;
+            function_args[0] = @ptrCast(@alignCast(instance.?));
+            inline for (fields, 0..) |field, i| {
+                const raw: *const types.Variant = @ptrCast(@alignCast(args[i].?));
+                const value = Variant{ .value = raw.* };
+                function_args[i + 1] = value.to(field.type);
+            }
+            @call(.auto, function, function_args);
+        }
+
+        pub fn ptrcall(_: ?*anyopaque, instance: c.GDExtensionClassInstancePtr, args: [*c]const c.GDExtensionConstTypePtr, _: c.GDExtensionTypePtr) callconv(.c) void {
+            var function_args: std.meta.ArgsTuple(Function) = undefined;
+            function_args[0] = @ptrCast(@alignCast(instance.?));
+            inline for (fields, 0..) |field, i| {
+                function_args[i + 1] = signalPtrArgument(field.type, args[i]);
+            }
+            @call(.auto, function, function_args);
+        }
+    };
+}
+
+pub fn registerSignal(class_name_text: [:0]const u8, comptime Signal: type) void {
+    const fields = @typeInfo(Signal).@"struct".fields;
+    var class_name = api_mod.godot.stringName(class_name_text);
+    var signal_name = api_mod.godot.stringName(signal.name(Signal));
+    defer api_mod.godot.destroy(c.GDEXTENSION_VARIANT_TYPE_STRING_NAME, &signal_name);
+    defer api_mod.godot.destroy(c.GDEXTENSION_VARIANT_TYPE_STRING_NAME, &class_name);
+
+    var arguments: [fields.len]c.GDExtensionPropertyInfo = undefined;
+    inline for (fields, 0..) |field, i| {
+        arguments[i] = makePropertyInfo(field.name, signal.variantType(field.type), "");
+    }
+    defer inline for (&arguments) |*argument| destroyPropertyInfo(argument);
+
+    api_mod.godot.classdb_register_extension_class_signal.?(
+        api_mod.godot.library,
+        &class_name,
+        &signal_name,
+        if (arguments.len == 0) null else &arguments,
+        @intCast(arguments.len),
+    );
+}
+
+pub fn registerSignalHandler(comptime T: type, class_name_text: [:0]const u8, method_name_text: [:0]const u8, comptime Signal: type, comptime function: anytype) void {
+    const fields = @typeInfo(Signal).@"struct".fields;
+    // Instantiate the callback type here so signature mismatches fail while
+    // registering rather than at the first signal emission.
+    const Callback = SignalMethod(T, Signal, function);
+
+    var method_name = api_mod.godot.stringName(method_name_text);
+    var class_name = api_mod.godot.stringName(class_name_text);
+    defer api_mod.godot.destroy(c.GDEXTENSION_VARIANT_TYPE_STRING_NAME, &method_name);
+    defer api_mod.godot.destroy(c.GDEXTENSION_VARIANT_TYPE_STRING_NAME, &class_name);
+
+    var arguments: [fields.len]c.GDExtensionPropertyInfo = undefined;
+    var metadata: [fields.len]c.GDExtensionClassMethodArgumentMetadata = @splat(c.GDEXTENSION_METHOD_ARGUMENT_METADATA_NONE);
+    inline for (fields, 0..) |field, i| {
+        arguments[i] = makePropertyInfo(field.name, signal.variantType(field.type), "");
+    }
+    defer inline for (&arguments) |*argument| destroyPropertyInfo(argument);
+
+    var info: c.GDExtensionClassMethodInfo = std.mem.zeroes(c.GDExtensionClassMethodInfo);
+    info.name = &method_name;
+    info.call_func = Callback.call;
+    info.ptrcall_func = Callback.ptrcall;
+    info.method_flags = c.GDEXTENSION_METHOD_FLAGS_DEFAULT;
+    info.argument_count = @intCast(fields.len);
+    info.arguments_info = if (arguments.len == 0) null else &arguments;
+    info.arguments_metadata = if (metadata.len == 0) null else &metadata;
+    api_mod.godot.classdb_register_extension_class_method.?(api_mod.godot.library, &class_name, &info);
+}
+
 pub fn registerMethod0(comptime T: type, class_name_text: [:0]const u8, method_name_text: [:0]const u8, comptime ret: MethodReturn, comptime function: *const fn (*T) callconv(.c) ReturnZig(ret)) void {
     var method_name = api_mod.godot.stringName(method_name_text);
     var class_name = api_mod.godot.stringName(class_name_text);
@@ -181,4 +296,26 @@ pub fn NativeClass(comptime T: type, comptime parent_name_text: [:0]const u8, co
 test "return type mapping" {
     try std.testing.expect(ReturnZig(.float) == f64);
     try std.testing.expect(variantType(.int) == c.GDEXTENSION_VARIANT_TYPE_INT);
+}
+
+const TestSignal = struct {
+    pub const signal_name: [:0]const u8 = "test_signal";
+    point: types.Vector3,
+    strength: f64,
+};
+
+const TestReceiver = struct {
+    fn onSignal(_: *@This(), _: types.Vector3, _: f64) callconv(.c) void {}
+};
+
+fn compileSignalRegistration() void {
+    registerSignal("TestReceiver", TestSignal);
+    registerSignalHandler(TestReceiver, "TestReceiver", "on_signal", TestSignal, &TestReceiver.onSignal);
+}
+
+test "typed signal registration compiles" {
+    const Callback = SignalMethod(TestReceiver, TestSignal, &TestReceiver.onSignal);
+    _ = &Callback.call;
+    _ = &Callback.ptrcall;
+    _ = &compileSignalRegistration;
 }
