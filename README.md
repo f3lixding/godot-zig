@@ -162,6 +162,69 @@ if (!camera.isNull()) {
 }
 ```
 
+## Typed signals
+
+Declare signal arguments as a Zig struct with a Godot signal name:
+
+```zig
+const ContactSignal = struct {
+    pub const signal_name: [:0]const u8 = "contact_requested";
+    point: godot.Vector3,
+    normal: godot.Vector3,
+    strength: f64,
+};
+```
+
+Register the signal on its sender class and a matching handler on its receiver class after registering both native classes:
+
+```zig
+godot.class.registerSignal("MouseInteractor", ContactSignal);
+godot.class.registerSignalHandler(
+    JelloVisual,
+    "JelloVisual",
+    "on_contact_requested",
+    ContactSignal,
+    &JelloVisual.onContactRequested,
+);
+```
+
+The receiver signature must match the signal fields:
+
+```zig
+fn onContactRequested(
+    self: *JelloVisual,
+    point: godot.Vector3,
+    normal: godot.Vector3,
+    strength: f64,
+) callconv(.c) void {
+    // Handle contact.
+}
+```
+
+Connect specific object instances:
+
+```zig
+var callable = godot.Callable.fromObjectMethod(
+    receiver_object,
+    "on_contact_requested",
+);
+defer callable.destroy();
+
+const result = sender_object.connectSignal(ContactSignal, callable);
+```
+
+Emit the typed payload from the sender:
+
+```zig
+_ = try sender_object.emitSignal(ContactSignal, .{
+    .point = point,
+    .normal = normal,
+    .strength = 4.0,
+});
+```
+
+The signal payload is converted to a fixed-size stack array of Godot Variants, allowing signals with different argument counts without a Zig vararg wrapper.
+
 ## Logging
 
 Godot's GDExtension logging functions are available through `godot.log` after initialization:
