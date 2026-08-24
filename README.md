@@ -119,6 +119,17 @@ print(body.speed())
 
 A native class that overrides Godot callbacks such as `_ready`, `_physics_process`, or `_input` defines the following pair of public methods. `NativeClass.register()` detects them and installs them as the class's virtual dispatch callbacks. Classes without Godot virtual overrides may omit them.
 
+`register()` supplies null class userdata. To provide shared class context, use module-lifetime storage and `registerWithUserdata()`:
+
+```zig
+var class_context = ClassContext{ /* ... */ };
+
+const Native = godot.class.NativeClass(MyNode, "Node", "MyNode");
+Native.registerWithUserdata(&class_context);
+```
+
+The userdata pointer must remain valid for the entire class registration.
+
 ### `getVirtualCallData`
 
 ```zig
@@ -133,7 +144,7 @@ Godot calls this while resolving a virtual method for the class. It returns an o
 
 Arguments:
 
-- `class_userdata`: Per-class data supplied during class registration. `NativeClass` currently supplies `null`, so most implementations ignore it.
+- `class_userdata`: Per-class data supplied through `registerWithUserdata()`, or `null` when the class was registered with `register()`.
 - `name`: Godot `StringName` identifying the requested virtual method, such as `_ready` or `_physics_process`.
 - `hash`: Godot's compatibility hash for that virtual method signature. It can distinguish methods whose signatures change between API versions; simple implementations may ignore it.
 

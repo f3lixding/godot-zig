@@ -278,12 +278,19 @@ pub fn NativeClass(comptime T: type, comptime parent_name_text: [:0]const u8, co
         }
 
         pub fn register() void {
+            registerWithUserdata(null);
+        }
+
+        /// Register the native class with context shared by its class-level
+        /// callbacks. The pointed-to data must outlive the registration.
+        pub fn registerWithUserdata(class_userdata: ?*anyopaque) void {
             var class_name = api_mod.godot.stringName(class_name_text);
             var parent_name = api_mod.godot.stringName(parent_name_text);
             defer api_mod.godot.destroy(c.GDEXTENSION_VARIANT_TYPE_STRING_NAME, &class_name);
             defer api_mod.godot.destroy(c.GDEXTENSION_VARIANT_TYPE_STRING_NAME, &parent_name);
             var info: c.GDExtensionClassCreationInfo6 = std.mem.zeroes(c.GDExtensionClassCreationInfo6);
             info.is_exposed = 1;
+            info.class_userdata = class_userdata;
             info.create_instance_func = create;
             info.free_instance_func = free;
             if (@hasDecl(T, "getVirtualCallData")) info.get_virtual_call_data_func = T.getVirtualCallData;
@@ -318,4 +325,12 @@ test "typed signal registration compiles" {
     _ = &Callback.call;
     _ = &Callback.ptrcall;
     _ = &compileSignalRegistration;
+}
+
+fn compileClassUserdataRegistration(context: ?*anyopaque) void {
+    NativeClass(TestReceiver, "Object", "TestReceiver").registerWithUserdata(context);
+}
+
+test "native class userdata registration compiles" {
+    _ = &compileClassUserdataRegistration;
 }
