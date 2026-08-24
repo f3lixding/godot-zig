@@ -115,6 +115,38 @@ var body = ClassDB.instantiate("MyBody")
 print(body.speed())
 ```
 
+### Native instance lifecycle
+
+`NativeClass` automatically invokes optional Zig lifecycle declarations for every instance:
+
+```text
+Godot creates the native object
+→ NativeClass.create()
+→ T.init(object), when T declares init
+
+Godot frees the native object
+→ T.deinit(), when T declares deinit
+→ NativeClass frees the Zig instance storage
+```
+
+`init` initializes instance-owned fields:
+
+```zig
+pub fn init(object: godot.c.GDExtensionObjectPtr) MyBody {
+    return .{ .object = object };
+}
+```
+
+`deinit` releases instance-owned resources:
+
+```zig
+pub fn deinit(self: *MyBody) void {
+    _ = self;
+}
+```
+
+These names are `godot-zig` conventions used by `NativeClass.create()` and `NativeClass.free()`. Godot scene callbacks such as `_ready` are separate virtual callbacks that run after construction.
+
 ## Overriding Godot virtual methods
 
 A native class that overrides Godot callbacks such as `_ready`, `_physics_process`, or `_input` defines the following pair of public methods. `NativeClass.register()` detects them and installs them as the class's virtual dispatch callbacks. Classes without Godot virtual overrides may omit them.
