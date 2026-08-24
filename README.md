@@ -115,6 +115,91 @@ var body = ClassDB.instantiate("MyBody")
 print(body.speed())
 ```
 
+## Overriding Godot virtual methods
+
+A native class that overrides Godot callbacks such as `_ready`, `_physics_process`, or `_input` defines the following pair of public methods. `NativeClass.register()` detects them and installs them as the class's virtual dispatch callbacks. Classes without Godot virtual overrides may omit them.
+
+### `getVirtualCallData`
+
+```zig
+pub fn getVirtualCallData(
+    class_userdata: ?*anyopaque,
+    name: godot.c.GDExtensionConstStringNamePtr,
+    hash: u32,
+) callconv(.c) ?*anyopaque
+```
+
+Godot calls this while resolving a virtual method for the class. It returns an opaque token identifying the Zig callback, or `null` when the class does not override the requested method.
+
+Arguments:
+
+- `class_userdata`: Per-class data supplied during class registration. `NativeClass` currently supplies `null`, so most implementations ignore it.
+- `name`: Godot `StringName` identifying the requested virtual method, such as `_ready` or `_physics_process`.
+- `hash`: Godot's compatibility hash for that virtual method signature. It can distinguish methods whose signatures change between API versions; simple implementations may ignore it.
+
+A function pointer can serve as the opaque token:
+
+```zig
+pub fn getVirtualCallData(
+    _: ?*anyopaque,
+    name: godot.c.GDExtensionConstStringNamePtr,
+    _: u32,
+) callconv(.c) ?*anyopaque {
+    var ready_name = godot.api.godot.stringName("_ready");
+    defer godot.api.godot.destroy(
+        godot.c.GDEXTENSION_VARIANT_TYPE_STRING_NAME,
+        &ready_name,
+    );
+
+    if (stringNameEqual(name, &ready_name)) {
+        return @ptrCast(@constCast(&ready));
+    }
+    return null;
+}
+```
+
+### `callVirtualWithData`
+
+```zig
+pub fn callVirtualWithData(
+    instance: godot.c.GDExtensionClassInstancePtr,
+    name: godot.c.GDExtensionConstStringNamePtr,
+    virtual_call_userdata: ?*anyopaque,
+    args: [*c]const godot.c.GDExtensionConstTypePtr,
+    ret: godot.c.GDExtensionTypePtr,
+) callconv(.c) void
+```
+
+Godot calls this to execute a virtual method previously resolved by `getVirtualCallData`.
+
+Arguments:
+
+- `instance`: Pointer to the specific Zig class instance receiving the callback. Cast it to `*Self` with `@ptrCast(@alignCast(instance.?))`.
+- `name`: Name of the virtual method being called. Dispatch can use this value, although the opaque token is usually sufficient.
+- `virtual_call_userdata`: The exact token returned by `getVirtualCallData`. It identifies which Zig callback to invoke.
+- `args`: Array of raw pointers to the virtual method arguments in declaration order. For `_physics_process`, `args[0]` points to an `f64` delta. For `_input`, `args[0]` points to a Godot object pointer.
+- `ret`: Raw output location for the virtual method's return value. Void callbacks ignore it; callbacks with return values must write the correctly typed value here.
+
+Example dispatch:
+
+```zig
+pub fn callVirtualWithData(
+    instance: godot.c.GDExtensionClassInstancePtr,
+    _: godot.c.GDExtensionConstStringNamePtr,
+    userdata: ?*anyopaque,
+    args: [*c]const godot.c.GDExtensionConstTypePtr,
+    ret: godot.c.GDExtensionTypePtr,
+) callconv(.c) void {
+    _ = ret;
+    const self: *Self = @ptrCast(@alignCast(instance.?));
+
+    if (userdata == @as(?*anyopaque, @ptrCast(@constCast(&physicsProcess)))) {
+        const delta: *const f64 = @ptrCast(@alignCast(args[0].?));
+        physicsProcess(self, delta.*);
+    }
+}
+```
+
 ## Calling Godot APIs from Zig
 
 ```zig
