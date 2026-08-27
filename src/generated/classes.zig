@@ -809,6 +809,36 @@ pub const AcceptDialog = struct {
         return out != 0;
     }
 
+    pub fn @"add_button"(self: AcceptDialog, arg0: types.String, arg1: bool, arg2: types.String) Button {
+        const method = methodBind(godot_class_name, "add_button", 3328440682);
+        var a0: types.String = arg0;
+        var a1: u8 = @intFromBool(arg1);
+        var a2: types.String = arg2;
+        const args = [_]c.GDExtensionConstTypePtr{ &a0, &a1, &a2 };
+        _ = &args;
+        var v0 = Variant.fromString(arg0);
+        defer v0.destroy();
+        var v1 = Variant.fromBool(arg1);
+        defer v1.destroy();
+        var v2 = Variant.fromString(arg2);
+        defer v2.destroy();
+        var ret = self.object.callVariant3(method, &v0, &v1, &v2);
+        defer ret.destroy();
+        return .init(ret.toObjectPtr());
+    }
+
+    pub fn @"add_cancel_button"(self: AcceptDialog, arg0: types.String) Button {
+        const method = methodBind(godot_class_name, "add_cancel_button", 242045556);
+        var a0: types.String = arg0;
+        const args = [_]c.GDExtensionConstTypePtr{ &a0 };
+        _ = &args;
+        var v0 = Variant.fromString(arg0);
+        defer v0.destroy();
+        var ret = self.object.callVariant1(method, &v0);
+        defer ret.destroy();
+        return .init(ret.toObjectPtr());
+    }
+
     pub fn @"remove_button"(self: AcceptDialog, arg0: Button) void {
         const method = methodBind(godot_class_name, "remove_button", 2068354942);
         var a0: c.GDExtensionObjectPtr = arg0.object.ptr;
@@ -18999,6 +19029,18 @@ pub const CodeEdit = struct {
         return out != 0;
     }
 
+    pub fn @"get_auto_brace_completion_close_key"(self: CodeEdit, arg0: types.String) types.String {
+        const method = methodBind(godot_class_name, "get_auto_brace_completion_close_key", 3135753539);
+        var a0: types.String = arg0;
+        const args = [_]c.GDExtensionConstTypePtr{ &a0 };
+        _ = &args;
+        var v0 = Variant.fromString(arg0);
+        defer v0.destroy();
+        var ret = self.object.callVariant1(method, &v0);
+        defer ret.destroy();
+        return ret.toString();
+    }
+
     pub fn @"set_draw_breakpoints_gutter"(self: CodeEdit, arg0: bool) void {
         const method = methodBind(godot_class_name, "set_draw_breakpoints_gutter", 2586408642);
         var a0: u8 = @intFromBool(arg0);
@@ -21841,6 +21883,18 @@ pub const Control = struct {
         var out: i64 = std.mem.zeroes(i64);
         api_mod.godot.object_method_bind_ptrcall.?(method, self.object.ptr, &args, @ptrCast(&out));
         return out;
+    }
+
+    pub fn @"_make_custom_tooltip"(self: Control, arg0: types.String) Object {
+        const method = methodBind(godot_class_name, "_make_custom_tooltip", 1976279298);
+        var a0: types.String = arg0;
+        const args = [_]c.GDExtensionConstTypePtr{ &a0 };
+        _ = &args;
+        var v0 = Variant.fromString(arg0);
+        defer v0.destroy();
+        var ret = self.object.callVariant1(method, &v0);
+        defer ret.destroy();
+        return .init(ret.toObjectPtr());
     }
 
     pub fn @"_get_cursor_shape"(self: Control, arg0: types.Vector2) i64 {
@@ -25394,6 +25448,18 @@ pub const DirAccess = struct {
         return out != 0;
     }
 
+    pub fn @"read_link"(self: DirAccess, arg0: types.String) types.String {
+        const method = methodBind(godot_class_name, "read_link", 1703090593);
+        var a0: types.String = arg0;
+        const args = [_]c.GDExtensionConstTypePtr{ &a0 };
+        _ = &args;
+        var v0 = Variant.fromString(arg0);
+        defer v0.destroy();
+        var ret = self.object.callVariant1(method, &v0);
+        defer ret.destroy();
+        return ret.toString();
+    }
+
     pub fn @"create_link"(self: DirAccess, arg0: types.String, arg1: types.String) i64 {
         const method = methodBind(godot_class_name, "create_link", 852856452);
         var a0: types.String = arg0;
@@ -25649,6 +25715,36 @@ pub const DisplayServer = struct {
         return out != 0;
     }
 
+    pub fn @"global_menu_get_item_text"(self: DisplayServer, arg0: types.String, arg1: i64) types.String {
+        const method = methodBind(godot_class_name, "global_menu_get_item_text", 591067909);
+        var a0: types.String = arg0;
+        var a1: i64 = arg1;
+        const args = [_]c.GDExtensionConstTypePtr{ &a0, &a1 };
+        _ = &args;
+        var v0 = Variant.fromString(arg0);
+        defer v0.destroy();
+        var v1 = Variant.fromInt(arg1);
+        defer v1.destroy();
+        var ret = self.object.callVariant2(method, &v0, &v1);
+        defer ret.destroy();
+        return ret.toString();
+    }
+
+    pub fn @"global_menu_get_item_submenu"(self: DisplayServer, arg0: types.String, arg1: i64) types.String {
+        const method = methodBind(godot_class_name, "global_menu_get_item_submenu", 591067909);
+        var a0: types.String = arg0;
+        var a1: i64 = arg1;
+        const args = [_]c.GDExtensionConstTypePtr{ &a0, &a1 };
+        _ = &args;
+        var v0 = Variant.fromString(arg0);
+        defer v0.destroy();
+        var v1 = Variant.fromInt(arg1);
+        defer v1.destroy();
+        var ret = self.object.callVariant2(method, &v0, &v1);
+        defer ret.destroy();
+        return ret.toString();
+    }
+
     pub fn @"global_menu_get_item_accelerator"(self: DisplayServer, arg0: types.String, arg1: i64) i64 {
         const method = methodBind(godot_class_name, "global_menu_get_item_accelerator", 936065394);
         var a0: types.String = arg0;
@@ -25682,6 +25778,21 @@ pub const DisplayServer = struct {
         return out != 0;
     }
 
+    pub fn @"global_menu_get_item_tooltip"(self: DisplayServer, arg0: types.String, arg1: i64) types.String {
+        const method = methodBind(godot_class_name, "global_menu_get_item_tooltip", 591067909);
+        var a0: types.String = arg0;
+        var a1: i64 = arg1;
+        const args = [_]c.GDExtensionConstTypePtr{ &a0, &a1 };
+        _ = &args;
+        var v0 = Variant.fromString(arg0);
+        defer v0.destroy();
+        var v1 = Variant.fromInt(arg1);
+        defer v1.destroy();
+        var ret = self.object.callVariant2(method, &v0, &v1);
+        defer ret.destroy();
+        return ret.toString();
+    }
+
     pub fn @"global_menu_get_item_state"(self: DisplayServer, arg0: types.String, arg1: i64) i64 {
         const method = methodBind(godot_class_name, "global_menu_get_item_state", 3422818498);
         var a0: types.String = arg0;
@@ -25702,6 +25813,21 @@ pub const DisplayServer = struct {
         var out: i64 = std.mem.zeroes(i64);
         api_mod.godot.object_method_bind_ptrcall.?(method, self.object.ptr, &args, @ptrCast(&out));
         return out;
+    }
+
+    pub fn @"global_menu_get_item_icon"(self: DisplayServer, arg0: types.String, arg1: i64) Texture2D {
+        const method = methodBind(godot_class_name, "global_menu_get_item_icon", 3591713183);
+        var a0: types.String = arg0;
+        var a1: i64 = arg1;
+        const args = [_]c.GDExtensionConstTypePtr{ &a0, &a1 };
+        _ = &args;
+        var v0 = Variant.fromString(arg0);
+        defer v0.destroy();
+        var v1 = Variant.fromInt(arg1);
+        defer v1.destroy();
+        var ret = self.object.callVariant2(method, &v0, &v1);
+        defer ret.destroy();
+        return .init(ret.toObjectPtr());
     }
 
     pub fn @"global_menu_get_item_indentation_level"(self: DisplayServer, arg0: types.String, arg1: i64) i64 {
@@ -27108,6 +27234,27 @@ pub const ENetConnection = struct {
         api_mod.godot.object_method_bind_ptrcall.?(method, self.object.ptr, null, null);
     }
 
+    pub fn @"connect_to_host"(self: ENetConnection, arg0: types.String, arg1: i64, arg2: i64, arg3: i64) ENetPacketPeer {
+        const method = methodBind(godot_class_name, "connect_to_host", 2171300490);
+        var a0: types.String = arg0;
+        var a1: i64 = arg1;
+        var a2: i64 = arg2;
+        var a3: i64 = arg3;
+        const args = [_]c.GDExtensionConstTypePtr{ &a0, &a1, &a2, &a3 };
+        _ = &args;
+        var v0 = Variant.fromString(arg0);
+        defer v0.destroy();
+        var v1 = Variant.fromInt(arg1);
+        defer v1.destroy();
+        var v2 = Variant.fromInt(arg2);
+        defer v2.destroy();
+        var v3 = Variant.fromInt(arg3);
+        defer v3.destroy();
+        var out: c.GDExtensionObjectPtr = std.mem.zeroes(c.GDExtensionObjectPtr);
+        api_mod.godot.object_method_bind_ptrcall.?(method, self.object.ptr, &args, @ptrCast(&out));
+        return .init(out);
+    }
+
     pub fn @"service"(self: ENetConnection, arg0: i64) collections.Array {
         const method = methodBind(godot_class_name, "service", 2402345344);
         var a0: i64 = arg0;
@@ -27898,6 +28045,18 @@ pub const EditorExportPlatform = struct {
         var ret = self.object.callVariant0(method);
         defer ret.destroy();
         return .init(ret.toObjectPtr());
+    }
+
+    pub fn @"find_export_template"(self: EditorExportPlatform, arg0: types.String) types.Dictionary {
+        const method = methodBind(godot_class_name, "find_export_template", 2248993622);
+        var a0: types.String = arg0;
+        const args = [_]c.GDExtensionConstTypePtr{ &a0 };
+        _ = &args;
+        var v0 = Variant.fromString(arg0);
+        defer v0.destroy();
+        var ret = self.object.callVariant1(method, &v0);
+        defer ret.destroy();
+        return ret.toDictionary();
     }
 
     pub fn @"get_current_presets"(self: EditorExportPlatform) collections.Array {
@@ -28970,6 +29129,30 @@ pub const EditorFileSystem = struct {
         api_mod.godot.object_method_bind_ptrcall.?(method, self.object.ptr, &args, null);
     }
 
+    pub fn @"get_filesystem_path"(self: EditorFileSystem, arg0: types.String) EditorFileSystemDirectory {
+        const method = methodBind(godot_class_name, "get_filesystem_path", 3188521125);
+        var a0: types.String = arg0;
+        const args = [_]c.GDExtensionConstTypePtr{ &a0 };
+        _ = &args;
+        var v0 = Variant.fromString(arg0);
+        defer v0.destroy();
+        var ret = self.object.callVariant1(method, &v0);
+        defer ret.destroy();
+        return .init(ret.toObjectPtr());
+    }
+
+    pub fn @"get_file_type"(self: EditorFileSystem, arg0: types.String) types.String {
+        const method = methodBind(godot_class_name, "get_file_type", 3135753539);
+        var a0: types.String = arg0;
+        const args = [_]c.GDExtensionConstTypePtr{ &a0 };
+        _ = &args;
+        var v0 = Variant.fromString(arg0);
+        defer v0.destroy();
+        var ret = self.object.callVariant1(method, &v0);
+        defer ret.destroy();
+        return ret.toString();
+    }
+
 };
 
 pub const EditorFileSystemDirectory = struct {
@@ -29182,6 +29365,21 @@ pub const EditorImportPlugin = struct {
         var ret = self.object.callVariant1(method, &v0);
         defer ret.destroy();
         return ret.toString();
+    }
+
+    pub fn @"_get_import_options"(self: EditorImportPlugin, arg0: types.String, arg1: i64) collections.Array {
+        const method = methodBind(godot_class_name, "_get_import_options", 520498173);
+        var a0: types.String = arg0;
+        var a1: i64 = arg1;
+        const args = [_]c.GDExtensionConstTypePtr{ &a0, &a1 };
+        _ = &args;
+        var v0 = Variant.fromString(arg0);
+        defer v0.destroy();
+        var v1 = Variant.fromInt(arg1);
+        defer v1.destroy();
+        var ret = self.object.callVariant2(method, &v0, &v1);
+        defer ret.destroy();
+        return ret.toArray();
     }
 
     pub fn @"_get_save_extension"(self: EditorImportPlugin) types.String {
@@ -30368,6 +30566,18 @@ pub const EditorPlugin = struct {
     pub fn @"_clear"(self: EditorPlugin) void {
         const method = methodBind(godot_class_name, "_clear", 3218959716);
         api_mod.godot.object_method_bind_ptrcall.?(method, self.object.ptr, null, null);
+    }
+
+    pub fn @"_get_unsaved_status"(self: EditorPlugin, arg0: types.String) types.String {
+        const method = methodBind(godot_class_name, "_get_unsaved_status", 3135753539);
+        var a0: types.String = arg0;
+        const args = [_]c.GDExtensionConstTypePtr{ &a0 };
+        _ = &args;
+        var v0 = Variant.fromString(arg0);
+        defer v0.destroy();
+        var ret = self.object.callVariant1(method, &v0);
+        defer ret.destroy();
+        return ret.toString();
     }
 
     pub fn @"_save_external_data"(self: EditorPlugin) void {
@@ -31605,6 +31815,18 @@ pub const EditorSettings = struct {
         return out != 0;
     }
 
+    pub fn @"get_shortcut"(self: EditorSettings, arg0: types.String) Shortcut {
+        const method = methodBind(godot_class_name, "get_shortcut", 1149070301);
+        var a0: types.String = arg0;
+        const args = [_]c.GDExtensionConstTypePtr{ &a0 };
+        _ = &args;
+        var v0 = Variant.fromString(arg0);
+        defer v0.destroy();
+        var ret = self.object.callVariant1(method, &v0);
+        defer ret.destroy();
+        return .init(ret.toObjectPtr());
+    }
+
     pub fn @"check_changed_settings_in_group"(self: EditorSettings, arg0: types.String) bool {
         const method = methodBind(godot_class_name, "check_changed_settings_in_group", 3927539163);
         var a0: types.String = arg0;
@@ -31807,6 +32029,18 @@ pub const EditorTranslationParserPlugin = struct {
     pub fn isNull(self: EditorTranslationParserPlugin) bool { return self.object.isNull(); }
     pub fn asObject(self: EditorTranslationParserPlugin) GodotObject { return self.object; }
 
+    pub fn @"_parse_file"(self: EditorTranslationParserPlugin, arg0: types.String) collections.Array {
+        const method = methodBind(godot_class_name, "_parse_file", 1576865988);
+        var a0: types.String = arg0;
+        const args = [_]c.GDExtensionConstTypePtr{ &a0 };
+        _ = &args;
+        var v0 = Variant.fromString(arg0);
+        defer v0.destroy();
+        var ret = self.object.callVariant1(method, &v0);
+        defer ret.destroy();
+        return ret.toArray();
+    }
+
 };
 
 pub const EditorUndoRedoManager = struct {
@@ -31975,6 +32209,21 @@ pub const EditorVCSInterface = struct {
         return out != 0;
     }
 
+    pub fn @"_get_diff"(self: EditorVCSInterface, arg0: types.String, arg1: i64) collections.Array {
+        const method = methodBind(godot_class_name, "_get_diff", 1366379175);
+        var a0: types.String = arg0;
+        var a1: i64 = arg1;
+        const args = [_]c.GDExtensionConstTypePtr{ &a0, &a1 };
+        _ = &args;
+        var v0 = Variant.fromString(arg0);
+        defer v0.destroy();
+        var v1 = Variant.fromInt(arg1);
+        defer v1.destroy();
+        var ret = self.object.callVariant2(method, &v0, &v1);
+        defer ret.destroy();
+        return ret.toArray();
+    }
+
     pub fn @"_shut_down"(self: EditorVCSInterface) bool {
         const method = methodBind(godot_class_name, "_shut_down", 2240911060);
         var out: u8 = std.mem.zeroes(u8);
@@ -32090,6 +32339,42 @@ pub const EditorVCSInterface = struct {
         api_mod.godot.object_method_bind_ptrcall.?(method, self.object.ptr, &args, null);
     }
 
+    pub fn @"_get_line_diff"(self: EditorVCSInterface, arg0: types.String, arg1: types.String) collections.Array {
+        const method = methodBind(godot_class_name, "_get_line_diff", 2796572089);
+        var a0: types.String = arg0;
+        var a1: types.String = arg1;
+        const args = [_]c.GDExtensionConstTypePtr{ &a0, &a1 };
+        _ = &args;
+        var v0 = Variant.fromString(arg0);
+        defer v0.destroy();
+        var v1 = Variant.fromString(arg1);
+        defer v1.destroy();
+        var ret = self.object.callVariant2(method, &v0, &v1);
+        defer ret.destroy();
+        return ret.toArray();
+    }
+
+    pub fn @"create_diff_line"(self: EditorVCSInterface, arg0: i64, arg1: i64, arg2: types.String, arg3: types.String) types.Dictionary {
+        const method = methodBind(godot_class_name, "create_diff_line", 2901184053);
+        var a0: i64 = arg0;
+        var a1: i64 = arg1;
+        var a2: types.String = arg2;
+        var a3: types.String = arg3;
+        const args = [_]c.GDExtensionConstTypePtr{ &a0, &a1, &a2, &a3 };
+        _ = &args;
+        var v0 = Variant.fromInt(arg0);
+        defer v0.destroy();
+        var v1 = Variant.fromInt(arg1);
+        defer v1.destroy();
+        var v2 = Variant.fromString(arg2);
+        defer v2.destroy();
+        var v3 = Variant.fromString(arg3);
+        defer v3.destroy();
+        var out: types.Dictionary = std.mem.zeroes(types.Dictionary);
+        api_mod.godot.object_method_bind_ptrcall.?(method, self.object.ptr, &args, @ptrCast(&out));
+        return out;
+    }
+
     pub fn @"create_diff_hunk"(self: EditorVCSInterface, arg0: i64, arg1: i64, arg2: i64, arg3: i64) types.Dictionary {
         const method = methodBind(godot_class_name, "create_diff_hunk", 3784842090);
         var a0: i64 = arg0;
@@ -32109,6 +32394,63 @@ pub const EditorVCSInterface = struct {
         var out: types.Dictionary = std.mem.zeroes(types.Dictionary);
         api_mod.godot.object_method_bind_ptrcall.?(method, self.object.ptr, &args, @ptrCast(&out));
         return out;
+    }
+
+    pub fn @"create_diff_file"(self: EditorVCSInterface, arg0: types.String, arg1: types.String) types.Dictionary {
+        const method = methodBind(godot_class_name, "create_diff_file", 2723227684);
+        var a0: types.String = arg0;
+        var a1: types.String = arg1;
+        const args = [_]c.GDExtensionConstTypePtr{ &a0, &a1 };
+        _ = &args;
+        var v0 = Variant.fromString(arg0);
+        defer v0.destroy();
+        var v1 = Variant.fromString(arg1);
+        defer v1.destroy();
+        var ret = self.object.callVariant2(method, &v0, &v1);
+        defer ret.destroy();
+        return ret.toDictionary();
+    }
+
+    pub fn @"create_commit"(self: EditorVCSInterface, arg0: types.String, arg1: types.String, arg2: types.String, arg3: i64, arg4: i64) types.Dictionary {
+        const method = methodBind(godot_class_name, "create_commit", 1075983584);
+        var a0: types.String = arg0;
+        var a1: types.String = arg1;
+        var a2: types.String = arg2;
+        var a3: i64 = arg3;
+        var a4: i64 = arg4;
+        const args = [_]c.GDExtensionConstTypePtr{ &a0, &a1, &a2, &a3, &a4 };
+        _ = &args;
+        var v0 = Variant.fromString(arg0);
+        defer v0.destroy();
+        var v1 = Variant.fromString(arg1);
+        defer v1.destroy();
+        var v2 = Variant.fromString(arg2);
+        defer v2.destroy();
+        var v3 = Variant.fromInt(arg3);
+        defer v3.destroy();
+        var v4 = Variant.fromInt(arg4);
+        defer v4.destroy();
+        var out: types.Dictionary = std.mem.zeroes(types.Dictionary);
+        api_mod.godot.object_method_bind_ptrcall.?(method, self.object.ptr, &args, @ptrCast(&out));
+        return out;
+    }
+
+    pub fn @"create_status_file"(self: EditorVCSInterface, arg0: types.String, arg1: i64, arg2: i64) types.Dictionary {
+        const method = methodBind(godot_class_name, "create_status_file", 1083471673);
+        var a0: types.String = arg0;
+        var a1: i64 = arg1;
+        var a2: i64 = arg2;
+        const args = [_]c.GDExtensionConstTypePtr{ &a0, &a1, &a2 };
+        _ = &args;
+        var v0 = Variant.fromString(arg0);
+        defer v0.destroy();
+        var v1 = Variant.fromInt(arg1);
+        defer v1.destroy();
+        var v2 = Variant.fromInt(arg2);
+        defer v2.destroy();
+        var ret = self.object.callVariant3(method, &v0, &v1, &v2);
+        defer ret.destroy();
+        return ret.toDictionary();
     }
 
     pub fn @"popup_error"(self: EditorVCSInterface, arg0: types.String) void {
@@ -36961,6 +37303,18 @@ pub const GDExtensionManager = struct {
         return out != 0;
     }
 
+    pub fn @"get_extension"(self: GDExtensionManager, arg0: types.String) GDExtension {
+        const method = methodBind(godot_class_name, "get_extension", 49743343);
+        var a0: types.String = arg0;
+        const args = [_]c.GDExtensionConstTypePtr{ &a0 };
+        _ = &args;
+        var v0 = Variant.fromString(arg0);
+        defer v0.destroy();
+        var ret = self.object.callVariant1(method, &v0);
+        defer ret.destroy();
+        return .init(ret.toObjectPtr());
+    }
+
 };
 
 pub const GDScript = struct {
@@ -37062,6 +37416,42 @@ pub const GDScriptWorkspace = struct {
     pub fn init(ptr: c.GDExtensionObjectPtr) GDScriptWorkspace { return .{ .object = .init(ptr) }; }
     pub fn isNull(self: GDScriptWorkspace) bool { return self.object.isNull(); }
     pub fn asObject(self: GDScriptWorkspace) GodotObject { return self.object; }
+
+    pub fn @"get_file_path"(self: GDScriptWorkspace, arg0: types.String) types.String {
+        const method = methodBind(godot_class_name, "get_file_path", 1703090593);
+        var a0: types.String = arg0;
+        const args = [_]c.GDExtensionConstTypePtr{ &a0 };
+        _ = &args;
+        var v0 = Variant.fromString(arg0);
+        defer v0.destroy();
+        var ret = self.object.callVariant1(method, &v0);
+        defer ret.destroy();
+        return ret.toString();
+    }
+
+    pub fn @"get_file_uri"(self: GDScriptWorkspace, arg0: types.String) types.String {
+        const method = methodBind(godot_class_name, "get_file_uri", 3135753539);
+        var a0: types.String = arg0;
+        const args = [_]c.GDExtensionConstTypePtr{ &a0 };
+        _ = &args;
+        var v0 = Variant.fromString(arg0);
+        defer v0.destroy();
+        var ret = self.object.callVariant1(method, &v0);
+        defer ret.destroy();
+        return ret.toString();
+    }
+
+    pub fn @"generate_script_api"(self: GDScriptWorkspace, arg0: types.String) types.Dictionary {
+        const method = methodBind(godot_class_name, "generate_script_api", 2786125124);
+        var a0: types.String = arg0;
+        const args = [_]c.GDExtensionConstTypePtr{ &a0 };
+        _ = &args;
+        var v0 = Variant.fromString(arg0);
+        defer v0.destroy();
+        var ret = self.object.callVariant1(method, &v0);
+        defer ret.destroy();
+        return ret.toDictionary();
+    }
 
     pub fn @"didDeleteFiles"(self: GDScriptWorkspace, arg0: types.Dictionary) void {
         const method = methodBind(godot_class_name, "didDeleteFiles", 4155329257);
@@ -44135,6 +44525,21 @@ pub const IP = struct {
     pub fn asObject(self: IP) GodotObject { return self.object; }
     pub fn singleton() IP { return .init(api_mod.godot.singleton("IP")); }
 
+    pub fn @"resolve_hostname"(self: IP, arg0: types.String, arg1: i64) types.String {
+        const method = methodBind(godot_class_name, "resolve_hostname", 4283295457);
+        var a0: types.String = arg0;
+        var a1: i64 = arg1;
+        const args = [_]c.GDExtensionConstTypePtr{ &a0, &a1 };
+        _ = &args;
+        var v0 = Variant.fromString(arg0);
+        defer v0.destroy();
+        var v1 = Variant.fromInt(arg1);
+        defer v1.destroy();
+        var ret = self.object.callVariant2(method, &v0, &v1);
+        defer ret.destroy();
+        return ret.toString();
+    }
+
     pub fn @"resolve_hostname_queue_item"(self: IP, arg0: types.String, arg1: i64) i64 {
         const method = methodBind(godot_class_name, "resolve_hostname_queue_item", 1749894742);
         var a0: types.String = arg0;
@@ -48367,6 +48772,18 @@ pub const JSONRPC = struct {
     pub fn isNull(self: JSONRPC) bool { return self.object.isNull(); }
     pub fn asObject(self: JSONRPC) GodotObject { return self.object; }
 
+    pub fn @"process_string"(self: JSONRPC, arg0: types.String) types.String {
+        const method = methodBind(godot_class_name, "process_string", 1703090593);
+        var a0: types.String = arg0;
+        const args = [_]c.GDExtensionConstTypePtr{ &a0 };
+        _ = &args;
+        var v0 = Variant.fromString(arg0);
+        defer v0.destroy();
+        var ret = self.object.callVariant1(method, &v0);
+        defer ret.destroy();
+        return ret.toString();
+    }
+
 };
 
 pub const JacobianIK3D = struct {
@@ -48429,6 +48846,18 @@ pub const JavaClassWrapper = struct {
     pub fn asObject(self: JavaClassWrapper) GodotObject { return self.object; }
     pub fn singleton() JavaClassWrapper { return .init(api_mod.godot.singleton("JavaClassWrapper")); }
 
+    pub fn @"wrap"(self: JavaClassWrapper, arg0: types.String) JavaClass {
+        const method = methodBind(godot_class_name, "wrap", 1124367868);
+        var a0: types.String = arg0;
+        const args = [_]c.GDExtensionConstTypePtr{ &a0 };
+        _ = &args;
+        var v0 = Variant.fromString(arg0);
+        defer v0.destroy();
+        var ret = self.object.callVariant1(method, &v0);
+        defer ret.destroy();
+        return .init(ret.toObjectPtr());
+    }
+
     pub fn @"get_exception"(self: JavaClassWrapper) JavaObject {
         const method = methodBind(godot_class_name, "get_exception", 3277089691);
         var ret = self.object.callVariant0(method);
@@ -48473,6 +48902,18 @@ pub const JavaScriptBridge = struct {
     pub fn isNull(self: JavaScriptBridge) bool { return self.object.isNull(); }
     pub fn asObject(self: JavaScriptBridge) GodotObject { return self.object; }
     pub fn singleton() JavaScriptBridge { return .init(api_mod.godot.singleton("JavaScriptBridge")); }
+
+    pub fn @"get_interface"(self: JavaScriptBridge, arg0: types.String) JavaScriptObject {
+        const method = methodBind(godot_class_name, "get_interface", 1355533281);
+        var a0: types.String = arg0;
+        const args = [_]c.GDExtensionConstTypePtr{ &a0 };
+        _ = &args;
+        var v0 = Variant.fromString(arg0);
+        defer v0.destroy();
+        var ret = self.object.callVariant1(method, &v0);
+        defer ret.destroy();
+        return .init(ret.toObjectPtr());
+    }
 
     pub fn @"is_js_buffer"(self: JavaScriptBridge, arg0: JavaScriptObject) bool {
         const method = methodBind(godot_class_name, "is_js_buffer", 821968997);
@@ -52882,6 +53323,41 @@ pub const Marshalls = struct {
     pub fn isNull(self: Marshalls) bool { return self.object.isNull(); }
     pub fn asObject(self: Marshalls) GodotObject { return self.object; }
     pub fn singleton() Marshalls { return .init(api_mod.godot.singleton("Marshalls")); }
+
+    pub fn @"base64_to_raw"(self: Marshalls, arg0: types.String) collections.PackedByteArray {
+        const method = methodBind(godot_class_name, "base64_to_raw", 659035735);
+        var a0: types.String = arg0;
+        const args = [_]c.GDExtensionConstTypePtr{ &a0 };
+        _ = &args;
+        var v0 = Variant.fromString(arg0);
+        defer v0.destroy();
+        var ret = self.object.callVariant1(method, &v0);
+        return ret.toPackedByteArray();
+    }
+
+    pub fn @"utf8_to_base64"(self: Marshalls, arg0: types.String) types.String {
+        const method = methodBind(godot_class_name, "utf8_to_base64", 1703090593);
+        var a0: types.String = arg0;
+        const args = [_]c.GDExtensionConstTypePtr{ &a0 };
+        _ = &args;
+        var v0 = Variant.fromString(arg0);
+        defer v0.destroy();
+        var ret = self.object.callVariant1(method, &v0);
+        defer ret.destroy();
+        return ret.toString();
+    }
+
+    pub fn @"base64_to_utf8"(self: Marshalls, arg0: types.String) types.String {
+        const method = methodBind(godot_class_name, "base64_to_utf8", 1703090593);
+        var a0: types.String = arg0;
+        const args = [_]c.GDExtensionConstTypePtr{ &a0 };
+        _ = &args;
+        var v0 = Variant.fromString(arg0);
+        defer v0.destroy();
+        var ret = self.object.callVariant1(method, &v0);
+        defer ret.destroy();
+        return ret.toString();
+    }
 
 };
 
@@ -59770,6 +60246,57 @@ pub const Node = struct {
         return .init(ret.toObjectPtr());
     }
 
+    pub fn @"find_child"(self: Node, arg0: types.String, arg1: bool, arg2: bool) Node {
+        const method = methodBind(godot_class_name, "find_child", 2008217037);
+        var a0: types.String = arg0;
+        var a1: u8 = @intFromBool(arg1);
+        var a2: u8 = @intFromBool(arg2);
+        const args = [_]c.GDExtensionConstTypePtr{ &a0, &a1, &a2 };
+        _ = &args;
+        var v0 = Variant.fromString(arg0);
+        defer v0.destroy();
+        var v1 = Variant.fromBool(arg1);
+        defer v1.destroy();
+        var v2 = Variant.fromBool(arg2);
+        defer v2.destroy();
+        var ret = self.object.callVariant3(method, &v0, &v1, &v2);
+        defer ret.destroy();
+        return .init(ret.toObjectPtr());
+    }
+
+    pub fn @"find_children"(self: Node, arg0: types.String, arg1: types.String, arg2: bool, arg3: bool) collections.Array {
+        const method = methodBind(godot_class_name, "find_children", 2560337219);
+        var a0: types.String = arg0;
+        var a1: types.String = arg1;
+        var a2: u8 = @intFromBool(arg2);
+        var a3: u8 = @intFromBool(arg3);
+        const args = [_]c.GDExtensionConstTypePtr{ &a0, &a1, &a2, &a3 };
+        _ = &args;
+        var v0 = Variant.fromString(arg0);
+        defer v0.destroy();
+        var v1 = Variant.fromString(arg1);
+        defer v1.destroy();
+        var v2 = Variant.fromBool(arg2);
+        defer v2.destroy();
+        var v3 = Variant.fromBool(arg3);
+        defer v3.destroy();
+        var out: types.Array = std.mem.zeroes(types.Array);
+        api_mod.godot.object_method_bind_ptrcall.?(method, self.object.ptr, &args, @ptrCast(&out));
+        return .{ .value = out };
+    }
+
+    pub fn @"find_parent"(self: Node, arg0: types.String) Node {
+        const method = methodBind(godot_class_name, "find_parent", 1140089439);
+        var a0: types.String = arg0;
+        const args = [_]c.GDExtensionConstTypePtr{ &a0 };
+        _ = &args;
+        var v0 = Variant.fromString(arg0);
+        defer v0.destroy();
+        var ret = self.object.callVariant1(method, &v0);
+        defer ret.destroy();
+        return .init(ret.toObjectPtr());
+    }
+
     pub fn @"is_inside_tree"(self: Node) bool {
         const method = methodBind(godot_class_name, "is_inside_tree", 36873697);
         var out: u8 = std.mem.zeroes(u8);
@@ -61659,6 +62186,27 @@ pub const OS = struct {
         return ret.toString();
     }
 
+    pub fn @"get_system_font_path"(self: OS, arg0: types.String, arg1: i64, arg2: i64, arg3: bool) types.String {
+        const method = methodBind(godot_class_name, "get_system_font_path", 626580860);
+        var a0: types.String = arg0;
+        var a1: i64 = arg1;
+        var a2: i64 = arg2;
+        var a3: u8 = @intFromBool(arg3);
+        const args = [_]c.GDExtensionConstTypePtr{ &a0, &a1, &a2, &a3 };
+        _ = &args;
+        var v0 = Variant.fromString(arg0);
+        defer v0.destroy();
+        var v1 = Variant.fromInt(arg1);
+        defer v1.destroy();
+        var v2 = Variant.fromInt(arg2);
+        defer v2.destroy();
+        var v3 = Variant.fromBool(arg3);
+        defer v3.destroy();
+        var out: types.String = std.mem.zeroes(types.String);
+        api_mod.godot.object_method_bind_ptrcall.?(method, self.object.ptr, &args, @ptrCast(&out));
+        return out;
+    }
+
     pub fn @"get_executable_path"(self: OS) types.String {
         const method = methodBind(godot_class_name, "get_executable_path", 201670096);
         var ret = self.object.callVariant0(method);
@@ -61776,6 +62324,18 @@ pub const OS = struct {
         var out: u8 = std.mem.zeroes(u8);
         api_mod.godot.object_method_bind_ptrcall.?(method, self.object.ptr, &args, @ptrCast(&out));
         return out != 0;
+    }
+
+    pub fn @"get_environment"(self: OS, arg0: types.String) types.String {
+        const method = methodBind(godot_class_name, "get_environment", 3135753539);
+        var a0: types.String = arg0;
+        const args = [_]c.GDExtensionConstTypePtr{ &a0 };
+        _ = &args;
+        var v0 = Variant.fromString(arg0);
+        defer v0.destroy();
+        var ret = self.object.callVariant1(method, &v0);
+        defer ret.destroy();
+        return ret.toString();
     }
 
     pub fn @"set_environment"(self: OS, arg0: types.String, arg1: types.String) void {
@@ -62975,6 +63535,18 @@ pub const OpenXRActionMap = struct {
         return out;
     }
 
+    pub fn @"find_action_set"(self: OpenXRActionMap, arg0: types.String) OpenXRActionSet {
+        const method = methodBind(godot_class_name, "find_action_set", 1888809267);
+        var a0: types.String = arg0;
+        const args = [_]c.GDExtensionConstTypePtr{ &a0 };
+        _ = &args;
+        var v0 = Variant.fromString(arg0);
+        defer v0.destroy();
+        var ret = self.object.callVariant1(method, &v0);
+        defer ret.destroy();
+        return .init(ret.toObjectPtr());
+    }
+
     pub fn @"get_action_set"(self: OpenXRActionMap, arg0: i64) OpenXRActionSet {
         const method = methodBind(godot_class_name, "get_action_set", 1789580336);
         var a0: i64 = arg0;
@@ -63023,6 +63595,18 @@ pub const OpenXRActionMap = struct {
         var out: i64 = std.mem.zeroes(i64);
         api_mod.godot.object_method_bind_ptrcall.?(method, self.object.ptr, null, @ptrCast(&out));
         return out;
+    }
+
+    pub fn @"find_interaction_profile"(self: OpenXRActionMap, arg0: types.String) OpenXRInteractionProfile {
+        const method = methodBind(godot_class_name, "find_interaction_profile", 3095875538);
+        var a0: types.String = arg0;
+        const args = [_]c.GDExtensionConstTypePtr{ &a0 };
+        _ = &args;
+        var v0 = Variant.fromString(arg0);
+        defer v0.destroy();
+        var ret = self.object.callVariant1(method, &v0);
+        defer ret.destroy();
+        return .init(ret.toObjectPtr());
     }
 
     pub fn @"get_interaction_profile"(self: OpenXRActionMap, arg0: i64) OpenXRInteractionProfile {
@@ -74297,6 +74881,30 @@ pub const ProjectSettings = struct {
         api_mod.godot.object_method_bind_ptrcall.?(method, self.object.ptr, &args, null);
     }
 
+    pub fn @"localize_path"(self: ProjectSettings, arg0: types.String) types.String {
+        const method = methodBind(godot_class_name, "localize_path", 3135753539);
+        var a0: types.String = arg0;
+        const args = [_]c.GDExtensionConstTypePtr{ &a0 };
+        _ = &args;
+        var v0 = Variant.fromString(arg0);
+        defer v0.destroy();
+        var ret = self.object.callVariant1(method, &v0);
+        defer ret.destroy();
+        return ret.toString();
+    }
+
+    pub fn @"globalize_path"(self: ProjectSettings, arg0: types.String) types.String {
+        const method = methodBind(godot_class_name, "globalize_path", 3135753539);
+        var a0: types.String = arg0;
+        const args = [_]c.GDExtensionConstTypePtr{ &a0 };
+        _ = &args;
+        var v0 = Variant.fromString(arg0);
+        defer v0.destroy();
+        var ret = self.object.callVariant1(method, &v0);
+        defer ret.destroy();
+        return ret.toString();
+    }
+
     pub fn @"save"(self: ProjectSettings) i64 {
         const method = methodBind(godot_class_name, "save", 166280745);
         var out: i64 = std.mem.zeroes(i64);
@@ -77610,6 +78218,66 @@ pub const RegEx = struct {
         return out;
     }
 
+    pub fn @"search"(self: RegEx, arg0: types.String, arg1: i64, arg2: i64) RegExMatch {
+        const method = methodBind(godot_class_name, "search", 3365977994);
+        var a0: types.String = arg0;
+        var a1: i64 = arg1;
+        var a2: i64 = arg2;
+        const args = [_]c.GDExtensionConstTypePtr{ &a0, &a1, &a2 };
+        _ = &args;
+        var v0 = Variant.fromString(arg0);
+        defer v0.destroy();
+        var v1 = Variant.fromInt(arg1);
+        defer v1.destroy();
+        var v2 = Variant.fromInt(arg2);
+        defer v2.destroy();
+        var ret = self.object.callVariant3(method, &v0, &v1, &v2);
+        defer ret.destroy();
+        return .init(ret.toObjectPtr());
+    }
+
+    pub fn @"search_all"(self: RegEx, arg0: types.String, arg1: i64, arg2: i64) collections.Array {
+        const method = methodBind(godot_class_name, "search_all", 849021363);
+        var a0: types.String = arg0;
+        var a1: i64 = arg1;
+        var a2: i64 = arg2;
+        const args = [_]c.GDExtensionConstTypePtr{ &a0, &a1, &a2 };
+        _ = &args;
+        var v0 = Variant.fromString(arg0);
+        defer v0.destroy();
+        var v1 = Variant.fromInt(arg1);
+        defer v1.destroy();
+        var v2 = Variant.fromInt(arg2);
+        defer v2.destroy();
+        var ret = self.object.callVariant3(method, &v0, &v1, &v2);
+        defer ret.destroy();
+        return ret.toArray();
+    }
+
+    pub fn @"sub"(self: RegEx, arg0: types.String, arg1: types.String, arg2: bool, arg3: i64, arg4: i64) types.String {
+        const method = methodBind(godot_class_name, "sub", 54019702);
+        var a0: types.String = arg0;
+        var a1: types.String = arg1;
+        var a2: u8 = @intFromBool(arg2);
+        var a3: i64 = arg3;
+        var a4: i64 = arg4;
+        const args = [_]c.GDExtensionConstTypePtr{ &a0, &a1, &a2, &a3, &a4 };
+        _ = &args;
+        var v0 = Variant.fromString(arg0);
+        defer v0.destroy();
+        var v1 = Variant.fromString(arg1);
+        defer v1.destroy();
+        var v2 = Variant.fromBool(arg2);
+        defer v2.destroy();
+        var v3 = Variant.fromInt(arg3);
+        defer v3.destroy();
+        var v4 = Variant.fromInt(arg4);
+        defer v4.destroy();
+        var out: types.String = std.mem.zeroes(types.String);
+        api_mod.godot.object_method_bind_ptrcall.?(method, self.object.ptr, &args, @ptrCast(&out));
+        return out;
+    }
+
     pub fn @"is_valid"(self: RegEx) bool {
         const method = methodBind(godot_class_name, "is_valid", 36873697);
         var out: u8 = std.mem.zeroes(u8);
@@ -79386,6 +80054,18 @@ pub const Resource = struct {
         api_mod.godot.object_method_bind_ptrcall.?(method, self.object.ptr, &args, null);
     }
 
+    pub fn @"get_id_for_path"(self: Resource, arg0: types.String) types.String {
+        const method = methodBind(godot_class_name, "get_id_for_path", 3135753539);
+        var a0: types.String = arg0;
+        const args = [_]c.GDExtensionConstTypePtr{ &a0 };
+        _ = &args;
+        var v0 = Variant.fromString(arg0);
+        defer v0.destroy();
+        var ret = self.object.callVariant1(method, &v0);
+        defer ret.destroy();
+        return ret.toString();
+    }
+
     pub fn @"is_built_in"(self: Resource) bool {
         const method = methodBind(godot_class_name, "is_built_in", 36873697);
         var out: u8 = std.mem.zeroes(u8);
@@ -79476,6 +80156,30 @@ pub const ResourceFormatLoader = struct {
         var out: u8 = std.mem.zeroes(u8);
         api_mod.godot.object_method_bind_ptrcall.?(method, self.object.ptr, &args, @ptrCast(&out));
         return out != 0;
+    }
+
+    pub fn @"_get_resource_type"(self: ResourceFormatLoader, arg0: types.String) types.String {
+        const method = methodBind(godot_class_name, "_get_resource_type", 3135753539);
+        var a0: types.String = arg0;
+        const args = [_]c.GDExtensionConstTypePtr{ &a0 };
+        _ = &args;
+        var v0 = Variant.fromString(arg0);
+        defer v0.destroy();
+        var ret = self.object.callVariant1(method, &v0);
+        defer ret.destroy();
+        return ret.toString();
+    }
+
+    pub fn @"_get_resource_script_class"(self: ResourceFormatLoader, arg0: types.String) types.String {
+        const method = methodBind(godot_class_name, "_get_resource_script_class", 3135753539);
+        var a0: types.String = arg0;
+        const args = [_]c.GDExtensionConstTypePtr{ &a0 };
+        _ = &args;
+        var v0 = Variant.fromString(arg0);
+        defer v0.destroy();
+        var ret = self.object.callVariant1(method, &v0);
+        defer ret.destroy();
+        return ret.toString();
     }
 
     pub fn @"_get_resource_uid"(self: ResourceFormatLoader, arg0: types.String) i64 {
@@ -79768,6 +80472,36 @@ pub const ResourceLoader = struct {
         return out;
     }
 
+    pub fn @"load_threaded_get"(self: ResourceLoader, arg0: types.String) Resource {
+        const method = methodBind(godot_class_name, "load_threaded_get", 1748875256);
+        var a0: types.String = arg0;
+        const args = [_]c.GDExtensionConstTypePtr{ &a0 };
+        _ = &args;
+        var v0 = Variant.fromString(arg0);
+        defer v0.destroy();
+        var ret = self.object.callVariant1(method, &v0);
+        defer ret.destroy();
+        return .init(ret.toObjectPtr());
+    }
+
+    pub fn @"load"(self: ResourceLoader, arg0: types.String, arg1: types.String, arg2: i64) Resource {
+        const method = methodBind(godot_class_name, "load", 3358495409);
+        var a0: types.String = arg0;
+        var a1: types.String = arg1;
+        var a2: i64 = arg2;
+        const args = [_]c.GDExtensionConstTypePtr{ &a0, &a1, &a2 };
+        _ = &args;
+        var v0 = Variant.fromString(arg0);
+        defer v0.destroy();
+        var v1 = Variant.fromString(arg1);
+        defer v1.destroy();
+        var v2 = Variant.fromInt(arg2);
+        defer v2.destroy();
+        var ret = self.object.callVariant3(method, &v0, &v1, &v2);
+        defer ret.destroy();
+        return .init(ret.toObjectPtr());
+    }
+
     pub fn @"add_resource_format_loader"(self: ResourceLoader, arg0: ResourceFormatLoader, arg1: bool) void {
         const method = methodBind(godot_class_name, "add_resource_format_loader", 2896595483);
         var a0: c.GDExtensionObjectPtr = arg0.object.ptr;
@@ -79801,6 +80535,18 @@ pub const ResourceLoader = struct {
         var out: u8 = std.mem.zeroes(u8);
         api_mod.godot.object_method_bind_ptrcall.?(method, self.object.ptr, &args, @ptrCast(&out));
         return out != 0;
+    }
+
+    pub fn @"get_cached_ref"(self: ResourceLoader, arg0: types.String) Resource {
+        const method = methodBind(godot_class_name, "get_cached_ref", 1748875256);
+        var a0: types.String = arg0;
+        const args = [_]c.GDExtensionConstTypePtr{ &a0 };
+        _ = &args;
+        var v0 = Variant.fromString(arg0);
+        defer v0.destroy();
+        var ret = self.object.callVariant1(method, &v0);
+        defer ret.destroy();
+        return .init(ret.toObjectPtr());
     }
 
     pub fn @"exists"(self: ResourceLoader, arg0: types.String, arg1: types.String) bool {
@@ -83662,11 +84408,41 @@ pub const ScriptLanguageExtension = struct {
         return out != 0;
     }
 
+    pub fn @"_make_template"(self: ScriptLanguageExtension, arg0: types.String, arg1: types.String, arg2: types.String) Script {
+        const method = methodBind(godot_class_name, "_make_template", 3583744548);
+        var a0: types.String = arg0;
+        var a1: types.String = arg1;
+        var a2: types.String = arg2;
+        const args = [_]c.GDExtensionConstTypePtr{ &a0, &a1, &a2 };
+        _ = &args;
+        var v0 = Variant.fromString(arg0);
+        defer v0.destroy();
+        var v1 = Variant.fromString(arg1);
+        defer v1.destroy();
+        var v2 = Variant.fromString(arg2);
+        defer v2.destroy();
+        var ret = self.object.callVariant3(method, &v0, &v1, &v2);
+        defer ret.destroy();
+        return .init(ret.toObjectPtr());
+    }
+
     pub fn @"_is_using_templates"(self: ScriptLanguageExtension) bool {
         const method = methodBind(godot_class_name, "_is_using_templates", 2240911060);
         var out: u8 = std.mem.zeroes(u8);
         api_mod.godot.object_method_bind_ptrcall.?(method, self.object.ptr, null, @ptrCast(&out));
         return out != 0;
+    }
+
+    pub fn @"_validate_path"(self: ScriptLanguageExtension, arg0: types.String) types.String {
+        const method = methodBind(godot_class_name, "_validate_path", 3135753539);
+        var a0: types.String = arg0;
+        const args = [_]c.GDExtensionConstTypePtr{ &a0 };
+        _ = &args;
+        var v0 = Variant.fromString(arg0);
+        defer v0.destroy();
+        var ret = self.object.callVariant1(method, &v0);
+        defer ret.destroy();
+        return ret.toString();
     }
 
     pub fn @"_create_script"(self: ScriptLanguageExtension) Object {
@@ -83746,6 +84522,24 @@ pub const ScriptLanguageExtension = struct {
         var out: i64 = std.mem.zeroes(i64);
         api_mod.godot.object_method_bind_ptrcall.?(method, self.object.ptr, null, @ptrCast(&out));
         return out;
+    }
+
+    pub fn @"_auto_indent_code"(self: ScriptLanguageExtension, arg0: types.String, arg1: i64, arg2: i64) types.String {
+        const method = methodBind(godot_class_name, "_auto_indent_code", 2531480354);
+        var a0: types.String = arg0;
+        var a1: i64 = arg1;
+        var a2: i64 = arg2;
+        const args = [_]c.GDExtensionConstTypePtr{ &a0, &a1, &a2 };
+        _ = &args;
+        var v0 = Variant.fromString(arg0);
+        defer v0.destroy();
+        var v1 = Variant.fromInt(arg1);
+        defer v1.destroy();
+        var v2 = Variant.fromInt(arg2);
+        defer v2.destroy();
+        var ret = self.object.callVariant3(method, &v0, &v1, &v2);
+        defer ret.destroy();
+        return ret.toString();
     }
 
     pub fn @"_remove_named_global_constant"(self: ScriptLanguageExtension, arg0: types.StringName) void {
@@ -83865,6 +84659,27 @@ pub const ScriptLanguageExtension = struct {
         return ret.toDictionary();
     }
 
+    pub fn @"_debug_parse_stack_level_expression"(self: ScriptLanguageExtension, arg0: i64, arg1: types.String, arg2: i64, arg3: i64) types.String {
+        const method = methodBind(godot_class_name, "_debug_parse_stack_level_expression", 1135811067);
+        var a0: i64 = arg0;
+        var a1: types.String = arg1;
+        var a2: i64 = arg2;
+        var a3: i64 = arg3;
+        const args = [_]c.GDExtensionConstTypePtr{ &a0, &a1, &a2, &a3 };
+        _ = &args;
+        var v0 = Variant.fromInt(arg0);
+        defer v0.destroy();
+        var v1 = Variant.fromString(arg1);
+        defer v1.destroy();
+        var v2 = Variant.fromInt(arg2);
+        defer v2.destroy();
+        var v3 = Variant.fromInt(arg3);
+        defer v3.destroy();
+        var out: types.String = std.mem.zeroes(types.String);
+        api_mod.godot.object_method_bind_ptrcall.?(method, self.object.ptr, &args, @ptrCast(&out));
+        return out;
+    }
+
     pub fn @"_debug_get_current_stack_info"(self: ScriptLanguageExtension) collections.Array {
         const method = methodBind(godot_class_name, "_debug_get_current_stack_info", 2915620761);
         var ret = self.object.callVariant0(method);
@@ -83947,6 +84762,18 @@ pub const ScriptLanguageExtension = struct {
         var out: u8 = std.mem.zeroes(u8);
         api_mod.godot.object_method_bind_ptrcall.?(method, self.object.ptr, &args, @ptrCast(&out));
         return out != 0;
+    }
+
+    pub fn @"_get_global_class_name"(self: ScriptLanguageExtension, arg0: types.String) types.Dictionary {
+        const method = methodBind(godot_class_name, "_get_global_class_name", 2248993622);
+        var a0: types.String = arg0;
+        const args = [_]c.GDExtensionConstTypePtr{ &a0 };
+        _ = &args;
+        var v0 = Variant.fromString(arg0);
+        defer v0.destroy();
+        var ret = self.object.callVariant1(method, &v0);
+        defer ret.destroy();
+        return ret.toDictionary();
     }
 
 };
@@ -96043,6 +96870,79 @@ pub const TextServer = struct {
         return out;
     }
 
+    pub fn @"format_number"(self: TextServer, arg0: types.String, arg1: types.String) types.String {
+        const method = methodBind(godot_class_name, "format_number", 2664628024);
+        var a0: types.String = arg0;
+        var a1: types.String = arg1;
+        const args = [_]c.GDExtensionConstTypePtr{ &a0, &a1 };
+        _ = &args;
+        var v0 = Variant.fromString(arg0);
+        defer v0.destroy();
+        var v1 = Variant.fromString(arg1);
+        defer v1.destroy();
+        var ret = self.object.callVariant2(method, &v0, &v1);
+        defer ret.destroy();
+        return ret.toString();
+    }
+
+    pub fn @"parse_number"(self: TextServer, arg0: types.String, arg1: types.String) types.String {
+        const method = methodBind(godot_class_name, "parse_number", 2664628024);
+        var a0: types.String = arg0;
+        var a1: types.String = arg1;
+        const args = [_]c.GDExtensionConstTypePtr{ &a0, &a1 };
+        _ = &args;
+        var v0 = Variant.fromString(arg0);
+        defer v0.destroy();
+        var v1 = Variant.fromString(arg1);
+        defer v1.destroy();
+        var ret = self.object.callVariant2(method, &v0, &v1);
+        defer ret.destroy();
+        return ret.toString();
+    }
+
+    pub fn @"percent_sign"(self: TextServer, arg0: types.String) types.String {
+        const method = methodBind(godot_class_name, "percent_sign", 993269549);
+        var a0: types.String = arg0;
+        const args = [_]c.GDExtensionConstTypePtr{ &a0 };
+        _ = &args;
+        var v0 = Variant.fromString(arg0);
+        defer v0.destroy();
+        var ret = self.object.callVariant1(method, &v0);
+        defer ret.destroy();
+        return ret.toString();
+    }
+
+    pub fn @"string_get_word_breaks"(self: TextServer, arg0: types.String, arg1: types.String, arg2: i64) collections.PackedInt32Array {
+        const method = methodBind(godot_class_name, "string_get_word_breaks", 581857818);
+        var a0: types.String = arg0;
+        var a1: types.String = arg1;
+        var a2: i64 = arg2;
+        const args = [_]c.GDExtensionConstTypePtr{ &a0, &a1, &a2 };
+        _ = &args;
+        var v0 = Variant.fromString(arg0);
+        defer v0.destroy();
+        var v1 = Variant.fromString(arg1);
+        defer v1.destroy();
+        var v2 = Variant.fromInt(arg2);
+        defer v2.destroy();
+        var ret = self.object.callVariant3(method, &v0, &v1, &v2);
+        return ret.toPackedInt32Array();
+    }
+
+    pub fn @"string_get_character_breaks"(self: TextServer, arg0: types.String, arg1: types.String) collections.PackedInt32Array {
+        const method = methodBind(godot_class_name, "string_get_character_breaks", 2333794773);
+        var a0: types.String = arg0;
+        var a1: types.String = arg1;
+        const args = [_]c.GDExtensionConstTypePtr{ &a0, &a1 };
+        _ = &args;
+        var v0 = Variant.fromString(arg0);
+        defer v0.destroy();
+        var v1 = Variant.fromString(arg1);
+        defer v1.destroy();
+        var ret = self.object.callVariant2(method, &v0, &v1);
+        return ret.toPackedInt32Array();
+    }
+
     pub fn @"spoof_check"(self: TextServer, arg0: types.String) bool {
         const method = methodBind(godot_class_name, "spoof_check", 3927539163);
         var a0: types.String = arg0;
@@ -96051,6 +96951,18 @@ pub const TextServer = struct {
         var out: u8 = std.mem.zeroes(u8);
         api_mod.godot.object_method_bind_ptrcall.?(method, self.object.ptr, &args, @ptrCast(&out));
         return out != 0;
+    }
+
+    pub fn @"strip_diacritics"(self: TextServer, arg0: types.String) types.String {
+        const method = methodBind(godot_class_name, "strip_diacritics", 3135753539);
+        var a0: types.String = arg0;
+        const args = [_]c.GDExtensionConstTypePtr{ &a0 };
+        _ = &args;
+        var v0 = Variant.fromString(arg0);
+        defer v0.destroy();
+        var ret = self.object.callVariant1(method, &v0);
+        defer ret.destroy();
+        return ret.toString();
     }
 
     pub fn @"is_valid_identifier"(self: TextServer, arg0: types.String) bool {
@@ -96071,6 +96983,51 @@ pub const TextServer = struct {
         var out: u8 = std.mem.zeroes(u8);
         api_mod.godot.object_method_bind_ptrcall.?(method, self.object.ptr, &args, @ptrCast(&out));
         return out != 0;
+    }
+
+    pub fn @"string_to_upper"(self: TextServer, arg0: types.String, arg1: types.String) types.String {
+        const method = methodBind(godot_class_name, "string_to_upper", 2664628024);
+        var a0: types.String = arg0;
+        var a1: types.String = arg1;
+        const args = [_]c.GDExtensionConstTypePtr{ &a0, &a1 };
+        _ = &args;
+        var v0 = Variant.fromString(arg0);
+        defer v0.destroy();
+        var v1 = Variant.fromString(arg1);
+        defer v1.destroy();
+        var ret = self.object.callVariant2(method, &v0, &v1);
+        defer ret.destroy();
+        return ret.toString();
+    }
+
+    pub fn @"string_to_lower"(self: TextServer, arg0: types.String, arg1: types.String) types.String {
+        const method = methodBind(godot_class_name, "string_to_lower", 2664628024);
+        var a0: types.String = arg0;
+        var a1: types.String = arg1;
+        const args = [_]c.GDExtensionConstTypePtr{ &a0, &a1 };
+        _ = &args;
+        var v0 = Variant.fromString(arg0);
+        defer v0.destroy();
+        var v1 = Variant.fromString(arg1);
+        defer v1.destroy();
+        var ret = self.object.callVariant2(method, &v0, &v1);
+        defer ret.destroy();
+        return ret.toString();
+    }
+
+    pub fn @"string_to_title"(self: TextServer, arg0: types.String, arg1: types.String) types.String {
+        const method = methodBind(godot_class_name, "string_to_title", 2664628024);
+        var a0: types.String = arg0;
+        var a1: types.String = arg1;
+        const args = [_]c.GDExtensionConstTypePtr{ &a0, &a1 };
+        _ = &args;
+        var v0 = Variant.fromString(arg0);
+        defer v0.destroy();
+        var v1 = Variant.fromString(arg1);
+        defer v1.destroy();
+        var ret = self.object.callVariant2(method, &v0, &v1);
+        defer ret.destroy();
+        return ret.toString();
     }
 
 };
@@ -96256,6 +97213,60 @@ pub const TextServerExtension = struct {
         return out;
     }
 
+    pub fn @"_format_number"(self: TextServerExtension, arg0: types.String, arg1: types.String) types.String {
+        const method = methodBind(godot_class_name, "_format_number", 315676799);
+        var a0: types.String = arg0;
+        var a1: types.String = arg1;
+        const args = [_]c.GDExtensionConstTypePtr{ &a0, &a1 };
+        _ = &args;
+        var v0 = Variant.fromString(arg0);
+        defer v0.destroy();
+        var v1 = Variant.fromString(arg1);
+        defer v1.destroy();
+        var ret = self.object.callVariant2(method, &v0, &v1);
+        defer ret.destroy();
+        return ret.toString();
+    }
+
+    pub fn @"_parse_number"(self: TextServerExtension, arg0: types.String, arg1: types.String) types.String {
+        const method = methodBind(godot_class_name, "_parse_number", 315676799);
+        var a0: types.String = arg0;
+        var a1: types.String = arg1;
+        const args = [_]c.GDExtensionConstTypePtr{ &a0, &a1 };
+        _ = &args;
+        var v0 = Variant.fromString(arg0);
+        defer v0.destroy();
+        var v1 = Variant.fromString(arg1);
+        defer v1.destroy();
+        var ret = self.object.callVariant2(method, &v0, &v1);
+        defer ret.destroy();
+        return ret.toString();
+    }
+
+    pub fn @"_percent_sign"(self: TextServerExtension, arg0: types.String) types.String {
+        const method = methodBind(godot_class_name, "_percent_sign", 3135753539);
+        var a0: types.String = arg0;
+        const args = [_]c.GDExtensionConstTypePtr{ &a0 };
+        _ = &args;
+        var v0 = Variant.fromString(arg0);
+        defer v0.destroy();
+        var ret = self.object.callVariant1(method, &v0);
+        defer ret.destroy();
+        return ret.toString();
+    }
+
+    pub fn @"_strip_diacritics"(self: TextServerExtension, arg0: types.String) types.String {
+        const method = methodBind(godot_class_name, "_strip_diacritics", 3135753539);
+        var a0: types.String = arg0;
+        const args = [_]c.GDExtensionConstTypePtr{ &a0 };
+        _ = &args;
+        var v0 = Variant.fromString(arg0);
+        defer v0.destroy();
+        var ret = self.object.callVariant1(method, &v0);
+        defer ret.destroy();
+        return ret.toString();
+    }
+
     pub fn @"_is_valid_identifier"(self: TextServerExtension, arg0: types.String) bool {
         const method = methodBind(godot_class_name, "_is_valid_identifier", 3927539163);
         var a0: types.String = arg0;
@@ -96276,6 +97287,37 @@ pub const TextServerExtension = struct {
         return out != 0;
     }
 
+    pub fn @"_string_get_word_breaks"(self: TextServerExtension, arg0: types.String, arg1: types.String, arg2: i64) collections.PackedInt32Array {
+        const method = methodBind(godot_class_name, "_string_get_word_breaks", 3658450588);
+        var a0: types.String = arg0;
+        var a1: types.String = arg1;
+        var a2: i64 = arg2;
+        const args = [_]c.GDExtensionConstTypePtr{ &a0, &a1, &a2 };
+        _ = &args;
+        var v0 = Variant.fromString(arg0);
+        defer v0.destroy();
+        var v1 = Variant.fromString(arg1);
+        defer v1.destroy();
+        var v2 = Variant.fromInt(arg2);
+        defer v2.destroy();
+        var ret = self.object.callVariant3(method, &v0, &v1, &v2);
+        return ret.toPackedInt32Array();
+    }
+
+    pub fn @"_string_get_character_breaks"(self: TextServerExtension, arg0: types.String, arg1: types.String) collections.PackedInt32Array {
+        const method = methodBind(godot_class_name, "_string_get_character_breaks", 2509056759);
+        var a0: types.String = arg0;
+        var a1: types.String = arg1;
+        const args = [_]c.GDExtensionConstTypePtr{ &a0, &a1 };
+        _ = &args;
+        var v0 = Variant.fromString(arg0);
+        defer v0.destroy();
+        var v1 = Variant.fromString(arg1);
+        defer v1.destroy();
+        var ret = self.object.callVariant2(method, &v0, &v1);
+        return ret.toPackedInt32Array();
+    }
+
     pub fn @"_spoof_check"(self: TextServerExtension, arg0: types.String) bool {
         const method = methodBind(godot_class_name, "_spoof_check", 3927539163);
         var a0: types.String = arg0;
@@ -96284,6 +97326,51 @@ pub const TextServerExtension = struct {
         var out: u8 = std.mem.zeroes(u8);
         api_mod.godot.object_method_bind_ptrcall.?(method, self.object.ptr, &args, @ptrCast(&out));
         return out != 0;
+    }
+
+    pub fn @"_string_to_upper"(self: TextServerExtension, arg0: types.String, arg1: types.String) types.String {
+        const method = methodBind(godot_class_name, "_string_to_upper", 315676799);
+        var a0: types.String = arg0;
+        var a1: types.String = arg1;
+        const args = [_]c.GDExtensionConstTypePtr{ &a0, &a1 };
+        _ = &args;
+        var v0 = Variant.fromString(arg0);
+        defer v0.destroy();
+        var v1 = Variant.fromString(arg1);
+        defer v1.destroy();
+        var ret = self.object.callVariant2(method, &v0, &v1);
+        defer ret.destroy();
+        return ret.toString();
+    }
+
+    pub fn @"_string_to_lower"(self: TextServerExtension, arg0: types.String, arg1: types.String) types.String {
+        const method = methodBind(godot_class_name, "_string_to_lower", 315676799);
+        var a0: types.String = arg0;
+        var a1: types.String = arg1;
+        const args = [_]c.GDExtensionConstTypePtr{ &a0, &a1 };
+        _ = &args;
+        var v0 = Variant.fromString(arg0);
+        defer v0.destroy();
+        var v1 = Variant.fromString(arg1);
+        defer v1.destroy();
+        var ret = self.object.callVariant2(method, &v0, &v1);
+        defer ret.destroy();
+        return ret.toString();
+    }
+
+    pub fn @"_string_to_title"(self: TextServerExtension, arg0: types.String, arg1: types.String) types.String {
+        const method = methodBind(godot_class_name, "_string_to_title", 315676799);
+        var a0: types.String = arg0;
+        var a1: types.String = arg1;
+        const args = [_]c.GDExtensionConstTypePtr{ &a0, &a1 };
+        _ = &args;
+        var v0 = Variant.fromString(arg0);
+        defer v0.destroy();
+        var v1 = Variant.fromString(arg1);
+        defer v1.destroy();
+        var ret = self.object.callVariant2(method, &v0, &v1);
+        defer ret.destroy();
+        return ret.toString();
     }
 
     pub fn @"_cleanup"(self: TextServerExtension) void {
@@ -96342,6 +97429,18 @@ pub const TextServerManager = struct {
         var ret = self.object.callVariant0(method);
         defer ret.destroy();
         return ret.toArray();
+    }
+
+    pub fn @"find_interface"(self: TextServerManager, arg0: types.String) TextServer {
+        const method = methodBind(godot_class_name, "find_interface", 2240905781);
+        var a0: types.String = arg0;
+        const args = [_]c.GDExtensionConstTypePtr{ &a0 };
+        _ = &args;
+        var v0 = Variant.fromString(arg0);
+        defer v0.destroy();
+        var ret = self.object.callVariant1(method, &v0);
+        defer ret.destroy();
+        return .init(ret.toObjectPtr());
     }
 
     pub fn @"set_primary_interface"(self: TextServerManager, arg0: TextServer) void {
@@ -100671,6 +101770,21 @@ pub const Time = struct {
         return ret.toString();
     }
 
+    pub fn @"get_datetime_dict_from_datetime_string"(self: Time, arg0: types.String, arg1: bool) types.Dictionary {
+        const method = methodBind(godot_class_name, "get_datetime_dict_from_datetime_string", 3253569256);
+        var a0: types.String = arg0;
+        var a1: u8 = @intFromBool(arg1);
+        const args = [_]c.GDExtensionConstTypePtr{ &a0, &a1 };
+        _ = &args;
+        var v0 = Variant.fromString(arg0);
+        defer v0.destroy();
+        var v1 = Variant.fromBool(arg1);
+        defer v1.destroy();
+        var ret = self.object.callVariant2(method, &v0, &v1);
+        defer ret.destroy();
+        return ret.toDictionary();
+    }
+
     pub fn @"get_unix_time_from_datetime_dict"(self: Time, arg0: types.Dictionary) i64 {
         const method = methodBind(godot_class_name, "get_unix_time_from_datetime_dict", 3021115443);
         var a0: types.Dictionary = arg0;
@@ -101231,6 +102345,18 @@ pub const TranslationDomain = struct {
     pub fn isNull(self: TranslationDomain) bool { return self.object.isNull(); }
     pub fn asObject(self: TranslationDomain) GodotObject { return self.object; }
 
+    pub fn @"get_translation_object"(self: TranslationDomain, arg0: types.String) Translation {
+        const method = methodBind(godot_class_name, "get_translation_object", 606768082);
+        var a0: types.String = arg0;
+        const args = [_]c.GDExtensionConstTypePtr{ &a0 };
+        _ = &args;
+        var v0 = Variant.fromString(arg0);
+        defer v0.destroy();
+        var ret = self.object.callVariant1(method, &v0);
+        defer ret.destroy();
+        return .init(ret.toObjectPtr());
+    }
+
     pub fn @"add_translation"(self: TranslationDomain, arg0: Translation) void {
         const method = methodBind(godot_class_name, "add_translation", 1466479800);
         var a0: c.GDExtensionObjectPtr = arg0.object.ptr;
@@ -101278,6 +102404,21 @@ pub const TranslationDomain = struct {
         var out: u8 = std.mem.zeroes(u8);
         api_mod.godot.object_method_bind_ptrcall.?(method, self.object.ptr, &args, @ptrCast(&out));
         return out != 0;
+    }
+
+    pub fn @"find_translations"(self: TranslationDomain, arg0: types.String, arg1: bool) collections.Array {
+        const method = methodBind(godot_class_name, "find_translations", 2109650934);
+        var a0: types.String = arg0;
+        var a1: u8 = @intFromBool(arg1);
+        const args = [_]c.GDExtensionConstTypePtr{ &a0, &a1 };
+        _ = &args;
+        var v0 = Variant.fromString(arg0);
+        defer v0.destroy();
+        var v1 = Variant.fromBool(arg1);
+        defer v1.destroy();
+        var ret = self.object.callVariant2(method, &v0, &v1);
+        defer ret.destroy();
+        return ret.toArray();
     }
 
     pub fn @"get_locale_override"(self: TranslationDomain) types.String {
@@ -101489,6 +102630,81 @@ pub const TranslationServer = struct {
         return out;
     }
 
+    pub fn @"standardize_locale"(self: TranslationServer, arg0: types.String, arg1: bool) types.String {
+        const method = methodBind(godot_class_name, "standardize_locale", 4216441673);
+        var a0: types.String = arg0;
+        var a1: u8 = @intFromBool(arg1);
+        const args = [_]c.GDExtensionConstTypePtr{ &a0, &a1 };
+        _ = &args;
+        var v0 = Variant.fromString(arg0);
+        defer v0.destroy();
+        var v1 = Variant.fromBool(arg1);
+        defer v1.destroy();
+        var ret = self.object.callVariant2(method, &v0, &v1);
+        defer ret.destroy();
+        return ret.toString();
+    }
+
+    pub fn @"get_language_name"(self: TranslationServer, arg0: types.String) types.String {
+        const method = methodBind(godot_class_name, "get_language_name", 3135753539);
+        var a0: types.String = arg0;
+        const args = [_]c.GDExtensionConstTypePtr{ &a0 };
+        _ = &args;
+        var v0 = Variant.fromString(arg0);
+        defer v0.destroy();
+        var ret = self.object.callVariant1(method, &v0);
+        defer ret.destroy();
+        return ret.toString();
+    }
+
+    pub fn @"get_script_name"(self: TranslationServer, arg0: types.String) types.String {
+        const method = methodBind(godot_class_name, "get_script_name", 3135753539);
+        var a0: types.String = arg0;
+        const args = [_]c.GDExtensionConstTypePtr{ &a0 };
+        _ = &args;
+        var v0 = Variant.fromString(arg0);
+        defer v0.destroy();
+        var ret = self.object.callVariant1(method, &v0);
+        defer ret.destroy();
+        return ret.toString();
+    }
+
+    pub fn @"get_country_name"(self: TranslationServer, arg0: types.String) types.String {
+        const method = methodBind(godot_class_name, "get_country_name", 3135753539);
+        var a0: types.String = arg0;
+        const args = [_]c.GDExtensionConstTypePtr{ &a0 };
+        _ = &args;
+        var v0 = Variant.fromString(arg0);
+        defer v0.destroy();
+        var ret = self.object.callVariant1(method, &v0);
+        defer ret.destroy();
+        return ret.toString();
+    }
+
+    pub fn @"get_locale_name"(self: TranslationServer, arg0: types.String) types.String {
+        const method = methodBind(godot_class_name, "get_locale_name", 3135753539);
+        var a0: types.String = arg0;
+        const args = [_]c.GDExtensionConstTypePtr{ &a0 };
+        _ = &args;
+        var v0 = Variant.fromString(arg0);
+        defer v0.destroy();
+        var ret = self.object.callVariant1(method, &v0);
+        defer ret.destroy();
+        return ret.toString();
+    }
+
+    pub fn @"get_plural_rules"(self: TranslationServer, arg0: types.String) types.String {
+        const method = methodBind(godot_class_name, "get_plural_rules", 3135753539);
+        var a0: types.String = arg0;
+        const args = [_]c.GDExtensionConstTypePtr{ &a0 };
+        _ = &args;
+        var v0 = Variant.fromString(arg0);
+        defer v0.destroy();
+        var ret = self.object.callVariant1(method, &v0);
+        defer ret.destroy();
+        return ret.toString();
+    }
+
     pub fn @"add_translation"(self: TranslationServer, arg0: Translation) void {
         const method = methodBind(godot_class_name, "add_translation", 1466479800);
         var a0: c.GDExtensionObjectPtr = arg0.object.ptr;
@@ -101505,9 +102721,36 @@ pub const TranslationServer = struct {
         api_mod.godot.object_method_bind_ptrcall.?(method, self.object.ptr, &args, null);
     }
 
+    pub fn @"get_translation_object"(self: TranslationServer, arg0: types.String) Translation {
+        const method = methodBind(godot_class_name, "get_translation_object", 2065240175);
+        var a0: types.String = arg0;
+        const args = [_]c.GDExtensionConstTypePtr{ &a0 };
+        _ = &args;
+        var v0 = Variant.fromString(arg0);
+        defer v0.destroy();
+        var ret = self.object.callVariant1(method, &v0);
+        defer ret.destroy();
+        return .init(ret.toObjectPtr());
+    }
+
     pub fn @"get_translations"(self: TranslationServer) collections.Array {
         const method = methodBind(godot_class_name, "get_translations", 3995934104);
         var ret = self.object.callVariant0(method);
+        defer ret.destroy();
+        return ret.toArray();
+    }
+
+    pub fn @"find_translations"(self: TranslationServer, arg0: types.String, arg1: bool) collections.Array {
+        const method = methodBind(godot_class_name, "find_translations", 2109650934);
+        var a0: types.String = arg0;
+        var a1: u8 = @intFromBool(arg1);
+        const args = [_]c.GDExtensionConstTypePtr{ &a0, &a1 };
+        _ = &args;
+        var v0 = Variant.fromString(arg0);
+        defer v0.destroy();
+        var v1 = Variant.fromBool(arg1);
+        defer v1.destroy();
+        var ret = self.object.callVariant2(method, &v0, &v1);
         defer ret.destroy();
         return ret.toArray();
     }
@@ -101554,6 +102797,48 @@ pub const TranslationServer = struct {
     pub fn @"clear"(self: TranslationServer) void {
         const method = methodBind(godot_class_name, "clear", 3218959716);
         api_mod.godot.object_method_bind_ptrcall.?(method, self.object.ptr, null, null);
+    }
+
+    pub fn @"format_number"(self: TranslationServer, arg0: types.String, arg1: types.String) types.String {
+        const method = methodBind(godot_class_name, "format_number", 315676799);
+        var a0: types.String = arg0;
+        var a1: types.String = arg1;
+        const args = [_]c.GDExtensionConstTypePtr{ &a0, &a1 };
+        _ = &args;
+        var v0 = Variant.fromString(arg0);
+        defer v0.destroy();
+        var v1 = Variant.fromString(arg1);
+        defer v1.destroy();
+        var ret = self.object.callVariant2(method, &v0, &v1);
+        defer ret.destroy();
+        return ret.toString();
+    }
+
+    pub fn @"get_percent_sign"(self: TranslationServer, arg0: types.String) types.String {
+        const method = methodBind(godot_class_name, "get_percent_sign", 3135753539);
+        var a0: types.String = arg0;
+        const args = [_]c.GDExtensionConstTypePtr{ &a0 };
+        _ = &args;
+        var v0 = Variant.fromString(arg0);
+        defer v0.destroy();
+        var ret = self.object.callVariant1(method, &v0);
+        defer ret.destroy();
+        return ret.toString();
+    }
+
+    pub fn @"parse_number"(self: TranslationServer, arg0: types.String, arg1: types.String) types.String {
+        const method = methodBind(godot_class_name, "parse_number", 315676799);
+        var a0: types.String = arg0;
+        var a1: types.String = arg1;
+        const args = [_]c.GDExtensionConstTypePtr{ &a0, &a1 };
+        _ = &args;
+        var v0 = Variant.fromString(arg0);
+        defer v0.destroy();
+        var v1 = Variant.fromString(arg1);
+        defer v1.destroy();
+        var ret = self.object.callVariant2(method, &v0, &v1);
+        defer ret.destroy();
+        return ret.toString();
     }
 
     pub fn @"is_pseudolocalization_enabled"(self: TranslationServer) bool {
@@ -112352,6 +113637,30 @@ pub const XMLParser = struct {
         return out != 0;
     }
 
+    pub fn @"get_named_attribute_value"(self: XMLParser, arg0: types.String) types.String {
+        const method = methodBind(godot_class_name, "get_named_attribute_value", 3135753539);
+        var a0: types.String = arg0;
+        const args = [_]c.GDExtensionConstTypePtr{ &a0 };
+        _ = &args;
+        var v0 = Variant.fromString(arg0);
+        defer v0.destroy();
+        var ret = self.object.callVariant1(method, &v0);
+        defer ret.destroy();
+        return ret.toString();
+    }
+
+    pub fn @"get_named_attribute_value_safe"(self: XMLParser, arg0: types.String) types.String {
+        const method = methodBind(godot_class_name, "get_named_attribute_value_safe", 3135753539);
+        var a0: types.String = arg0;
+        const args = [_]c.GDExtensionConstTypePtr{ &a0 };
+        _ = &args;
+        var v0 = Variant.fromString(arg0);
+        defer v0.destroy();
+        var ret = self.object.callVariant1(method, &v0);
+        defer ret.destroy();
+        return ret.toString();
+    }
+
     pub fn @"is_empty"(self: XMLParser) bool {
         const method = methodBind(godot_class_name, "is_empty", 36873697);
         var out: u8 = std.mem.zeroes(u8);
@@ -113516,6 +114825,18 @@ pub const XRServer = struct {
         return ret.toArray();
     }
 
+    pub fn @"find_interface"(self: XRServer, arg0: types.String) XRInterface {
+        const method = methodBind(godot_class_name, "find_interface", 1395192955);
+        var a0: types.String = arg0;
+        const args = [_]c.GDExtensionConstTypePtr{ &a0 };
+        _ = &args;
+        var v0 = Variant.fromString(arg0);
+        defer v0.destroy();
+        var ret = self.object.callVariant1(method, &v0);
+        defer ret.destroy();
+        return .init(ret.toObjectPtr());
+    }
+
     pub fn @"add_tracker"(self: XRServer, arg0: XRTracker) void {
         const method = methodBind(godot_class_name, "add_tracker", 684804553);
         var a0: c.GDExtensionObjectPtr = arg0.object.ptr;
@@ -113763,6 +115084,20 @@ pub const ZIPReader = struct {
         var out: i64 = std.mem.zeroes(i64);
         api_mod.godot.object_method_bind_ptrcall.?(method, self.object.ptr, null, @ptrCast(&out));
         return out;
+    }
+
+    pub fn @"read_file"(self: ZIPReader, arg0: types.String, arg1: bool) collections.PackedByteArray {
+        const method = methodBind(godot_class_name, "read_file", 740857591);
+        var a0: types.String = arg0;
+        var a1: u8 = @intFromBool(arg1);
+        const args = [_]c.GDExtensionConstTypePtr{ &a0, &a1 };
+        _ = &args;
+        var v0 = Variant.fromString(arg0);
+        defer v0.destroy();
+        var v1 = Variant.fromBool(arg1);
+        defer v1.destroy();
+        var ret = self.object.callVariant2(method, &v0, &v1);
+        return ret.toPackedByteArray();
     }
 
     pub fn @"file_exists"(self: ZIPReader, arg0: types.String, arg1: bool) bool {

@@ -43,6 +43,10 @@ pub const Variant = struct {
         return fromBuiltin(value, c.GDEXTENSION_VARIANT_TYPE_COLOR);
     }
 
+    pub fn fromString(value: types.String) Variant {
+        return fromBuiltin(value, c.GDEXTENSION_VARIANT_TYPE_STRING);
+    }
+
     pub fn fromStringName(value: types.StringName) Variant {
         return fromBuiltin(value, c.GDEXTENSION_VARIANT_TYPE_STRING_NAME);
     }
@@ -65,6 +69,7 @@ pub const Variant = struct {
             types.Vector3 => fromVector3(value),
             types.Vector4 => fromVector4(value),
             types.Color => fromColor(value),
+            types.String => fromString(value),
             types.StringName => fromStringName(value),
             else => @compileError("unsupported Variant conversion from " ++ @typeName(T)),
         };

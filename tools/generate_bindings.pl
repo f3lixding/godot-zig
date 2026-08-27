@@ -94,6 +94,7 @@ sub variant_arg_expr {
   return "Variant.fromInt($name)" if $t eq 'int';
   return "Variant.fromBool($name)" if $t eq 'bool';
   return "Variant.fromFloat($name)" if $t eq 'float';
+  return "Variant.fromString($name)" if $t eq 'String';
   return undef;
 }
 sub arg_expr {

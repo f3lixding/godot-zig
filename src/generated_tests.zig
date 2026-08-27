@@ -28,6 +28,18 @@ test "generator retains ArrayMesh methods with five arguments" {
     try std.testing.expect(@TypeOf(classes.ArrayMesh.@"add_surface_from_arrays") == Expected);
 }
 
+test "generator supports String arguments on object-returning methods" {
+    try std.testing.expect(@hasDecl(classes.ResourceLoader, "load"));
+
+    const Expected = fn (
+        classes.ResourceLoader,
+        types.String,
+        types.String,
+        i64,
+    ) classes.Resource;
+    try std.testing.expect(@TypeOf(classes.ResourceLoader.@"load") == Expected);
+}
+
 test "generator supports AABB arguments and returns" {
     try std.testing.expect(@hasDecl(classes.ArrayMesh, "set_custom_aabb"));
     try std.testing.expect(@hasDecl(classes.ArrayMesh, "get_custom_aabb"));
