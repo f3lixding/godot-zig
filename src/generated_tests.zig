@@ -28,8 +28,16 @@ test "generator retains ArrayMesh methods with five arguments" {
     try std.testing.expect(@TypeOf(classes.ArrayMesh.@"add_surface_from_arrays") == Expected);
 }
 
-test "generator supports String arguments on object-returning methods" {
+test "generator preserves argument names, enum constants, and String arguments" {
     try std.testing.expect(@hasDecl(classes.ResourceLoader, "load"));
+    try std.testing.expectEqual(@as(i64, 1), classes.ResourceLoader.CacheMode.reuse);
+
+    const generated_source = @embedFile("generated/classes.zig");
+    try std.testing.expect(std.mem.indexOf(
+        u8,
+        generated_source,
+        "pub fn @\"load\"(self: ResourceLoader, p_path: types.String, p_type_hint: types.String, p_cache_mode: i64)",
+    ) != null);
 
     const Expected = fn (
         classes.ResourceLoader,
