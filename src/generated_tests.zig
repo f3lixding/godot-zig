@@ -38,6 +38,11 @@ test "generator preserves argument names, enum constants, and String arguments" 
         generated_source,
         "pub fn @\"load\"(self: ResourceLoader, p_path: types.String, p_type_hint: types.String, p_cache_mode: i64)",
     ) != null);
+    try std.testing.expect(std.mem.indexOf(
+        u8,
+        generated_source,
+        "if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();",
+    ) != null);
 
     const Expected = fn (
         classes.ResourceLoader,

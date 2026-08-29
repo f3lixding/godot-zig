@@ -1186,7 +1186,9 @@ pub const AnimatedSprite2D = struct {
         const method_bind = methodBind(godot_class_name, "get_sprite_frames", 3804851214);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"set_animation"(self: AnimatedSprite2D, p_name: types.StringName) void {
@@ -1388,7 +1390,9 @@ pub const AnimatedSprite3D = struct {
         const method_bind = methodBind(godot_class_name, "get_sprite_frames", 3804851214);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"set_animation"(self: AnimatedSprite3D, p_name: types.StringName) void {
@@ -1607,7 +1611,9 @@ pub const AnimatedTexture = struct {
         defer v0.destroy();
         var ret = self.object.callVariant1(method_bind, &v0);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"set_frame_duration"(self: AnimatedTexture, p_frame: i64, p_duration: f64) void {
@@ -2148,7 +2154,9 @@ pub const Animation = struct {
         defer v1.destroy();
         var ret = self.object.callVariant2(method_bind, &v0, &v1);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"audio_track_get_key_start_offset"(self: Animation, p_track_idx: i64, p_key_idx: i64) f64 {
@@ -3065,7 +3073,9 @@ pub const AnimationNodeBlendSpace1D = struct {
         defer v0.destroy();
         var ret = self.object.callVariant1(method_bind, &v0);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"set_blend_point_name"(self: AnimationNodeBlendSpace1D, p_point: i64, p_name: types.StringName) void {
@@ -3296,7 +3306,9 @@ pub const AnimationNodeBlendSpace2D = struct {
         defer v0.destroy();
         var ret = self.object.callVariant1(method_bind, &v0);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"set_blend_point_name"(self: AnimationNodeBlendSpace2D, p_point: i64, p_name: types.StringName) void {
@@ -3680,7 +3692,9 @@ pub const AnimationNodeOneShot = struct {
         const method_bind = methodBind(godot_class_name, "get_fadein_curve", 2460114913);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"set_fadeout_time"(self: AnimationNodeOneShot, p_time: f64) void {
@@ -3708,7 +3722,9 @@ pub const AnimationNodeOneShot = struct {
         const method_bind = methodBind(godot_class_name, "get_fadeout_curve", 2460114913);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"set_break_loop_at_end"(self: AnimationNodeOneShot, p_enable: bool) void {
@@ -3913,7 +3929,9 @@ pub const AnimationNodeStateMachine = struct {
         defer v0.destroy();
         var ret = self.object.callVariant1(method_bind, &v0);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"get_transition_from"(self: AnimationNodeStateMachine, p_idx: i64) types.StringName {
@@ -4212,7 +4230,9 @@ pub const AnimationNodeStateMachineTransition = struct {
         const method_bind = methodBind(godot_class_name, "get_xfade_curve", 2460114913);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"set_break_loop_at_end"(self: AnimationNodeStateMachineTransition, p_enable: bool) void {
@@ -4432,7 +4452,9 @@ pub const AnimationNodeTransition = struct {
         const method_bind = methodBind(godot_class_name, "get_xfade_curve", 2460114913);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"set_allow_transition_to_self"(self: AnimationNodeTransition, p_enable: bool) void {
@@ -4882,7 +4904,9 @@ pub const AnimationTree = struct {
         const method_bind = methodBind(godot_class_name, "get_tree_root", 4110384712);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     /// `p_mode`: Godot type `enum::AnimationTree.AnimationProcessCallback`.
@@ -5559,7 +5583,9 @@ pub const AreaLight3D = struct {
         const method_bind = methodBind(godot_class_name, "get_area_texture", 3635182373);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"set_area_size"(self: AreaLight3D, p_area_size: types.Vector2) void {
@@ -5797,7 +5823,9 @@ pub const ArrayMesh = struct {
         const method_bind = methodBind(godot_class_name, "get_shadow_mesh", 3206942465);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
 };
@@ -5935,7 +5963,9 @@ pub const AtlasTexture = struct {
         const method_bind = methodBind(godot_class_name, "get_atlas", 3635182373);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"set_filter_clip"(self: AtlasTexture, p_enable: bool) void {
@@ -5976,7 +6006,9 @@ pub const AudioEffect = struct {
         const method_bind = methodBind(godot_class_name, "_instantiate", 1659796816);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
 };
@@ -7178,7 +7210,9 @@ pub const AudioEffectRecord = struct {
         const method_bind = methodBind(godot_class_name, "get_recording", 2964110865);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
 };
@@ -7759,7 +7793,9 @@ pub const AudioServer = struct {
         defer v1.destroy();
         var ret = self.object.callVariant2(method_bind, &v0, &v1);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     /// `p_channel`: default `0`.
@@ -7773,7 +7809,9 @@ pub const AudioServer = struct {
         defer v2.destroy();
         var ret = self.object.callVariant3(method_bind, &v0, &v1, &v2);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"swap_bus_effects"(self: AudioServer, p_bus_idx: i64, p_effect_idx: i64, p_by_effect_idx: i64) void {
@@ -7959,7 +7997,9 @@ pub const AudioServer = struct {
         const method_bind = methodBind(godot_class_name, "generate_bus_layout", 3769973890);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"set_enable_tagging_used_audio_streams"(self: AudioServer, p_enable: bool) void {
@@ -7999,7 +8039,9 @@ pub const AudioStream = struct {
         const method_bind = methodBind(godot_class_name, "_instantiate_playback", 3093715447);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"_get_stream_name"(self: AudioStream) types.String {
@@ -8083,7 +8125,9 @@ pub const AudioStream = struct {
         const method_bind = methodBind(godot_class_name, "instantiate_playback", 210135309);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"can_be_sampled"(self: AudioStream) bool {
@@ -8097,7 +8141,9 @@ pub const AudioStream = struct {
         const method_bind = methodBind(godot_class_name, "generate_sample", 2646048999);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"is_meta_stream"(self: AudioStream) bool {
@@ -8310,7 +8356,9 @@ pub const AudioStreamInteractive = struct {
         defer v0.destroy();
         var ret = self.object.callVariant1(method_bind, &v0);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     /// `p_mode`: Godot type `enum::AudioStreamInteractive.AutoAdvanceMode`.
@@ -8566,7 +8614,9 @@ pub const AudioStreamOggVorbis = struct {
         const method_bind = methodBind(godot_class_name, "get_packet_sequence", 2801636033);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"set_loop"(self: AudioStreamOggVorbis, p_enable: bool) void {
@@ -8719,7 +8769,9 @@ pub const AudioStreamPlayback = struct {
         const method_bind = methodBind(godot_class_name, "get_sample_playback", 3482738536);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     /// `p_from_pos`: default `0.0`.
@@ -8916,7 +8968,9 @@ pub const AudioStreamPlayer = struct {
         const method_bind = methodBind(godot_class_name, "get_stream", 160907539);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"set_volume_db"(self: AudioStreamPlayer, p_volume_db: f64) void {
@@ -9084,7 +9138,9 @@ pub const AudioStreamPlayer = struct {
         const method_bind = methodBind(godot_class_name, "get_stream_playback", 210135309);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     /// `p_playback_type`: Godot type `enum::AudioServer.PlaybackType`.
@@ -9123,7 +9179,9 @@ pub const AudioStreamPlayer2D = struct {
         const method_bind = methodBind(godot_class_name, "get_stream", 160907539);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"set_volume_db"(self: AudioStreamPlayer2D, p_volume_db: f64) void {
@@ -9332,7 +9390,9 @@ pub const AudioStreamPlayer2D = struct {
         const method_bind = methodBind(godot_class_name, "get_stream_playback", 210135309);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     /// `p_playback_type`: Godot type `enum::AudioServer.PlaybackType`.
@@ -9384,7 +9444,9 @@ pub const AudioStreamPlayer3D = struct {
         const method_bind = methodBind(godot_class_name, "get_stream", 160907539);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"set_volume_db"(self: AudioStreamPlayer3D, p_volume_db: f64) void {
@@ -9707,7 +9769,9 @@ pub const AudioStreamPlayer3D = struct {
         const method_bind = methodBind(godot_class_name, "get_stream_playback", 210135309);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     /// `p_playback_type`: Godot type `enum::AudioServer.PlaybackType`.
@@ -9770,7 +9834,9 @@ pub const AudioStreamPlaylist = struct {
         defer v0.destroy();
         var ret = self.object.callVariant1(method_bind, &v0);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"set_shuffle"(self: AudioStreamPlaylist, p_shuffle: bool) void {
@@ -9894,7 +9960,9 @@ pub const AudioStreamRandomizer = struct {
         defer v0.destroy();
         var ret = self.object.callVariant1(method_bind, &v0);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"set_stream_probability_weight"(self: AudioStreamRandomizer, p_index: i64, p_weight: f64) void {
@@ -10023,7 +10091,9 @@ pub const AudioStreamSynchronized = struct {
         defer v0.destroy();
         var ret = self.object.callVariant1(method_bind, &v0);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"set_sync_stream_volume"(self: AudioStreamSynchronized, p_stream_index: i64, p_volume_db: f64) void {
@@ -10205,7 +10275,9 @@ pub const AwaitTweener = struct {
         defer v0.destroy();
         var ret = self.object.callVariant1(method_bind, &v0);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
 };
@@ -10420,7 +10492,9 @@ pub const BaseButton = struct {
         const method_bind = methodBind(godot_class_name, "get_shortcut", 3415666916);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"set_button_group"(self: BaseButton, p_button_group: ButtonGroup) void {
@@ -10434,7 +10508,9 @@ pub const BaseButton = struct {
         const method_bind = methodBind(godot_class_name, "get_button_group", 281644053);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
 };
@@ -11168,7 +11244,9 @@ pub const BaseMaterial3D = struct {
         defer v0.destroy();
         var ret = self.object.callVariant1(method_bind, &v0);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     /// `p_detail_blend_mode`: Godot type `enum::BaseMaterial3D.BlendMode`.
@@ -11842,7 +11920,9 @@ pub const BitMap = struct {
         const method_bind = methodBind(godot_class_name, "convert_to_image", 4190603485);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
 };
@@ -12171,7 +12251,9 @@ pub const BoneMap = struct {
         const method_bind = methodBind(godot_class_name, "get_profile", 4291782652);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"set_profile"(self: BoneMap, p_profile: SkeletonProfile) void {
@@ -12425,7 +12507,9 @@ pub const BoneTwistDisperser3D = struct {
         defer v0.destroy();
         var ret = self.object.callVariant1(method_bind, &v0);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"get_joint_bone_name"(self: BoneTwistDisperser3D, p_index: i64, p_joint: i64) types.String {
@@ -12754,7 +12838,9 @@ pub const Button = struct {
         const method_bind = methodBind(godot_class_name, "get_button_icon", 3635182373);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"set_flat"(self: Button, p_enabled: bool) void {
@@ -13172,7 +13258,9 @@ pub const CPUParticles2D = struct {
         const method_bind = methodBind(godot_class_name, "get_texture", 3635182373);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     /// `p_keep_seed`: default `false`.
@@ -13265,7 +13353,9 @@ pub const CPUParticles2D = struct {
         defer v0.destroy();
         var ret = self.object.callVariant1(method_bind, &v0);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"set_color"(self: CPUParticles2D, p_color: types.Color) void {
@@ -13293,7 +13383,9 @@ pub const CPUParticles2D = struct {
         const method_bind = methodBind(godot_class_name, "get_color_ramp", 132272999);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"set_color_initial_ramp"(self: CPUParticles2D, p_ramp: Gradient) void {
@@ -13307,7 +13399,9 @@ pub const CPUParticles2D = struct {
         const method_bind = methodBind(godot_class_name, "get_color_initial_ramp", 132272999);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     /// `p_particle_flag`: Godot type `enum::CPUParticles2D.ParticleFlags`.
@@ -13432,7 +13526,9 @@ pub const CPUParticles2D = struct {
         const method_bind = methodBind(godot_class_name, "get_scale_curve_x", 2460114913);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"set_scale_curve_x"(self: CPUParticles2D, p_scale_curve: Curve) void {
@@ -13446,7 +13542,9 @@ pub const CPUParticles2D = struct {
         const method_bind = methodBind(godot_class_name, "get_scale_curve_y", 2460114913);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"set_scale_curve_y"(self: CPUParticles2D, p_scale_curve: Curve) void {
@@ -13721,7 +13819,9 @@ pub const CPUParticles3D = struct {
         const method_bind = methodBind(godot_class_name, "get_mesh", 1808005922);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"set_use_fixed_seed"(self: CPUParticles3D, p_use_fixed_seed: bool) void {
@@ -13872,7 +13972,9 @@ pub const CPUParticles3D = struct {
         defer v0.destroy();
         var ret = self.object.callVariant1(method_bind, &v0);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"set_color"(self: CPUParticles3D, p_color: types.Color) void {
@@ -13900,7 +14002,9 @@ pub const CPUParticles3D = struct {
         const method_bind = methodBind(godot_class_name, "get_color_ramp", 132272999);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"set_color_initial_ramp"(self: CPUParticles3D, p_ramp: Gradient) void {
@@ -13914,7 +14018,9 @@ pub const CPUParticles3D = struct {
         const method_bind = methodBind(godot_class_name, "get_color_initial_ramp", 132272999);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     /// `p_particle_flag`: Godot type `enum::CPUParticles3D.ParticleFlags`.
@@ -14107,7 +14213,9 @@ pub const CPUParticles3D = struct {
         const method_bind = methodBind(godot_class_name, "get_scale_curve_x", 2460114913);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"set_scale_curve_x"(self: CPUParticles3D, p_scale_curve: Curve) void {
@@ -14121,7 +14229,9 @@ pub const CPUParticles3D = struct {
         const method_bind = methodBind(godot_class_name, "get_scale_curve_y", 2460114913);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"set_scale_curve_y"(self: CPUParticles3D, p_scale_curve: Curve) void {
@@ -14135,7 +14245,9 @@ pub const CPUParticles3D = struct {
         const method_bind = methodBind(godot_class_name, "get_scale_curve_z", 2460114913);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"set_scale_curve_z"(self: CPUParticles3D, p_scale_curve: Curve) void {
@@ -14187,7 +14299,9 @@ pub const CSGBox3D = struct {
         const method_bind = methodBind(godot_class_name, "get_material", 5934680);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
 };
@@ -14277,7 +14391,9 @@ pub const CSGCylinder3D = struct {
         const method_bind = methodBind(godot_class_name, "get_material", 5934680);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"set_smooth_faces"(self: CSGCylinder3D, p_smooth_faces: bool) void {
@@ -14315,7 +14431,9 @@ pub const CSGMesh3D = struct {
         const method_bind = methodBind(godot_class_name, "get_mesh", 4081188045);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"set_material"(self: CSGMesh3D, p_material: Material) void {
@@ -14329,7 +14447,9 @@ pub const CSGMesh3D = struct {
         const method_bind = methodBind(godot_class_name, "get_material", 5934680);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
 };
@@ -14555,7 +14675,9 @@ pub const CSGPolygon3D = struct {
         const method_bind = methodBind(godot_class_name, "get_material", 5934680);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"set_smooth_faces"(self: CSGPolygon3D, p_smooth_faces: bool) void {
@@ -14742,7 +14864,9 @@ pub const CSGShape3D = struct {
         const method_bind = methodBind(godot_class_name, "bake_collision_shape", 36102322);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"set_calculate_tangents"(self: CSGShape3D, p_enabled: bool) void {
@@ -14770,7 +14894,9 @@ pub const CSGShape3D = struct {
         const method_bind = methodBind(godot_class_name, "bake_static_mesh", 1605880883);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"set_autosmooth"(self: CSGShape3D, p_autosmooth: bool) void {
@@ -14878,7 +15004,9 @@ pub const CSGSphere3D = struct {
         const method_bind = methodBind(godot_class_name, "get_material", 5934680);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
 };
@@ -14958,7 +15086,9 @@ pub const CSGTorus3D = struct {
         const method_bind = methodBind(godot_class_name, "get_material", 5934680);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"set_smooth_faces"(self: CSGTorus3D, p_smooth_faces: bool) void {
@@ -14991,7 +15121,9 @@ pub const CallbackTweener = struct {
         defer v0.destroy();
         var ret = self.object.callVariant1(method_bind, &v0);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
 };
@@ -15657,7 +15789,9 @@ pub const Camera3D = struct {
         const method_bind = methodBind(godot_class_name, "get_environment", 3082064660);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"set_attributes"(self: Camera3D, p_env: CameraAttributes) void {
@@ -15671,7 +15805,9 @@ pub const Camera3D = struct {
         const method_bind = methodBind(godot_class_name, "get_attributes", 3921283215);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"set_compositor"(self: Camera3D, p_compositor: Compositor) void {
@@ -15685,7 +15821,9 @@ pub const Camera3D = struct {
         const method_bind = methodBind(godot_class_name, "get_compositor", 3647707413);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     /// `p_mode`: Godot type `enum::Camera3D.KeepAspect`.
@@ -16301,7 +16439,9 @@ pub const CameraServer = struct {
         defer v0.destroy();
         var ret = self.object.callVariant1(method_bind, &v0);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"get_feed_count"(self: CameraServer) i64 {
@@ -16721,7 +16861,9 @@ pub const CanvasItem = struct {
         const method_bind = methodBind(godot_class_name, "get_world_2d", 2339128592);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"set_material"(self: CanvasItem, p_material: Material) void {
@@ -16735,7 +16877,9 @@ pub const CanvasItem = struct {
         const method_bind = methodBind(godot_class_name, "get_material", 5934680);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"set_use_parent_material"(self: CanvasItem, p_enable: bool) void {
@@ -17172,7 +17316,9 @@ pub const CanvasTexture = struct {
         const method_bind = methodBind(godot_class_name, "get_diffuse_texture", 3635182373);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"set_normal_texture"(self: CanvasTexture, p_texture: Texture2D) void {
@@ -17186,7 +17332,9 @@ pub const CanvasTexture = struct {
         const method_bind = methodBind(godot_class_name, "get_normal_texture", 3635182373);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"set_specular_texture"(self: CanvasTexture, p_texture: Texture2D) void {
@@ -17200,7 +17348,9 @@ pub const CanvasTexture = struct {
         const method_bind = methodBind(godot_class_name, "get_specular_texture", 3635182373);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"set_specular_color"(self: CanvasTexture, p_color: types.Color) void {
@@ -18131,14 +18281,18 @@ pub const CharacterBody2D = struct {
         defer v0.destroy();
         var ret = self.object.callVariant1(method_bind, &v0);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"get_last_slide_collision"(self: CharacterBody2D) KinematicCollision2D {
         const method_bind = methodBind(godot_class_name, "get_last_slide_collision", 2161834755);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
 };
@@ -18500,14 +18654,18 @@ pub const CharacterBody3D = struct {
         defer v0.destroy();
         var ret = self.object.callVariant1(method_bind, &v0);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"get_last_slide_collision"(self: CharacterBody3D) KinematicCollision3D {
         const method_bind = methodBind(godot_class_name, "get_last_slide_collision", 186875014);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
 };
@@ -20055,7 +20213,9 @@ pub const CollisionObject2D = struct {
         defer v1.destroy();
         var ret = self.object.callVariant2(method_bind, &v0, &v1);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"shape_owner_get_shape_index"(self: CollisionObject2D, p_owner_id: i64, p_shape_id: i64) i64 {
@@ -20321,7 +20481,9 @@ pub const CollisionObject3D = struct {
         defer v1.destroy();
         var ret = self.object.callVariant2(method_bind, &v0, &v1);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"shape_owner_get_shape_index"(self: CollisionObject3D, p_owner_id: i64, p_shape_id: i64) i64 {
@@ -20545,7 +20707,9 @@ pub const CollisionShape2D = struct {
         const method_bind = methodBind(godot_class_name, "get_shape", 522005891);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"set_disabled"(self: CollisionShape2D, p_disabled: bool) void {
@@ -20646,7 +20810,9 @@ pub const CollisionShape3D = struct {
         const method_bind = methodBind(godot_class_name, "get_shape", 3214262478);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"set_disabled"(self: CollisionShape3D, p_enable: bool) void {
@@ -22335,7 +22501,9 @@ pub const Control = struct {
         const method_bind = methodBind(godot_class_name, "get_theme", 3846893731);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"set_theme_type_variation"(self: Control, p_theme_type: types.StringName) void {
@@ -22616,7 +22784,9 @@ pub const Control = struct {
         const method_bind = methodBind(godot_class_name, "get_theme_default_font", 3229501585);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"get_theme_default_font_size"(self: Control) i64 {
@@ -23517,7 +23687,9 @@ pub const Crypto = struct {
         defer v0.destroy();
         var ret = self.object.callVariant1(method_bind, &v0);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     /// `p_hash_type`: Godot type `enum::HashingContext.HashType`.
@@ -23617,7 +23789,9 @@ pub const Cubemap = struct {
         const method_bind = methodBind(godot_class_name, "create_placeholder", 121922552);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
 };
@@ -23634,7 +23808,9 @@ pub const CubemapArray = struct {
         const method_bind = methodBind(godot_class_name, "create_placeholder", 121922552);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
 };
@@ -24370,7 +24546,9 @@ pub const CurveTexture = struct {
         const method_bind = methodBind(godot_class_name, "get_curve", 2460114913);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     /// `p_texture_mode`: Godot type `enum::CurveTexture.TextureMode`.
@@ -24416,7 +24594,9 @@ pub const CurveXYZTexture = struct {
         const method_bind = methodBind(godot_class_name, "get_curve_x", 2460114913);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"set_curve_y"(self: CurveXYZTexture, p_curve: Curve) void {
@@ -24430,7 +24610,9 @@ pub const CurveXYZTexture = struct {
         const method_bind = methodBind(godot_class_name, "get_curve_y", 2460114913);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"set_curve_z"(self: CurveXYZTexture, p_curve: Curve) void {
@@ -24444,7 +24626,9 @@ pub const CurveXYZTexture = struct {
         const method_bind = methodBind(godot_class_name, "get_curve_z", 2460114913);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
 };
@@ -24827,7 +25011,9 @@ pub const Decal = struct {
         defer v0.destroy();
         var ret = self.object.callVariant1(method_bind, &v0);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"set_emission_energy"(self: Decal, p_energy: f64) void {
@@ -25768,7 +25954,9 @@ pub const DisplayServer = struct {
         defer v1.destroy();
         var ret = self.object.callVariant2(method_bind, &v0, &v1);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"global_menu_get_item_indentation_level"(self: DisplayServer, p_menu_root: types.String, p_idx: i64) i64 {
@@ -26048,7 +26236,9 @@ pub const DisplayServer = struct {
         const method_bind = methodBind(godot_class_name, "clipboard_get_image", 4190603485);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"clipboard_has"(self: DisplayServer) bool {
@@ -26187,7 +26377,9 @@ pub const DisplayServer = struct {
         defer v0.destroy();
         var ret = self.object.callVariant1(method_bind, &v0);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     /// `p_orientation`: Godot type `enum::DisplayServer.ScreenOrientation`.
@@ -27366,7 +27558,9 @@ pub const ENetMultiplayerPeer = struct {
         const method_bind = methodBind(godot_class_name, "get_host", 4103238886);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"get_peer"(self: ENetMultiplayerPeer, p_id: i64) ENetPacketPeer {
@@ -27375,7 +27569,9 @@ pub const ENetMultiplayerPeer = struct {
         defer v0.destroy();
         var ret = self.object.callVariant1(method_bind, &v0);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
 };
@@ -27663,7 +27859,9 @@ pub const EditorDebuggerPlugin = struct {
         defer v0.destroy();
         var ret = self.object.callVariant1(method_bind, &v0);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"get_sessions"(self: EditorDebuggerPlugin) collections.Array {
@@ -27912,7 +28110,9 @@ pub const EditorDock = struct {
         const method_bind = methodBind(godot_class_name, "get_dock_icon", 3635182373);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"set_force_show_icon"(self: EditorDock, p_force: bool) void {
@@ -27954,7 +28154,9 @@ pub const EditorDock = struct {
         const method_bind = methodBind(godot_class_name, "get_dock_shortcut", 3415666916);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     /// `p_slot`: Godot type `enum::EditorDock.DockSlot`.
@@ -28023,7 +28225,9 @@ pub const EditorExportPlatform = struct {
         const method_bind = methodBind(godot_class_name, "create_preset", 2572397818);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"find_export_template"(self: EditorExportPlatform, p_template_file_name: types.String) types.Dictionary {
@@ -28220,7 +28424,9 @@ pub const EditorExportPlatformExtension = struct {
         const method_bind = methodBind(godot_class_name, "_get_logo", 3635182373);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"_poll_export"(self: EditorExportPlatformExtension) bool {
@@ -28250,7 +28456,9 @@ pub const EditorExportPlatformExtension = struct {
         defer v0.destroy();
         var ret = self.object.callVariant1(method_bind, &v0);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"_get_option_label"(self: EditorExportPlatformExtension, p_device: i64) types.String {
@@ -28301,7 +28509,9 @@ pub const EditorExportPlatformExtension = struct {
         const method_bind = methodBind(godot_class_name, "_get_run_icon", 3635182373);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"_can_export"(self: EditorExportPlatformExtension, p_preset: EditorExportPreset, p_debug: bool) bool {
@@ -28680,14 +28890,18 @@ pub const EditorExportPlugin = struct {
         const method_bind = methodBind(godot_class_name, "get_export_preset", 1610607222);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"get_export_platform"(self: EditorExportPlugin) EditorExportPlatform {
         const method_bind = methodBind(godot_class_name, "get_export_platform", 282254641);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
 };
@@ -29539,7 +29753,9 @@ pub const EditorInterface = struct {
         const method_bind = methodBind(godot_class_name, "get_editor_settings", 4086932459);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"get_editor_toaster"(self: EditorInterface) EditorToaster {
@@ -29577,7 +29793,9 @@ pub const EditorInterface = struct {
         const method_bind = methodBind(godot_class_name, "get_editor_theme", 3846893731);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"get_base_control"(self: EditorInterface) Control {
@@ -30082,7 +30300,9 @@ pub const EditorNode3DGizmo = struct {
         const method_bind = methodBind(godot_class_name, "get_plugin", 4250544552);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"clear"(self: EditorNode3DGizmo) void {
@@ -30425,7 +30645,9 @@ pub const EditorPlugin = struct {
         const method_bind = methodBind(godot_class_name, "_get_plugin_icon", 3635182373);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"_has_main_screen"(self: EditorPlugin) bool {
@@ -31205,7 +31427,9 @@ pub const EditorResourcePicker = struct {
         const method_bind = methodBind(godot_class_name, "get_edited_resource", 2674603643);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"set_toggle_mode"(self: EditorResourcePicker, p_enable: bool) void {
@@ -31668,7 +31892,9 @@ pub const EditorSettings = struct {
         defer v0.destroy();
         var ret = self.object.callVariant1(method_bind, &v0);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"check_changed_settings_in_group"(self: EditorSettings, p_setting_prefix: types.String) bool {
@@ -31838,7 +32064,9 @@ pub const EditorSyntaxHighlighter = struct {
         const method_bind = methodBind(godot_class_name, "_create", 3789807118);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
 };
@@ -32916,7 +33144,9 @@ pub const Environment = struct {
         const method_bind = methodBind(godot_class_name, "get_sky", 1177136966);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"set_sky_custom_fov"(self: Environment, p_scale: f64) void {
@@ -33778,7 +34008,9 @@ pub const Environment = struct {
         const method_bind = methodBind(godot_class_name, "get_glow_map", 4037048985);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"set_fog_enabled"(self: Environment, p_enabled: bool) void {
@@ -34213,7 +34445,9 @@ pub const Environment = struct {
         const method_bind = methodBind(godot_class_name, "get_adjustment_color_correction", 4037048985);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
 };
@@ -35532,7 +35766,9 @@ pub const FogMaterial = struct {
         const method_bind = methodBind(godot_class_name, "get_density_texture", 373985333);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
 };
@@ -35585,7 +35821,9 @@ pub const FogVolume = struct {
         const method_bind = methodBind(godot_class_name, "get_material", 5934680);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
 };
@@ -35638,7 +35876,9 @@ pub const FoldableContainer = struct {
         const method_bind = methodBind(godot_class_name, "get_foldable_group", 66499518);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"set_title"(self: FoldableContainer, p_text: types.String) void {
@@ -36848,7 +37088,9 @@ pub const FontVariation = struct {
         const method_bind = methodBind(godot_class_name, "get_base_font", 3229501585);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"set_variation_opentype"(self: FontVariation, p_coords: types.Dictionary) void {
@@ -37039,7 +37281,9 @@ pub const GDExtensionManager = struct {
         defer v0.destroy();
         var ret = self.object.callVariant1(method_bind, &v0);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
 };
@@ -37067,14 +37311,18 @@ pub const GDScriptLanguageProtocol = struct {
         const method_bind = methodBind(godot_class_name, "get_text_document", 770545799);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"get_workspace"(self: GDScriptLanguageProtocol) GDScriptWorkspace {
         const method_bind = methodBind(godot_class_name, "get_workspace", 969295246);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"is_smart_resolve_enabled"(self: GDScriptLanguageProtocol) bool {
@@ -38167,7 +38415,9 @@ pub const GLTFMesh = struct {
         const method_bind = methodBind(godot_class_name, "get_mesh", 3754628756);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"set_mesh"(self: GLTFMesh, p_mesh: ImporterMesh) void {
@@ -38410,7 +38660,9 @@ pub const GLTFObjectModelProperty = struct {
         const method_bind = methodBind(godot_class_name, "get_gltf_to_godot_expression", 2240072449);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"set_gltf_to_godot_expression"(self: GLTFObjectModelProperty, p_gltf_to_godot_expr: Expression) void {
@@ -38424,7 +38676,9 @@ pub const GLTFObjectModelProperty = struct {
         const method_bind = methodBind(godot_class_name, "get_godot_to_gltf_expression", 2240072449);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"set_godot_to_gltf_expression"(self: GLTFObjectModelProperty, p_godot_to_gltf_expr: Expression) void {
@@ -38651,7 +38905,9 @@ pub const GLTFPhysicsShape = struct {
         defer v0.destroy();
         var ret = self.object.callVariant1(method_bind, &v0);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"to_dictionary"(self: GLTFPhysicsShape) types.Dictionary {
@@ -38749,7 +39005,9 @@ pub const GLTFPhysicsShape = struct {
         const method_bind = methodBind(godot_class_name, "get_importer_mesh", 3161779525);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"set_importer_mesh"(self: GLTFPhysicsShape, p_importer_mesh: ImporterMesh) void {
@@ -38982,7 +39240,9 @@ pub const GLTFSkin = struct {
         const method_bind = methodBind(godot_class_name, "get_godot_skin", 1032037385);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"set_godot_skin"(self: GLTFSkin, p_godot_skin: Skin) void {
@@ -39006,7 +39266,9 @@ pub const GLTFSpecGloss = struct {
         const method_bind = methodBind(godot_class_name, "get_diffuse_img", 564927088);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"set_diffuse_img"(self: GLTFSpecGloss, p_diffuse_img: Image) void {
@@ -39062,7 +39324,9 @@ pub const GLTFSpecGloss = struct {
         const method_bind = methodBind(godot_class_name, "get_spec_gloss_img", 564927088);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"set_spec_gloss_img"(self: GLTFSpecGloss, p_spec_gloss_img: Image) void {
@@ -39910,7 +40174,9 @@ pub const GPUParticles2D = struct {
         const method_bind = methodBind(godot_class_name, "get_process_material", 5934680);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"get_speed_scale"(self: GPUParticles2D) f64 {
@@ -39960,7 +40226,9 @@ pub const GPUParticles2D = struct {
         const method_bind = methodBind(godot_class_name, "get_texture", 3635182373);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     /// `p_keep_seed`: default `false`.
@@ -40309,7 +40577,9 @@ pub const GPUParticles3D = struct {
         const method_bind = methodBind(godot_class_name, "get_process_material", 5934680);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"get_speed_scale"(self: GPUParticles3D) f64 {
@@ -40404,7 +40674,9 @@ pub const GPUParticles3D = struct {
         defer v0.destroy();
         var ret = self.object.callVariant1(method_bind, &v0);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"set_skin"(self: GPUParticles3D, p_skin: Skin) void {
@@ -40418,7 +40690,9 @@ pub const GPUParticles3D = struct {
         const method_bind = methodBind(godot_class_name, "get_skin", 2074563878);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     /// `p_keep_seed`: default `false`.
@@ -40688,7 +40962,9 @@ pub const GPUParticlesAttractorVectorField3D = struct {
         const method_bind = methodBind(godot_class_name, "get_texture", 373985333);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
 };
@@ -40913,7 +41189,9 @@ pub const GPUParticlesCollisionSDF3D = struct {
         const method_bind = methodBind(godot_class_name, "get_texture", 373985333);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"set_thickness"(self: GPUParticlesCollisionSDF3D, p_thickness: f64) void {
@@ -41372,7 +41650,9 @@ pub const GeometryInstance3D = struct {
         const method_bind = methodBind(godot_class_name, "get_material_override", 5934680);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"set_material_overlay"(self: GeometryInstance3D, p_material: Material) void {
@@ -41386,7 +41666,9 @@ pub const GeometryInstance3D = struct {
         const method_bind = methodBind(godot_class_name, "get_material_overlay", 5934680);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     /// `p_shadow_casting_setting`: Godot type `enum::GeometryInstance3D.ShadowCastingSetting`.
@@ -41783,7 +42065,9 @@ pub const GradientTexture1D = struct {
         const method_bind = methodBind(godot_class_name, "get_gradient", 132272999);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"set_width"(self: GradientTexture1D, p_width: i64) void {
@@ -41841,7 +42125,9 @@ pub const GradientTexture2D = struct {
         const method_bind = methodBind(godot_class_name, "get_gradient", 132272999);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"set_width"(self: GradientTexture2D, p_width: i64) void {
@@ -42804,7 +43090,9 @@ pub const GraphNode = struct {
         defer v0.destroy();
         var ret = self.object.callVariant1(method_bind, &v0);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"is_slot_enabled_right"(self: GraphNode, p_slot_index: i64) bool {
@@ -42872,7 +43160,9 @@ pub const GraphNode = struct {
         defer v0.destroy();
         var ret = self.object.callVariant1(method_bind, &v0);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"is_slot_draw_stylebox"(self: GraphNode, p_slot_index: i64) bool {
@@ -43149,7 +43439,9 @@ pub const GridMap = struct {
         const method_bind = methodBind(godot_class_name, "get_physics_material", 2521850424);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"set_bake_navigation"(self: GridMap, p_bake_navigation: bool) void {
@@ -43177,7 +43469,9 @@ pub const GridMap = struct {
         const method_bind = methodBind(godot_class_name, "get_mesh_library", 3350993772);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"set_cell_size"(self: GridMap, p_size: types.Vector3) void {
@@ -43715,7 +44009,9 @@ pub const HTTPClient = struct {
         const method_bind = methodBind(godot_class_name, "get_connection", 2741655269);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"close"(self: HTTPClient) void {
@@ -44784,7 +45080,9 @@ pub const Image = struct {
         const method_bind = methodBind(godot_class_name, "rgbe_to_srgb", 564927088);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     /// `p_bump_scale`: default `1.0`.
@@ -45272,7 +45570,9 @@ pub const ImporterMesh = struct {
         defer v0.destroy();
         var ret = self.object.callVariant1(method_bind, &v0);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"get_surface_format"(self: ImporterMesh, p_surface_idx: i64) i64 {
@@ -45349,7 +45649,9 @@ pub const ImporterMeshInstance3D = struct {
         const method_bind = methodBind(godot_class_name, "get_mesh", 3161779525);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"set_skin"(self: ImporterMeshInstance3D, p_skin: Skin) void {
@@ -45363,7 +45665,9 @@ pub const ImporterMeshInstance3D = struct {
         const method_bind = methodBind(godot_class_name, "get_skin", 2074563878);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"set_layer_mask"(self: ImporterMeshInstance3D, p_layer_mask: i64) void {
@@ -47257,7 +47561,9 @@ pub const InputEventShortcut = struct {
         const method_bind = methodBind(godot_class_name, "get_shortcut", 3766804753);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
 };
@@ -47584,7 +47890,9 @@ pub const ItemList = struct {
         defer v0.destroy();
         var ret = self.object.callVariant1(method_bind, &v0);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     /// `p_direction`: Godot type `enum::Control.TextDirection`.
@@ -48267,7 +48575,9 @@ pub const IterateIK3D = struct {
         defer v1.destroy();
         var ret = self.object.callVariant2(method_bind, &v0, &v1);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     /// `p_direction`: Godot type `enum::SkeletonModifier3D.SecondaryDirection`.
@@ -48435,7 +48745,9 @@ pub const JavaClass = struct {
         const method_bind = methodBind(godot_class_name, "get_java_parent_class", 541536347);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"has_java_method"(self: JavaClass, p_method: types.StringName) bool {
@@ -48464,14 +48776,18 @@ pub const JavaClassWrapper = struct {
         defer v0.destroy();
         var ret = self.object.callVariant1(method_bind, &v0);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"get_exception"(self: JavaClassWrapper) JavaObject {
         const method_bind = methodBind(godot_class_name, "get_exception", 3277089691);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
 };
@@ -48488,7 +48804,9 @@ pub const JavaObject = struct {
         const method_bind = methodBind(godot_class_name, "get_java_class", 541536347);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"has_java_method"(self: JavaObject, p_method: types.StringName) bool {
@@ -48517,7 +48835,9 @@ pub const JavaScriptBridge = struct {
         defer v0.destroy();
         var ret = self.object.callVariant1(method_bind, &v0);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"is_js_buffer"(self: JavaScriptBridge, p_javascript_object: JavaScriptObject) bool {
@@ -48970,7 +49290,9 @@ pub const Label = struct {
         const method_bind = methodBind(godot_class_name, "get_label_settings", 826676056);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     /// `p_direction`: Godot type `enum::Control.TextDirection`.
@@ -49457,7 +49779,9 @@ pub const Label3D = struct {
         const method_bind = methodBind(godot_class_name, "get_font", 3229501585);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"set_font_size"(self: Label3D, p_size: i64) void {
@@ -49714,7 +50038,9 @@ pub const Label3D = struct {
         const method_bind = methodBind(godot_class_name, "generate_triangle_mesh", 3476533166);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
 };
@@ -49766,7 +50092,9 @@ pub const LabelSettings = struct {
         const method_bind = methodBind(godot_class_name, "get_font", 3229501585);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"set_font_size"(self: LabelSettings, p_size: i64) void {
@@ -50514,7 +50842,9 @@ pub const Light3D = struct {
         const method_bind = methodBind(godot_class_name, "get_projector", 3635182373);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"set_temperature"(self: Light3D, p_temperature: f64) void {
@@ -50559,7 +50889,9 @@ pub const LightOccluder2D = struct {
         const method_bind = methodBind(godot_class_name, "get_occluder_polygon", 3962317075);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"set_occluder_light_mask"(self: LightOccluder2D, p_mask: i64) void {
@@ -50648,7 +50980,9 @@ pub const LightmapGI = struct {
         const method_bind = methodBind(godot_class_name, "get_light_data", 290354153);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     /// `p_bake_quality`: Godot type `enum::LightmapGI.BakeQuality`.
@@ -50749,7 +51083,9 @@ pub const LightmapGI = struct {
         const method_bind = methodBind(godot_class_name, "get_environment_custom_sky", 1177136966);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"set_environment_custom_color"(self: LightmapGI, p_color: types.Color) void {
@@ -50946,7 +51282,9 @@ pub const LightmapGI = struct {
         const method_bind = methodBind(godot_class_name, "get_camera_attributes", 3921283215);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
 };
@@ -51030,7 +51368,9 @@ pub const LightmapGIData = struct {
         const method_bind = methodBind(godot_class_name, "get_light_texture", 3984243839);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
 };
@@ -51305,7 +51645,9 @@ pub const Line2D = struct {
         const method_bind = methodBind(godot_class_name, "get_curve", 2460114913);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"set_default_color"(self: Line2D, p_color: types.Color) void {
@@ -51333,7 +51675,9 @@ pub const Line2D = struct {
         const method_bind = methodBind(godot_class_name, "get_gradient", 132272999);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"set_texture"(self: Line2D, p_texture: Texture2D) void {
@@ -51347,7 +51691,9 @@ pub const Line2D = struct {
         const method_bind = methodBind(godot_class_name, "get_texture", 3635182373);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     /// `p_mode`: Godot type `enum::Line2D.LineTextureMode`.
@@ -52133,7 +52479,9 @@ pub const LineEdit = struct {
         const method_bind = methodBind(godot_class_name, "get_right_icon", 255860311);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     /// `p_mode`: Godot type `enum::LineEdit.ExpandMode`.
@@ -52973,7 +53321,9 @@ pub const Material = struct {
         const method_bind = methodBind(godot_class_name, "get_next_pass", 5934680);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"set_render_priority"(self: Material, p_priority: i64) void {
@@ -52999,7 +53349,9 @@ pub const Material = struct {
         const method_bind = methodBind(godot_class_name, "create_placeholder", 121922552);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
 };
@@ -53418,7 +53770,9 @@ pub const Mesh = struct {
         defer v0.destroy();
         var ret = self.object.callVariant1(method_bind, &v0);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"_get_blend_shape_count"(self: Mesh) i64 {
@@ -53518,21 +53872,27 @@ pub const Mesh = struct {
         defer v0.destroy();
         var ret = self.object.callVariant1(method_bind, &v0);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"create_placeholder"(self: Mesh) Resource {
         const method_bind = methodBind(godot_class_name, "create_placeholder", 121922552);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"create_trimesh_shape"(self: Mesh) ConcavePolygonShape3D {
         const method_bind = methodBind(godot_class_name, "create_trimesh_shape", 4160111210);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     /// `p_clean`: default `true`.
@@ -53545,7 +53905,9 @@ pub const Mesh = struct {
         defer v1.destroy();
         var ret = self.object.callVariant2(method_bind, &v0, &v1);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"create_outline"(self: Mesh, p_margin: f64) Mesh {
@@ -53554,14 +53916,18 @@ pub const Mesh = struct {
         defer v0.destroy();
         var ret = self.object.callVariant1(method_bind, &v0);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"generate_triangle_mesh"(self: Mesh) TriangleMesh {
         const method_bind = methodBind(godot_class_name, "generate_triangle_mesh", 3476533166);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
 };
@@ -54001,7 +54367,9 @@ pub const MeshDataTool = struct {
         const method_bind = methodBind(godot_class_name, "get_material", 5934680);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
 };
@@ -54025,7 +54393,9 @@ pub const MeshInstance2D = struct {
         const method_bind = methodBind(godot_class_name, "get_mesh", 1808005922);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"set_texture"(self: MeshInstance2D, p_texture: Texture2D) void {
@@ -54039,7 +54409,9 @@ pub const MeshInstance2D = struct {
         const method_bind = methodBind(godot_class_name, "get_texture", 3635182373);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
 };
@@ -54063,7 +54435,9 @@ pub const MeshInstance3D = struct {
         const method_bind = methodBind(godot_class_name, "get_mesh", 1808005922);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"set_skin"(self: MeshInstance3D, p_skin: Skin) void {
@@ -54077,14 +54451,18 @@ pub const MeshInstance3D = struct {
         const method_bind = methodBind(godot_class_name, "get_skin", 2074563878);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"get_skin_reference"(self: MeshInstance3D) SkinReference {
         const method_bind = methodBind(godot_class_name, "get_skin_reference", 2060603409);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"get_surface_override_material_count"(self: MeshInstance3D) i64 {
@@ -54108,7 +54486,9 @@ pub const MeshInstance3D = struct {
         defer v0.destroy();
         var ret = self.object.callVariant1(method_bind, &v0);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"get_active_material"(self: MeshInstance3D, p_surface: i64) Material {
@@ -54117,7 +54497,9 @@ pub const MeshInstance3D = struct {
         defer v0.destroy();
         var ret = self.object.callVariant1(method_bind, &v0);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"create_trimesh_collision"(self: MeshInstance3D) void {
@@ -54270,7 +54652,9 @@ pub const MeshLibrary = struct {
         defer v0.destroy();
         var ret = self.object.callVariant1(method_bind, &v0);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"get_item_mesh_cast_shadow"(self: MeshLibrary, p_id: i64) i64 {
@@ -54288,7 +54672,9 @@ pub const MeshLibrary = struct {
         defer v0.destroy();
         var ret = self.object.callVariant1(method_bind, &v0);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"get_item_navigation_layers"(self: MeshLibrary, p_id: i64) i64 {
@@ -54315,7 +54701,9 @@ pub const MeshLibrary = struct {
         defer v0.destroy();
         var ret = self.object.callVariant1(method_bind, &v0);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"remove_item"(self: MeshLibrary, p_id: i64) void {
@@ -54380,7 +54768,9 @@ pub const MeshTexture = struct {
         const method_bind = methodBind(godot_class_name, "get_mesh", 1808005922);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"set_image_size"(self: MeshTexture, p_size: types.Vector2) void {
@@ -54408,7 +54798,9 @@ pub const MeshTexture = struct {
         const method_bind = methodBind(godot_class_name, "get_base_texture", 3635182373);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
 };
@@ -54427,7 +54819,9 @@ pub const MethodTweener = struct {
         defer v0.destroy();
         var ret = self.object.callVariant1(method_bind, &v0);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     /// `p_trans`: Godot type `enum::Tween.TransitionType`.
@@ -54437,7 +54831,9 @@ pub const MethodTweener = struct {
         defer v0.destroy();
         var ret = self.object.callVariant1(method_bind, &v0);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     /// `p_ease`: Godot type `enum::Tween.EaseType`.
@@ -54447,7 +54843,9 @@ pub const MethodTweener = struct {
         defer v0.destroy();
         var ret = self.object.callVariant1(method_bind, &v0);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
 };
@@ -54808,7 +55206,9 @@ pub const MultiMesh = struct {
         const method_bind = methodBind(godot_class_name, "get_mesh", 1808005922);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"set_use_colors"(self: MultiMesh, p_enable: bool) void {
@@ -54985,7 +55385,9 @@ pub const MultiMeshInstance2D = struct {
         const method_bind = methodBind(godot_class_name, "get_multimesh", 1385450523);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"set_texture"(self: MultiMeshInstance2D, p_texture: Texture2D) void {
@@ -54999,7 +55401,9 @@ pub const MultiMeshInstance2D = struct {
         const method_bind = methodBind(godot_class_name, "get_texture", 3635182373);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
 };
@@ -55023,7 +55427,9 @@ pub const MultiMeshInstance3D = struct {
         const method_bind = methodBind(godot_class_name, "get_multimesh", 1385450523);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
 };
@@ -55053,7 +55459,9 @@ pub const MultiplayerAPI = struct {
         const method_bind = methodBind(godot_class_name, "get_multiplayer_peer", 3223692825);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"set_multiplayer_peer"(self: MultiplayerAPI, p_peer: MultiplayerPeer) void {
@@ -55138,7 +55546,9 @@ pub const MultiplayerAPIExtension = struct {
         const method_bind = methodBind(godot_class_name, "_get_multiplayer_peer", 3223692825);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"_get_unique_id"(self: MultiplayerAPIExtension) i64 {
@@ -55576,7 +55986,9 @@ pub const MultiplayerSynchronizer = struct {
         const method_bind = methodBind(godot_class_name, "get_replication_config", 3200254614);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     /// `p_mode`: Godot type `enum::MultiplayerSynchronizer.VisibilityUpdateMode`.
@@ -56107,7 +56519,9 @@ pub const NavigationAgent2D = struct {
         const method_bind = methodBind(godot_class_name, "get_current_navigation_result", 166799483);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"get_current_navigation_path_index"(self: NavigationAgent2D) i64 {
@@ -56717,7 +57131,9 @@ pub const NavigationAgent3D = struct {
         const method_bind = methodBind(godot_class_name, "get_current_navigation_result", 728825684);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"get_current_navigation_path"(self: NavigationAgent3D) collections.PackedVector3Array {
@@ -58745,7 +59161,9 @@ pub const NavigationPolygon = struct {
         const method_bind = methodBind(godot_class_name, "get_navigation_mesh", 330232164);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"get_outline_count"(self: NavigationPolygon) i64 {
@@ -58944,7 +59362,9 @@ pub const NavigationRegion2D = struct {
         const method_bind = methodBind(godot_class_name, "get_navigation_polygon", 1046532237);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"set_enabled"(self: NavigationRegion2D, p_enabled: bool) void {
@@ -59070,7 +59490,9 @@ pub const NavigationRegion3D = struct {
         const method_bind = methodBind(godot_class_name, "get_navigation_mesh", 1468720886);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"set_enabled"(self: NavigationRegion3D, p_enabled: bool) void {
@@ -59397,7 +59819,9 @@ pub const NinePatchRect = struct {
         const method_bind = methodBind(godot_class_name, "get_texture", 3635182373);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     /// `p_margin`: Godot type `enum::Side`.
@@ -60190,7 +60614,9 @@ pub const Node = struct {
         const method_bind = methodBind(godot_class_name, "create_tween", 3426978995);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     /// `p_flags`: default `15`.
@@ -60294,7 +60720,9 @@ pub const Node = struct {
         const method_bind = methodBind(godot_class_name, "get_multiplayer", 406750475);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"set_editor_description"(self: Node, p_editor_description: types.String) void {
@@ -60764,7 +61192,9 @@ pub const Node3D = struct {
         const method_bind = methodBind(godot_class_name, "get_world_3d", 317588385);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"force_update_transform"(self: Node3D) void {
@@ -61159,7 +61589,9 @@ pub const NoiseTexture2D = struct {
         const method_bind = methodBind(godot_class_name, "get_noise", 185851837);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"set_color_ramp"(self: NoiseTexture2D, p_gradient: Gradient) void {
@@ -61173,7 +61605,9 @@ pub const NoiseTexture2D = struct {
         const method_bind = methodBind(godot_class_name, "get_color_ramp", 132272999);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"set_seamless"(self: NoiseTexture2D, p_seamless: bool) void {
@@ -61316,7 +61750,9 @@ pub const NoiseTexture3D = struct {
         const method_bind = methodBind(godot_class_name, "get_noise", 185851837);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"set_color_ramp"(self: NoiseTexture3D, p_gradient: Gradient) void {
@@ -61330,7 +61766,9 @@ pub const NoiseTexture3D = struct {
         const method_bind = methodBind(godot_class_name, "get_color_ramp", 132272999);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"set_seamless"(self: NoiseTexture3D, p_seamless: bool) void {
@@ -62300,7 +62738,9 @@ pub const OccluderInstance3D = struct {
         const method_bind = methodBind(godot_class_name, "get_occluder", 1696836198);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
 };
@@ -62844,7 +63284,9 @@ pub const OpenXRActionMap = struct {
         defer v0.destroy();
         var ret = self.object.callVariant1(method_bind, &v0);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"get_action_set"(self: OpenXRActionMap, p_idx: i64) OpenXRActionSet {
@@ -62853,7 +63295,9 @@ pub const OpenXRActionMap = struct {
         defer v0.destroy();
         var ret = self.object.callVariant1(method_bind, &v0);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"add_action_set"(self: OpenXRActionMap, p_action_set: OpenXRActionSet) void {
@@ -62897,7 +63341,9 @@ pub const OpenXRActionMap = struct {
         defer v0.destroy();
         var ret = self.object.callVariant1(method_bind, &v0);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"get_interaction_profile"(self: OpenXRActionMap, p_idx: i64) OpenXRInteractionProfile {
@@ -62906,7 +63352,9 @@ pub const OpenXRActionMap = struct {
         defer v0.destroy();
         var ret = self.object.callVariant1(method_bind, &v0);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"add_interaction_profile"(self: OpenXRActionMap, p_interaction_profile: OpenXRInteractionProfile) void {
@@ -63050,7 +63498,9 @@ pub const OpenXRAnalogThresholdModifier = struct {
         const method_bind = methodBind(godot_class_name, "get_on_haptic", 922310751);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"set_off_haptic"(self: OpenXRAnalogThresholdModifier, p_haptic: OpenXRHapticBase) void {
@@ -63064,7 +63514,9 @@ pub const OpenXRAnalogThresholdModifier = struct {
         const method_bind = methodBind(godot_class_name, "get_off_haptic", 922310751);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
 };
@@ -63164,7 +63616,9 @@ pub const OpenXRBindingModifierEditor = struct {
         const method_bind = methodBind(godot_class_name, "get_binding_modifier", 2930765082);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"setup"(self: OpenXRBindingModifierEditor, p_action_map: OpenXRActionMap, p_binding_modifier: OpenXRBindingModifier) void {
@@ -63308,7 +63762,9 @@ pub const OpenXRCompositionLayer = struct {
         const method_bind = methodBind(godot_class_name, "get_android_surface", 3277089691);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"is_natively_supported"(self: OpenXRCompositionLayer) bool {
@@ -63711,7 +64167,9 @@ pub const OpenXRDpadBindingModifier = struct {
         const method_bind = methodBind(godot_class_name, "get_action_set", 619941079);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"set_input_path"(self: OpenXRDpadBindingModifier, p_input_path: types.String) void {
@@ -63809,7 +64267,9 @@ pub const OpenXRDpadBindingModifier = struct {
         const method_bind = methodBind(godot_class_name, "get_on_haptic", 922310751);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"set_off_haptic"(self: OpenXRDpadBindingModifier, p_haptic: OpenXRHapticBase) void {
@@ -63823,7 +64283,9 @@ pub const OpenXRDpadBindingModifier = struct {
         const method_bind = methodBind(godot_class_name, "get_off_haptic", 922310751);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
 };
@@ -63998,7 +64460,9 @@ pub const OpenXRExtensionWrapper = struct {
         const method_bind = methodBind(godot_class_name, "get_openxr_api", 1637791613);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"register_extension_wrapper"(self: OpenXRExtensionWrapper) void {
@@ -64302,7 +64766,9 @@ pub const OpenXRIPBinding = struct {
         const method_bind = methodBind(godot_class_name, "get_action", 4072409085);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"set_binding_path"(self: OpenXRIPBinding, p_binding_path: types.String) void {
@@ -64332,7 +64798,9 @@ pub const OpenXRIPBinding = struct {
         defer v0.destroy();
         var ret = self.object.callVariant1(method_bind, &v0);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"set_binding_modifiers"(self: OpenXRIPBinding, p_binding_modifiers: collections.Array) void {
@@ -64426,7 +64894,9 @@ pub const OpenXRInteractionProfile = struct {
         defer v0.destroy();
         var ret = self.object.callVariant1(method_bind, &v0);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"set_bindings"(self: OpenXRInteractionProfile, p_bindings: collections.Array) void {
@@ -64456,7 +64926,9 @@ pub const OpenXRInteractionProfile = struct {
         defer v0.destroy();
         var ret = self.object.callVariant1(method_bind, &v0);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"set_binding_modifiers"(self: OpenXRInteractionProfile, p_binding_modifiers: collections.Array) void {
@@ -65044,7 +65516,9 @@ pub const OpenXRPlaneTracker = struct {
         const method_bind = methodBind(godot_class_name, "get_mesh", 4081188045);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     /// `p_thickness`: default `0.01`.
@@ -65054,7 +65528,9 @@ pub const OpenXRPlaneTracker = struct {
         defer v0.destroy();
         var ret = self.object.callVariant1(method_bind, &v0);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
 };
@@ -65523,7 +65999,9 @@ pub const OpenXRSpatialComponentMesh3DList = struct {
         defer v0.destroy();
         var ret = self.object.callVariant1(method_bind, &v0);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
 };
@@ -65734,7 +66212,9 @@ pub const OpenXRSpatialEntityTracker = struct {
         const method_bind = methodBind(godot_class_name, "get_next", 2798796760);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"add_next"(self: OpenXRSpatialEntityTracker, p_next: OpenXRStructureBase) void {
@@ -65878,7 +66358,9 @@ pub const OpenXRStructureBase = struct {
         const method_bind = methodBind(godot_class_name, "get_next", 2798796760);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
 };
@@ -66052,7 +66534,9 @@ pub const OptionButton = struct {
         defer v0.destroy();
         var ret = self.object.callVariant1(method_bind, &v0);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"get_item_id"(self: OptionButton, p_idx: i64) i64 {
@@ -66384,7 +66868,9 @@ pub const PackedScene = struct {
         const method_bind = methodBind(godot_class_name, "get_state", 3479783971);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
 };
@@ -66532,7 +67018,9 @@ pub const PacketPeerStream = struct {
         const method_bind = methodBind(godot_class_name, "get_stream_peer", 2741655269);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"set_input_buffer_max_size"(self: PacketPeerStream, p_max_size_bytes: i64) void {
@@ -66721,7 +67209,9 @@ pub const PanoramaSkyMaterial = struct {
         const method_bind = methodBind(godot_class_name, "get_panorama", 3635182373);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"set_filtering_enabled"(self: PanoramaSkyMaterial, p_enabled: bool) void {
@@ -67245,7 +67735,9 @@ pub const ParticleProcessMaterial = struct {
         defer v0.destroy();
         var ret = self.object.callVariant1(method_bind, &v0);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"set_color"(self: ParticleProcessMaterial, p_color: types.Color) void {
@@ -67357,7 +67849,9 @@ pub const ParticleProcessMaterial = struct {
         const method_bind = methodBind(godot_class_name, "get_color_ramp", 3635182373);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"set_alpha_curve"(self: ParticleProcessMaterial, p_curve: Texture2D) void {
@@ -67371,7 +67865,9 @@ pub const ParticleProcessMaterial = struct {
         const method_bind = methodBind(godot_class_name, "get_alpha_curve", 3635182373);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"set_emission_curve"(self: ParticleProcessMaterial, p_curve: Texture2D) void {
@@ -67385,7 +67881,9 @@ pub const ParticleProcessMaterial = struct {
         const method_bind = methodBind(godot_class_name, "get_emission_curve", 3635182373);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"set_color_initial_ramp"(self: ParticleProcessMaterial, p_ramp: Texture2D) void {
@@ -67399,7 +67897,9 @@ pub const ParticleProcessMaterial = struct {
         const method_bind = methodBind(godot_class_name, "get_color_initial_ramp", 3635182373);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"set_velocity_limit_curve"(self: ParticleProcessMaterial, p_curve: Texture2D) void {
@@ -67413,7 +67913,9 @@ pub const ParticleProcessMaterial = struct {
         const method_bind = methodBind(godot_class_name, "get_velocity_limit_curve", 3635182373);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     /// `p_particle_flag`: Godot type `enum::ParticleProcessMaterial.ParticleFlags`.
@@ -67503,7 +68005,9 @@ pub const ParticleProcessMaterial = struct {
         const method_bind = methodBind(godot_class_name, "get_emission_point_texture", 3635182373);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"set_emission_normal_texture"(self: ParticleProcessMaterial, p_texture: Texture2D) void {
@@ -67517,7 +68021,9 @@ pub const ParticleProcessMaterial = struct {
         const method_bind = methodBind(godot_class_name, "get_emission_normal_texture", 3635182373);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"set_emission_color_texture"(self: ParticleProcessMaterial, p_texture: Texture2D) void {
@@ -67531,7 +68037,9 @@ pub const ParticleProcessMaterial = struct {
         const method_bind = methodBind(godot_class_name, "get_emission_color_texture", 3635182373);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"set_emission_point_count"(self: ParticleProcessMaterial, p_point_count: i64) void {
@@ -67953,7 +68461,9 @@ pub const ParticleProcessMaterial = struct {
         const method_bind = methodBind(godot_class_name, "get_rotation_velocity_3d_curve", 3635182373);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
 };
@@ -67977,7 +68487,9 @@ pub const Path2D = struct {
         const method_bind = methodBind(godot_class_name, "get_curve", 660369445);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
 };
@@ -68001,7 +68513,9 @@ pub const Path3D = struct {
         const method_bind = methodBind(godot_class_name, "get_curve", 4244715212);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"set_debug_custom_color"(self: Path3D, p_debug_custom_color: types.Color) void {
@@ -68936,7 +69450,9 @@ pub const PhysicalSkyMaterial = struct {
         const method_bind = methodBind(godot_class_name, "get_night_sky", 3635182373);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
 };
@@ -71600,7 +72116,9 @@ pub const PhysicsShapeQueryParameters2D = struct {
         const method_bind = methodBind(godot_class_name, "get_shape", 121922552);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"set_motion"(self: PhysicsShapeQueryParameters2D, p_motion: types.Vector2) void {
@@ -71708,7 +72226,9 @@ pub const PhysicsShapeQueryParameters3D = struct {
         const method_bind = methodBind(godot_class_name, "get_shape", 121922552);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"set_motion"(self: PhysicsShapeQueryParameters3D, p_motion: types.Vector3) void {
@@ -72582,7 +73102,9 @@ pub const PointLight2D = struct {
         const method_bind = methodBind(godot_class_name, "get_texture", 3635182373);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"set_texture_offset"(self: PointLight2D, p_texture_offset: types.Vector2) void {
@@ -72672,7 +73194,9 @@ pub const Polygon2D = struct {
         const method_bind = methodBind(godot_class_name, "get_texture", 3635182373);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"set_texture_offset"(self: Polygon2D, p_texture_offset: types.Vector2) void {
@@ -73334,7 +73858,9 @@ pub const PopupMenu = struct {
         defer v0.destroy();
         var ret = self.object.callVariant1(method_bind, &v0);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"get_item_icon_max_width"(self: PopupMenu, p_index: i64) i64 {
@@ -73469,7 +73995,9 @@ pub const PopupMenu = struct {
         defer v0.destroy();
         var ret = self.object.callVariant1(method_bind, &v0);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"get_item_indent"(self: PopupMenu, p_index: i64) i64 {
@@ -73849,7 +74377,9 @@ pub const PrimitiveMesh = struct {
         const method_bind = methodBind(godot_class_name, "get_material", 5934680);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"get_mesh_arrays"(self: PrimitiveMesh) collections.Array {
@@ -74077,7 +74607,9 @@ pub const ProceduralSkyMaterial = struct {
         const method_bind = methodBind(godot_class_name, "get_sky_cover", 3635182373);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"set_sky_cover_modulate"(self: ProceduralSkyMaterial, p_color: types.Color) void {
@@ -74431,14 +74963,18 @@ pub const PropertyTweener = struct {
         const method_bind = methodBind(godot_class_name, "from_current", 4279177709);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"as_relative"(self: PropertyTweener) PropertyTweener {
         const method_bind = methodBind(godot_class_name, "as_relative", 4279177709);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     /// `p_trans`: Godot type `enum::Tween.TransitionType`.
@@ -74448,7 +74984,9 @@ pub const PropertyTweener = struct {
         defer v0.destroy();
         var ret = self.object.callVariant1(method_bind, &v0);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     /// `p_ease`: Godot type `enum::Tween.EaseType`.
@@ -74458,7 +74996,9 @@ pub const PropertyTweener = struct {
         defer v0.destroy();
         var ret = self.object.callVariant1(method_bind, &v0);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"set_delay"(self: PropertyTweener, p_delay: f64) PropertyTweener {
@@ -74467,7 +75007,9 @@ pub const PropertyTweener = struct {
         defer v0.destroy();
         var ret = self.object.callVariant1(method_bind, &v0);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
 };
@@ -74832,7 +75374,9 @@ pub const RDHitGroup = struct {
         const method_bind = methodBind(godot_class_name, "get_closest_hit_shader", 2937716847);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"set_any_hit_shader"(self: RDHitGroup, p_p_member: RDPipelineShader) void {
@@ -74846,7 +75390,9 @@ pub const RDHitGroup = struct {
         const method_bind = methodBind(godot_class_name, "get_any_hit_shader", 2937716847);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"set_intersection_shader"(self: RDHitGroup, p_p_member: RDPipelineShader) void {
@@ -74860,7 +75406,9 @@ pub const RDHitGroup = struct {
         const method_bind = methodBind(godot_class_name, "get_intersection_shader", 2937716847);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
 };
@@ -77569,7 +78117,9 @@ pub const RegEx = struct {
         defer v2.destroy();
         var ret = self.object.callVariant3(method_bind, &v0, &v1, &v2);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     /// `p_offset`: default `0`.
@@ -77821,7 +78371,9 @@ pub const RenderData = struct {
         const method_bind = methodBind(godot_class_name, "get_render_scene_buffers", 2793216201);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"get_render_scene_data"(self: RenderData) RenderSceneData {
@@ -77845,7 +78397,9 @@ pub const RenderDataExtension = struct {
         const method_bind = methodBind(godot_class_name, "_get_render_scene_buffers", 2793216201);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"_get_render_scene_data"(self: RenderDataExtension) RenderSceneData {
@@ -80813,7 +81367,9 @@ pub const Resource = struct {
         defer v0.destroy();
         var ret = self.object.callVariant1(method_bind, &v0);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     /// `p_deep_subresources_mode`: Godot type `enum::Resource.DeepDuplicateMode`, default `1`.
@@ -80823,7 +81379,9 @@ pub const Resource = struct {
         defer v0.destroy();
         var ret = self.object.callVariant1(method_bind, &v0);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"copy_from_resource"(self: Resource, p_resource: Resource) i64 {
@@ -81201,7 +81759,9 @@ pub const ResourceLoader = struct {
         defer v0.destroy();
         var ret = self.object.callVariant1(method_bind, &v0);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     /// `p_type_hint`: default `""`.
@@ -81216,7 +81776,9 @@ pub const ResourceLoader = struct {
         defer v2.destroy();
         var ret = self.object.callVariant3(method_bind, &v0, &v1, &v2);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     /// `p_at_front`: default `false`.
@@ -81257,7 +81819,9 @@ pub const ResourceLoader = struct {
         defer v0.destroy();
         var ret = self.object.callVariant1(method_bind, &v0);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     /// `p_type_hint`: default `""`.
@@ -81508,7 +82072,9 @@ pub const RetargetModifier3D = struct {
         const method_bind = methodBind(godot_class_name, "get_profile", 4291782652);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"set_use_global_pose"(self: RetargetModifier3D, p_use_global_pose: bool) void {
@@ -81664,7 +82230,9 @@ pub const RibbonTrailMesh = struct {
         const method_bind = methodBind(godot_class_name, "get_curve", 2460114913);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     /// `p_shape`: Godot type `enum::RibbonTrailMesh.Shape`.
@@ -82755,7 +83323,9 @@ pub const RigidBody2D = struct {
         const method_bind = methodBind(godot_class_name, "get_physics_material_override", 2521850424);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"set_gravity_scale"(self: RigidBody2D, p_gravity_scale: f64) void {
@@ -83205,7 +83775,9 @@ pub const RigidBody3D = struct {
         const method_bind = methodBind(godot_class_name, "get_physics_material_override", 2521850424);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"set_linear_velocity"(self: RigidBody3D, p_linear_velocity: types.Vector3) void {
@@ -83816,7 +84388,9 @@ pub const SceneState = struct {
         const method_bind = methodBind(godot_class_name, "get_base_scene_state", 3479783971);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"get_node_count"(self: SceneState) i64 {
@@ -83868,7 +84442,9 @@ pub const SceneState = struct {
         defer v0.destroy();
         var ret = self.object.callVariant1(method_bind, &v0);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"get_node_index"(self: SceneState, p_idx: i64) i64 {
@@ -84124,7 +84700,9 @@ pub const SceneTree = struct {
         const method_bind = methodBind(godot_class_name, "create_tween", 3426978995);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"get_processed_tweens"(self: SceneTree) collections.Array {
@@ -84346,7 +84924,9 @@ pub const Script = struct {
         const method_bind = methodBind(godot_class_name, "get_base_script", 278624046);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"get_instance_base_type"(self: Script) types.StringName {
@@ -84630,7 +85210,9 @@ pub const ScriptEditor = struct {
         const method_bind = methodBind(godot_class_name, "get_current_script", 2146468882);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"get_open_scripts"(self: ScriptEditor) collections.Array {
@@ -84740,7 +85322,9 @@ pub const ScriptExtension = struct {
         const method_bind = methodBind(godot_class_name, "_get_base_script", 278624046);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"_get_global_name"(self: ScriptExtension) types.StringName {
@@ -85061,7 +85645,9 @@ pub const ScriptLanguageExtension = struct {
         defer v2.destroy();
         var ret = self.object.callVariant3(method_bind, &v0, &v1, &v2);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"_is_using_templates"(self: ScriptLanguageExtension) bool {
@@ -85900,7 +86486,9 @@ pub const ShaderMaterial = struct {
         const method_bind = methodBind(godot_class_name, "get_shader", 2078273437);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
 };
@@ -85969,7 +86557,9 @@ pub const Shape3D = struct {
         const method_bind = methodBind(godot_class_name, "get_debug_mesh", 1605880883);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
 };
@@ -86007,7 +86597,9 @@ pub const ShapeCast2D = struct {
         const method_bind = methodBind(godot_class_name, "get_shape", 522005891);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"set_target_position"(self: ShapeCast2D, p_local_point: types.Vector2) void {
@@ -86262,7 +86854,9 @@ pub const ShapeCast3D = struct {
         const method_bind = methodBind(godot_class_name, "get_shape", 3214262478);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"set_target_position"(self: ShapeCast3D, p_local_point: types.Vector3) void {
@@ -86573,7 +87167,9 @@ pub const Skeleton2D = struct {
         const method_bind = methodBind(godot_class_name, "get_modification_stack", 2107508396);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"execute_modifications"(self: Skeleton2D, p_delta: f64, p_execution_mode: i64) void {
@@ -86717,7 +87313,9 @@ pub const Skeleton3D = struct {
         const method_bind = methodBind(godot_class_name, "create_skin_from_rest_transforms", 1032037385);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"localize_rests"(self: Skeleton3D) void {
@@ -87084,7 +87682,9 @@ pub const SkeletonModification2D = struct {
         const method_bind = methodBind(godot_class_name, "get_modification_stack", 2137761694);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"set_is_setup"(self: SkeletonModification2D, p_is_setup: bool) void {
@@ -87748,7 +88348,9 @@ pub const SkeletonModification2DStackHolder = struct {
         const method_bind = methodBind(godot_class_name, "get_held_modification_stack", 2107508396);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
 };
@@ -87867,7 +88469,9 @@ pub const SkeletonModificationStack2D = struct {
         defer v0.destroy();
         var ret = self.object.callVariant1(method_bind, &v0);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"add_modification"(self: SkeletonModificationStack2D, p_modification: SkeletonModification2D) void {
@@ -88137,7 +88741,9 @@ pub const SkeletonProfile = struct {
         defer v0.destroy();
         var ret = self.object.callVariant1(method_bind, &v0);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"set_texture"(self: SkeletonProfile, p_group_idx: i64, p_texture: Texture2D) void {
@@ -88378,7 +88984,9 @@ pub const SkinReference = struct {
         const method_bind = methodBind(godot_class_name, "get_skin", 2074563878);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
 };
@@ -88450,7 +89058,9 @@ pub const Sky = struct {
         const method_bind = methodBind(godot_class_name, "get_material", 5934680);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
 };
@@ -88629,7 +89239,9 @@ pub const SocketServer = struct {
         const method_bind = methodBind(godot_class_name, "take_socket_connection", 1883962599);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
 };
@@ -89487,7 +90099,9 @@ pub const SpringArm3D = struct {
         const method_bind = methodBind(godot_class_name, "get_shape", 3214262478);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"clear_excluded_objects"(self: SpringArm3D) void {
@@ -89950,7 +90564,9 @@ pub const SpringBoneSimulator3D = struct {
         defer v0.destroy();
         var ret = self.object.callVariant1(method_bind, &v0);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"set_stiffness"(self: SpringBoneSimulator3D, p_index: i64, p_stiffness: f64) void {
@@ -89984,7 +90600,9 @@ pub const SpringBoneSimulator3D = struct {
         defer v0.destroy();
         var ret = self.object.callVariant1(method_bind, &v0);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"set_drag"(self: SpringBoneSimulator3D, p_index: i64, p_drag: f64) void {
@@ -90018,7 +90636,9 @@ pub const SpringBoneSimulator3D = struct {
         defer v0.destroy();
         var ret = self.object.callVariant1(method_bind, &v0);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"set_gravity"(self: SpringBoneSimulator3D, p_index: i64, p_gravity: f64) void {
@@ -90052,7 +90672,9 @@ pub const SpringBoneSimulator3D = struct {
         defer v0.destroy();
         var ret = self.object.callVariant1(method_bind, &v0);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"set_gravity_direction"(self: SpringBoneSimulator3D, p_index: i64, p_gravity_direction: types.Vector3) void {
@@ -90391,7 +91013,9 @@ pub const Sprite2D = struct {
         const method_bind = methodBind(godot_class_name, "get_texture", 3635182373);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"set_centered"(self: Sprite2D, p_centered: bool) void {
@@ -90564,7 +91188,9 @@ pub const Sprite3D = struct {
         const method_bind = methodBind(godot_class_name, "get_texture", 3635182373);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"set_region_enabled"(self: Sprite3D, p_enabled: bool) void {
@@ -90901,7 +91527,9 @@ pub const SpriteBase3D = struct {
         const method_bind = methodBind(godot_class_name, "generate_triangle_mesh", 3476533166);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
 };
@@ -91132,7 +91760,9 @@ pub const StaticBody2D = struct {
         const method_bind = methodBind(godot_class_name, "get_physics_material_override", 2521850424);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
 };
@@ -91184,7 +91814,9 @@ pub const StaticBody3D = struct {
         const method_bind = methodBind(godot_class_name, "get_physics_material_override", 2521850424);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
 };
@@ -91222,7 +91854,9 @@ pub const StatusIndicator = struct {
         const method_bind = methodBind(godot_class_name, "get_icon", 3635182373);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"set_visible"(self: StatusIndicator, p_visible: bool) void {
@@ -91545,7 +92179,9 @@ pub const StreamPeerBuffer = struct {
         const method_bind = methodBind(godot_class_name, "duplicate", 2474064677);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
 };
@@ -91762,7 +92398,9 @@ pub const StreamPeerTLS = struct {
         const method_bind = methodBind(godot_class_name, "get_stream", 2741655269);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"disconnect_from_stream"(self: StreamPeerTLS) void {
@@ -92245,7 +92883,9 @@ pub const StyleBoxTexture = struct {
         const method_bind = methodBind(godot_class_name, "get_texture", 3635182373);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     /// `p_margin`: Godot type `enum::Side`.
@@ -92545,7 +93185,9 @@ pub const SubtweenTweener = struct {
         defer v0.destroy();
         var ret = self.object.callVariant1(method_bind, &v0);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
 };
@@ -93088,7 +93730,9 @@ pub const TCPServer = struct {
         const method_bind = methodBind(godot_class_name, "take_connection", 30545006);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
 };
@@ -93126,21 +93770,27 @@ pub const TLSOptions = struct {
         const method_bind = methodBind(godot_class_name, "get_trusted_ca_chain", 1120709175);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"get_private_key"(self: TLSOptions) CryptoKey {
         const method_bind = methodBind(godot_class_name, "get_private_key", 2119971811);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"get_own_certificate"(self: TLSOptions) X509Certificate {
         const method_bind = methodBind(godot_class_name, "get_own_certificate", 1120709175);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
 };
@@ -93299,7 +93949,9 @@ pub const TabBar = struct {
         defer v0.destroy();
         var ret = self.object.callVariant1(method_bind, &v0);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"set_tab_icon_max_width"(self: TabBar, p_tab_idx: i64, p_width: i64) void {
@@ -93333,7 +93985,9 @@ pub const TabBar = struct {
         defer v0.destroy();
         var ret = self.object.callVariant1(method_bind, &v0);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"set_tab_disabled"(self: TabBar, p_tab_idx: i64, p_disabled: bool) void {
@@ -93801,7 +94455,9 @@ pub const TabContainer = struct {
         defer v0.destroy();
         var ret = self.object.callVariant1(method_bind, &v0);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"set_tab_icon_max_width"(self: TabContainer, p_tab_idx: i64, p_width: i64) void {
@@ -93869,7 +94525,9 @@ pub const TabContainer = struct {
         defer v0.destroy();
         var ret = self.object.callVariant1(method_bind, &v0);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"get_tab_idx_at_point"(self: TabContainer, p_point: types.Vector2) i64 {
@@ -95824,7 +96482,9 @@ pub const TextEdit = struct {
         defer v1.destroy();
         var ret = self.object.callVariant2(method_bind, &v0, &v1);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"set_line_gutter_item_color"(self: TextEdit, p_line: i64, p_gutter: i64, p_color: types.Color) void {
@@ -95893,7 +96553,9 @@ pub const TextEdit = struct {
         const method_bind = methodBind(godot_class_name, "get_syntax_highlighter", 2721131626);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"set_highlight_current_line"(self: TextEdit, p_enabled: bool) void {
@@ -96043,7 +96705,9 @@ pub const TextLine = struct {
         const method_bind = methodBind(godot_class_name, "duplicate", 1912703884);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     /// `p_direction`: Godot type `enum::TextServer.Direction`.
@@ -96314,7 +96978,9 @@ pub const TextMesh = struct {
         const method_bind = methodBind(godot_class_name, "get_font", 3229501585);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"set_font_size"(self: TextMesh, p_font_size: i64) void {
@@ -96536,7 +97202,9 @@ pub const TextParagraph = struct {
         const method_bind = methodBind(godot_class_name, "duplicate", 3607706709);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     /// `p_direction`: Godot type `enum::TextServer.Direction`.
@@ -97645,7 +98313,9 @@ pub const TextServerManager = struct {
         defer v0.destroy();
         var ret = self.object.callVariant1(method_bind, &v0);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"get_interfaces"(self: TextServerManager) collections.Array {
@@ -97661,7 +98331,9 @@ pub const TextServerManager = struct {
         defer v0.destroy();
         var ret = self.object.callVariant1(method_bind, &v0);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"set_primary_interface"(self: TextServerManager, p_index: TextServer) void {
@@ -97675,7 +98347,9 @@ pub const TextServerManager = struct {
         const method_bind = methodBind(godot_class_name, "get_primary_interface", 905850878);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
 };
@@ -97702,7 +98376,9 @@ pub const Texture2D = struct {
         const method_bind = methodBind(godot_class_name, "_get_image", 4190603485);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"_get_format"(self: Texture2D) i64 {
@@ -97810,14 +98486,18 @@ pub const Texture2D = struct {
         const method_bind = methodBind(godot_class_name, "get_image", 4190603485);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"create_placeholder"(self: Texture2D) Resource {
         const method_bind = methodBind(godot_class_name, "create_placeholder", 121922552);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
 };
@@ -97834,7 +98514,9 @@ pub const Texture2DArray = struct {
         const method_bind = methodBind(godot_class_name, "create_placeholder", 121922552);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
 };
@@ -97955,7 +98637,9 @@ pub const Texture3D = struct {
         const method_bind = methodBind(godot_class_name, "create_placeholder", 121922552);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
 };
@@ -98077,42 +98761,54 @@ pub const TextureButton = struct {
         const method_bind = methodBind(godot_class_name, "get_texture_normal", 3635182373);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"get_texture_pressed"(self: TextureButton) Texture2D {
         const method_bind = methodBind(godot_class_name, "get_texture_pressed", 3635182373);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"get_texture_hover"(self: TextureButton) Texture2D {
         const method_bind = methodBind(godot_class_name, "get_texture_hover", 3635182373);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"get_texture_disabled"(self: TextureButton) Texture2D {
         const method_bind = methodBind(godot_class_name, "get_texture_disabled", 3635182373);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"get_texture_focused"(self: TextureButton) Texture2D {
         const method_bind = methodBind(godot_class_name, "get_texture_focused", 3635182373);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"get_click_mask"(self: TextureButton) BitMap {
         const method_bind = methodBind(godot_class_name, "get_click_mask", 2459671998);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"get_ignore_texture_size"(self: TextureButton) bool {
@@ -98213,7 +98909,9 @@ pub const TextureLayered = struct {
         defer v0.destroy();
         var ret = self.object.callVariant1(method_bind, &v0);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"get_format"(self: TextureLayered) i64 {
@@ -98264,7 +98962,9 @@ pub const TextureLayered = struct {
         defer v0.destroy();
         var ret = self.object.callVariant1(method_bind, &v0);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
 };
@@ -98310,7 +99010,9 @@ pub const TextureProgressBar = struct {
         const method_bind = methodBind(godot_class_name, "get_under_texture", 3635182373);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"set_progress_texture"(self: TextureProgressBar, p_tex: Texture2D) void {
@@ -98324,7 +99026,9 @@ pub const TextureProgressBar = struct {
         const method_bind = methodBind(godot_class_name, "get_progress_texture", 3635182373);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"set_over_texture"(self: TextureProgressBar, p_tex: Texture2D) void {
@@ -98338,7 +99042,9 @@ pub const TextureProgressBar = struct {
         const method_bind = methodBind(godot_class_name, "get_over_texture", 3635182373);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"set_fill_mode"(self: TextureProgressBar, p_mode: i64) void {
@@ -98526,7 +99232,9 @@ pub const TextureRect = struct {
         const method_bind = methodBind(godot_class_name, "get_texture", 3635182373);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     /// `p_expand_mode`: Godot type `enum::TextureRect.ExpandMode`.
@@ -98885,7 +99593,9 @@ pub const Theme = struct {
         const method_bind = methodBind(godot_class_name, "get_default_font", 3229501585);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"has_default_font"(self: Theme) bool {
@@ -99023,14 +99733,18 @@ pub const ThemeDB = struct {
         const method_bind = methodBind(godot_class_name, "get_default_theme", 754276358);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"get_project_theme"(self: ThemeDB) Theme {
         const method_bind = methodBind(godot_class_name, "get_project_theme", 754276358);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"set_fallback_base_scale"(self: ThemeDB, p_base_scale: f64) void {
@@ -99058,7 +99772,9 @@ pub const ThemeDB = struct {
         const method_bind = methodBind(godot_class_name, "get_fallback_font", 3656929885);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"set_fallback_font_size"(self: ThemeDB, p_font_size: i64) void {
@@ -99086,7 +99802,9 @@ pub const ThemeDB = struct {
         const method_bind = methodBind(godot_class_name, "get_fallback_icon", 255860311);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"set_fallback_stylebox"(self: ThemeDB, p_stylebox: StyleBox) void {
@@ -99100,7 +99818,9 @@ pub const ThemeDB = struct {
         const method_bind = methodBind(godot_class_name, "get_fallback_stylebox", 496040854);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
 };
@@ -99203,7 +99923,9 @@ pub const TileData = struct {
         const method_bind = methodBind(godot_class_name, "get_material", 5934680);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"set_texture_origin"(self: TileData, p_texture_origin: types.Vector2i) void {
@@ -99629,7 +100351,9 @@ pub const TileMap = struct {
         const method_bind = methodBind(godot_class_name, "get_tileset", 2678226422);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"set_rendering_quadrant_size"(self: TileMap, p_size: i64) void {
@@ -100294,7 +101018,9 @@ pub const TileMapLayer = struct {
         const method_bind = methodBind(godot_class_name, "get_tile_set", 2678226422);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"set_y_sort_origin"(self: TileMapLayer, p_y_sort_origin: i64) void {
@@ -100654,7 +101380,9 @@ pub const TileSet = struct {
         defer v0.destroy();
         var ret = self.object.callVariant1(method_bind, &v0);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     /// `p_shape`: Godot type `enum::TileSet.TileShape`.
@@ -100889,7 +101617,9 @@ pub const TileSet = struct {
         defer v0.destroy();
         var ret = self.object.callVariant1(method_bind, &v0);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"get_terrain_sets_count"(self: TileSet) i64 {
@@ -101279,7 +102009,9 @@ pub const TileSet = struct {
         defer v0.destroy();
         var ret = self.object.callVariant1(method_bind, &v0);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"remove_pattern"(self: TileSet, p_index: i64) void {
@@ -101323,7 +102055,9 @@ pub const TileSetAtlasSource = struct {
         const method_bind = methodBind(godot_class_name, "get_texture", 3635182373);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"set_margins"(self: TileSetAtlasSource, p_margins: types.Vector2i) void {
@@ -101601,7 +102335,9 @@ pub const TileSetAtlasSource = struct {
         const method_bind = methodBind(godot_class_name, "get_runtime_texture", 3635182373);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
 };
@@ -101672,7 +102408,9 @@ pub const TileSetScenesCollectionSource = struct {
         defer v0.destroy();
         var ret = self.object.callVariant1(method_bind, &v0);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"set_scene_tile_display_placeholder"(self: TileSetScenesCollectionSource, p_id: i64, p_display_placeholder: bool) void {
@@ -102211,7 +102949,9 @@ pub const TouchScreenButton = struct {
         const method_bind = methodBind(godot_class_name, "get_texture_normal", 3635182373);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"set_texture_pressed"(self: TouchScreenButton, p_texture: Texture2D) void {
@@ -102225,7 +102965,9 @@ pub const TouchScreenButton = struct {
         const method_bind = methodBind(godot_class_name, "get_texture_pressed", 3635182373);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"set_bitmask"(self: TouchScreenButton, p_bitmask: BitMap) void {
@@ -102239,7 +102981,9 @@ pub const TouchScreenButton = struct {
         const method_bind = methodBind(godot_class_name, "get_bitmask", 2459671998);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"set_shape"(self: TouchScreenButton, p_shape: Shape2D) void {
@@ -102253,7 +102997,9 @@ pub const TouchScreenButton = struct {
         const method_bind = methodBind(godot_class_name, "get_shape", 522005891);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"set_shape_centered"(self: TouchScreenButton, p_bool: bool) void {
@@ -102414,7 +103160,9 @@ pub const TranslationDomain = struct {
         defer v0.destroy();
         var ret = self.object.callVariant1(method_bind, &v0);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"add_translation"(self: TranslationDomain, p_translation: Translation) void {
@@ -102746,7 +103494,9 @@ pub const TranslationServer = struct {
         defer v0.destroy();
         var ret = self.object.callVariant1(method_bind, &v0);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"get_translations"(self: TranslationServer) collections.Array {
@@ -103688,7 +104438,9 @@ pub const TreeItem = struct {
         defer v0.destroy();
         var ret = self.object.callVariant1(method_bind, &v0);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"set_icon_overlay"(self: TreeItem, p_column: i64, p_texture: Texture2D) void {
@@ -103705,7 +104457,9 @@ pub const TreeItem = struct {
         defer v0.destroy();
         var ret = self.object.callVariant1(method_bind, &v0);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"set_icon_max_width"(self: TreeItem, p_column: i64, p_width: i64) void {
@@ -103803,7 +104557,9 @@ pub const TreeItem = struct {
         defer v0.destroy();
         var ret = self.object.callVariant1(method_bind, &v0);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"set_collapsed"(self: TreeItem, p_enable: bool) void {
@@ -103974,7 +104730,9 @@ pub const TreeItem = struct {
         defer v0.destroy();
         var ret = self.object.callVariant1(method_bind, &v0);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"set_custom_font_size"(self: TreeItem, p_column: i64, p_font_size: i64) void {
@@ -104100,7 +104858,9 @@ pub const TreeItem = struct {
         defer v1.destroy();
         var ret = self.object.callVariant2(method_bind, &v0, &v1);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"set_button_tooltip_text"(self: TreeItem, p_column: i64, p_button_index: i64, p_tooltip: types.String) void {
@@ -104533,7 +105293,9 @@ pub const TubeTrailMesh = struct {
         const method_bind = methodBind(godot_class_name, "get_curve", 2460114913);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
 };
@@ -104585,7 +105347,9 @@ pub const Tween = struct {
         defer v0.destroy();
         var ret = self.object.callVariant1(method_bind, &v0);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"custom_step"(self: Tween, p_delta: f64) bool {
@@ -104652,7 +105416,9 @@ pub const Tween = struct {
         defer v0.destroy();
         var ret = self.object.callVariant1(method_bind, &v0);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     /// `p_mode`: Godot type `enum::Tween.TweenPauseMode`.
@@ -104662,7 +105428,9 @@ pub const Tween = struct {
         defer v0.destroy();
         var ret = self.object.callVariant1(method_bind, &v0);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     /// `p_ignore`: default `true`.
@@ -104672,7 +105440,9 @@ pub const Tween = struct {
         defer v0.destroy();
         var ret = self.object.callVariant1(method_bind, &v0);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     /// `p_parallel`: default `true`.
@@ -104682,7 +105452,9 @@ pub const Tween = struct {
         defer v0.destroy();
         var ret = self.object.callVariant1(method_bind, &v0);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     /// `p_loops`: default `0`.
@@ -104692,7 +105464,9 @@ pub const Tween = struct {
         defer v0.destroy();
         var ret = self.object.callVariant1(method_bind, &v0);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"get_loops_left"(self: Tween) i64 {
@@ -104708,7 +105482,9 @@ pub const Tween = struct {
         defer v0.destroy();
         var ret = self.object.callVariant1(method_bind, &v0);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     /// `p_trans`: Godot type `enum::Tween.TransitionType`.
@@ -104718,7 +105494,9 @@ pub const Tween = struct {
         defer v0.destroy();
         var ret = self.object.callVariant1(method_bind, &v0);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     /// `p_ease`: Godot type `enum::Tween.EaseType`.
@@ -104728,21 +105506,27 @@ pub const Tween = struct {
         defer v0.destroy();
         var ret = self.object.callVariant1(method_bind, &v0);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"parallel"(self: Tween) Tween {
         const method_bind = methodBind(godot_class_name, "parallel", 3426978995);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"chain"(self: Tween) Tween {
         const method_bind = methodBind(godot_class_name, "chain", 3426978995);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
 };
@@ -105024,7 +105808,9 @@ pub const UDPServer = struct {
         const method_bind = methodBind(godot_class_name, "take_connection", 808734560);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"stop"(self: UDPServer) void {
@@ -105069,7 +105855,9 @@ pub const UDSServer = struct {
         const method_bind = methodBind(godot_class_name, "take_connection", 1623851112);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
 };
@@ -105127,7 +105915,9 @@ pub const UPNP = struct {
         defer v0.destroy();
         var ret = self.object.callVariant1(method_bind, &v0);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"add_device"(self: UPNP, p_device: UPNPDevice) void {
@@ -105161,7 +105951,9 @@ pub const UPNP = struct {
         const method_bind = methodBind(godot_class_name, "get_gateway", 2276800779);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     /// `p_timeout`: default `2000`.
@@ -105942,7 +106734,9 @@ pub const VideoStream = struct {
         const method_bind = methodBind(godot_class_name, "_instantiate_playback", 294648086);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"set_file"(self: VideoStream, p_file: types.String) void {
@@ -106032,7 +106826,9 @@ pub const VideoStreamPlayback = struct {
         const method_bind = methodBind(godot_class_name, "_get_texture", 3635182373);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"_update"(self: VideoStreamPlayback, p_delta: f64) void {
@@ -106077,7 +106873,9 @@ pub const VideoStreamPlayer = struct {
         const method_bind = methodBind(godot_class_name, "get_stream", 438621487);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"play"(self: VideoStreamPlayer) void {
@@ -106269,7 +107067,9 @@ pub const VideoStreamPlayer = struct {
         const method_bind = methodBind(godot_class_name, "get_video_texture", 3635182373);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
 };
@@ -106440,14 +107240,18 @@ pub const Viewport = struct {
         const method_bind = methodBind(godot_class_name, "get_world_2d", 2339128592);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"find_world_2d"(self: Viewport) World2D {
         const method_bind = methodBind(godot_class_name, "find_world_2d", 2339128592);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"set_transparent_background"(self: Viewport, p_enable: bool) void {
@@ -106631,7 +107435,9 @@ pub const Viewport = struct {
         const method_bind = methodBind(godot_class_name, "get_texture", 1746695840);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"set_physics_object_picking"(self: Viewport, p_enable: bool) void {
@@ -107089,14 +107895,18 @@ pub const Viewport = struct {
         const method_bind = methodBind(godot_class_name, "get_world_3d", 317588385);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"find_world_3d"(self: Viewport) World3D {
         const method_bind = methodBind(godot_class_name, "find_world_3d", 317588385);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"set_use_own_world_3d"(self: Viewport, p_enable: bool) void {
@@ -107282,7 +108092,9 @@ pub const Viewport = struct {
         const method_bind = methodBind(godot_class_name, "get_vrs_texture", 3635182373);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
 };
@@ -107743,7 +108555,9 @@ pub const VisualShader = struct {
         defer v1.destroy();
         var ret = self.object.callVariant2(method_bind, &v0, &v1);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     /// `p_type`: Godot type `enum::VisualShader.Type`.
@@ -108473,7 +109287,9 @@ pub const VisualShaderNodeCubemap = struct {
         const method_bind = methodBind(godot_class_name, "get_cube_map", 3984243839);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     /// `p_value`: Godot type `enum::VisualShaderNodeCubemap.TextureType`.
@@ -108522,7 +109338,9 @@ pub const VisualShaderNodeCurveTexture = struct {
         const method_bind = methodBind(godot_class_name, "get_texture", 2800800579);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
 };
@@ -108546,7 +109364,9 @@ pub const VisualShaderNodeCurveXYZTexture = struct {
         const method_bind = methodBind(godot_class_name, "get_texture", 1950275015);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
 };
@@ -109957,7 +110777,9 @@ pub const VisualShaderNodeParticleMeshEmitter = struct {
         const method_bind = methodBind(godot_class_name, "get_mesh", 1808005922);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"set_use_all_surfaces"(self: VisualShaderNodeParticleMeshEmitter, p_enabled: bool) void {
@@ -110417,7 +111239,9 @@ pub const VisualShaderNodeTexture = struct {
         const method_bind = methodBind(godot_class_name, "get_texture", 3635182373);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     /// `p_value`: Godot type `enum::VisualShaderNodeTexture.TextureType`.
@@ -110456,7 +111280,9 @@ pub const VisualShaderNodeTexture2DArray = struct {
         const method_bind = methodBind(godot_class_name, "get_texture_array", 3984243839);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
 };
@@ -110500,7 +111326,9 @@ pub const VisualShaderNodeTexture3D = struct {
         const method_bind = methodBind(godot_class_name, "get_texture", 373985333);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
 };
@@ -111455,7 +112283,9 @@ pub const VoxelGI = struct {
         const method_bind = methodBind(godot_class_name, "get_probe_data", 1730645405);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     /// `p_subdiv`: Godot type `enum::VoxelGI.Subdiv`.
@@ -111498,7 +112328,9 @@ pub const VoxelGI = struct {
         const method_bind = methodBind(godot_class_name, "get_camera_attributes", 3921283215);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     /// `p_from_node`: default `null`.
@@ -112237,7 +113069,9 @@ pub const WebSocketMultiplayerPeer = struct {
         defer v0.destroy();
         var ret = self.object.callVariant1(method_bind, &v0);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"get_peer_address"(self: WebSocketMultiplayerPeer, p_id: i64) types.String {
@@ -112626,7 +113460,9 @@ pub const WebXRInterface = struct {
         defer v0.destroy();
         var ret = self.object.callVariant1(method_bind, &v0);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"get_input_source_target_ray_mode"(self: WebXRInterface, p_input_source_id: i64) i64 {
@@ -113220,7 +114056,9 @@ pub const Window = struct {
         const method_bind = methodBind(godot_class_name, "get_theme", 3846893731);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"set_theme_type_variation"(self: Window, p_theme_type: types.StringName) void {
@@ -113501,7 +114339,9 @@ pub const Window = struct {
         const method_bind = methodBind(godot_class_name, "get_theme_default_font", 3229501585);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"get_theme_default_font_size"(self: Window) i64 {
@@ -113757,7 +114597,9 @@ pub const World3D = struct {
         const method_bind = methodBind(godot_class_name, "get_environment", 3082064660);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"set_fallback_environment"(self: World3D, p_env: Environment) void {
@@ -113771,7 +114613,9 @@ pub const World3D = struct {
         const method_bind = methodBind(godot_class_name, "get_fallback_environment", 3082064660);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"set_camera_attributes"(self: World3D, p_attributes: CameraAttributes) void {
@@ -113785,7 +114629,9 @@ pub const World3D = struct {
         const method_bind = methodBind(godot_class_name, "get_camera_attributes", 3921283215);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"get_direct_space_state"(self: World3D) PhysicsDirectSpaceState3D {
@@ -113864,7 +114710,9 @@ pub const WorldEnvironment = struct {
         const method_bind = methodBind(godot_class_name, "get_environment", 3082064660);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"set_camera_attributes"(self: WorldEnvironment, p_camera_attributes: CameraAttributes) void {
@@ -113878,7 +114726,9 @@ pub const WorldEnvironment = struct {
         const method_bind = methodBind(godot_class_name, "get_camera_attributes", 3921283215);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"set_compositor"(self: WorldEnvironment, p_compositor: Compositor) void {
@@ -113892,7 +114742,9 @@ pub const WorldEnvironment = struct {
         const method_bind = methodBind(godot_class_name, "get_compositor", 3647707413);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
 };
@@ -115255,7 +116107,9 @@ pub const XRNode3D = struct {
         const method_bind = methodBind(godot_class_name, "get_pose", 2806551826);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"trigger_haptic_pulse"(self: XRNode3D, p_action_name: types.String, p_frequency: f64, p_amplitude: f64, p_duration_sec: f64, p_delay_sec: f64) void {
@@ -115555,7 +116409,9 @@ pub const XRServer = struct {
         defer v0.destroy();
         var ret = self.object.callVariant1(method_bind, &v0);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"get_interfaces"(self: XRServer) collections.Array {
@@ -115571,7 +116427,9 @@ pub const XRServer = struct {
         defer v0.destroy();
         var ret = self.object.callVariant1(method_bind, &v0);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"add_tracker"(self: XRServer, p_tracker: XRTracker) void {
@@ -115601,7 +116459,9 @@ pub const XRServer = struct {
         const method_bind = methodBind(godot_class_name, "get_primary_interface", 2143545064);
         var ret = self.object.callVariant0(method_bind);
         defer ret.destroy();
-        return .init(ret.toObjectPtr());
+        const object_ptr = ret.toObjectPtr();
+        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();
+        return .init(object_ptr);
     }
 
     pub fn @"set_primary_interface"(self: XRServer, p_interface: XRInterface) void {

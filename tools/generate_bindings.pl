@@ -37,6 +37,15 @@ sub common_enum_prefix {
 }
 
 my %class = map { $_->{name} => 1 } @{$json->{classes}};
+my %parent_by_class = map { $_->{name} => ($_->{inherits} // '') } @{$json->{classes}};
+sub is_refcounted_class {
+  my ($name)=@_;
+  while (defined($name) && length($name)) {
+    return 1 if $name eq 'RefCounted';
+    $name = $parent_by_class{$name};
+  }
+  return 0;
+}
 my %singleton_by_type = map { $_->{type} => $_->{name} } @{$json->{singletons} || []};
 my %builtin_variant = (
   bool => 'c.GDEXTENSION_VARIANT_TYPE_BOOL',
@@ -229,7 +238,13 @@ for my $cl (sort { $a->{name} cmp $b->{name} } @{$json->{classes}}) {
         else { $vok = 0; }
         if ($vok) {
           if (type_name($ret_t) ne 'PackedByteArray' && type_name($ret_t) ne 'PackedVector3Array' && type_name($ret_t) ne 'PackedInt32Array') { print $out "        defer ret.destroy();\n"; }
-          print $out "        return " . wrap_variant_return($ret_t, 'ret') . ";\n";
+          if (is_refcounted_class(type_name($ret_t))) {
+            print $out "        const object_ptr = ret.toObjectPtr();\n";
+            print $out "        if (object_ptr != null) _ = RefCounted.init(object_ptr).reference();\n";
+            print $out "        return .init(object_ptr);\n";
+          } else {
+            print $out "        return " . wrap_variant_return($ret_t, 'ret') . ";\n";
+          }
         }
       }
       if (!$vok) {
