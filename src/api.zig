@@ -144,6 +144,20 @@ pub const Interface = struct {
         return value;
     }
 
+    pub fn nodePath(self: *const Interface, text: [:0]const u8) types.NodePath {
+        var string_value = self.string(text);
+        defer self.destroy(c.GDEXTENSION_VARIANT_TYPE_STRING, &string_value);
+
+        var value: types.NodePath = std.mem.zeroes(types.NodePath);
+        const constructor = self.variant_get_ptr_constructor.?(
+            c.GDEXTENSION_VARIANT_TYPE_NODE_PATH,
+            2,
+        ).?;
+        const args = [_]c.GDExtensionConstTypePtr{ &string_value };
+        constructor(&value, &args);
+        return value;
+    }
+
     pub fn destroy(self: *const Interface, comptime variant_type: c.GDExtensionVariantType, value: anytype) void {
         const destructor = self.variant_get_ptr_destructor.?(variant_type);
         if (destructor) |d| d(@ptrCast(value));

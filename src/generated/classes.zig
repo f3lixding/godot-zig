@@ -60090,6 +60090,69 @@ pub const Node = struct {
         return .init(ret.toObjectPtr());
     }
 
+    pub fn @"has_node"(self: Node, p_path: types.NodePath) bool {
+        const method_bind = methodBind(godot_class_name, "has_node", 861721659);
+        var a0: types.NodePath = p_path;
+        const call_args = [_]c.GDExtensionConstTypePtr{ &a0 };
+        var out: u8 = std.mem.zeroes(u8);
+        api_mod.godot.object_method_bind_ptrcall.?(method_bind, self.object.ptr, &call_args, @ptrCast(&out));
+        return out != 0;
+    }
+
+    pub fn @"get_node"(self: Node, p_path: types.NodePath) Node {
+        const method_bind = methodBind(godot_class_name, "get_node", 2734337346);
+        var a0: types.NodePath = p_path;
+        const call_args = [_]c.GDExtensionConstTypePtr{ &a0 };
+        var ret: c.GDExtensionObjectPtr = null;
+        api_mod.godot.object_method_bind_ptrcall.?(method_bind, self.object.ptr, &call_args, @ptrCast(&ret));
+        return .init(ret);
+    }
+
+    pub fn @"get_node_or_null"(self: Node, p_path: types.NodePath) Node {
+        const method_bind = methodBind(godot_class_name, "get_node_or_null", 2734337346);
+        var a0: types.NodePath = p_path;
+        const call_args = [_]c.GDExtensionConstTypePtr{ &a0 };
+        var ret: c.GDExtensionObjectPtr = null;
+        api_mod.godot.object_method_bind_ptrcall.?(method_bind, self.object.ptr, &call_args, @ptrCast(&ret));
+        return .init(ret);
+    }
+
+    pub fn @"has_node_and_resource"(self: Node, p_path: types.NodePath) bool {
+        const method_bind = methodBind(godot_class_name, "has_node_and_resource", 861721659);
+        var a0: types.NodePath = p_path;
+        const call_args = [_]c.GDExtensionConstTypePtr{ &a0 };
+        var out: u8 = std.mem.zeroes(u8);
+        api_mod.godot.object_method_bind_ptrcall.?(method_bind, self.object.ptr, &call_args, @ptrCast(&out));
+        return out != 0;
+    }
+
+    pub fn @"get_node_and_resource"(self: Node, p_path: types.NodePath) collections.Array {
+        const method_bind = methodBind(godot_class_name, "get_node_and_resource", 502563882);
+        var a0: types.NodePath = p_path;
+        const call_args = [_]c.GDExtensionConstTypePtr{ &a0 };
+        var out: types.Array = std.mem.zeroes(types.Array);
+        api_mod.godot.object_method_bind_ptrcall.?(method_bind, self.object.ptr, &call_args, @ptrCast(&out));
+        return .{ .value = out };
+    }
+
+    pub fn @"get_path"(self: Node) types.NodePath {
+        const method_bind = methodBind(godot_class_name, "get_path", 4075236667);
+        var out: types.NodePath = std.mem.zeroes(types.NodePath);
+        api_mod.godot.object_method_bind_ptrcall.?(method_bind, self.object.ptr, null, @ptrCast(&out));
+        return out;
+    }
+
+    /// `p_use_unique_path`: default `false`.
+    pub fn @"get_path_to"(self: Node, p_node: Node, p_use_unique_path: bool) types.NodePath {
+        const method_bind = methodBind(godot_class_name, "get_path_to", 498846349);
+        var a0: c.GDExtensionObjectPtr = p_node.object.ptr;
+        var a1: u8 = @intFromBool(p_use_unique_path);
+        const call_args = [_]c.GDExtensionConstTypePtr{ @ptrCast(&a0), &a1 };
+        var out: types.NodePath = std.mem.zeroes(types.NodePath);
+        api_mod.godot.object_method_bind_ptrcall.?(method_bind, self.object.ptr, &call_args, @ptrCast(&out));
+        return out;
+    }
+
     pub fn @"get_parent"(self: Node) Node {
         const method_bind = methodBind(godot_class_name, "get_parent", 3160264692);
         var ret = self.object.callVariant0(method_bind);

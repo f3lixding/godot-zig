@@ -14,6 +14,7 @@ pub const extension = @import("extension.zig");
 pub const StringName = types.StringName;
 pub const String = types.String;
 pub const Variant = types.Variant;
+pub const NodePath = types.NodePath;
 pub const Vector2 = types.Vector2;
 pub const Vector2i = types.Vector2i;
 pub const Rect2 = types.Rect2;
