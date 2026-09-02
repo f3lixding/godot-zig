@@ -20520,6 +20520,13 @@ pub const CollisionObject3D = struct {
         return out;
     }
 
+    pub fn @"get_rid"(self: CollisionObject3D) types.RID {
+        const method_bind = methodBind(godot_class_name, "get_rid", 2944877500);
+        var out: types.RID = std.mem.zeroes(types.RID);
+        api_mod.godot.object_method_bind_ptrcall.?(method_bind, self.object.ptr, null, @ptrCast(&out));
+        return out;
+    }
+
 };
 
 pub const CollisionPolygon2D = struct {
@@ -90107,6 +90114,22 @@ pub const SpringArm3D = struct {
     pub fn @"clear_excluded_objects"(self: SpringArm3D) void {
         const method_bind = methodBind(godot_class_name, "clear_excluded_objects", 3218959716);
         api_mod.godot.object_method_bind_ptrcall.?(method_bind, self.object.ptr, null, null);
+    }
+
+    pub fn @"add_excluded_object"(self: SpringArm3D, p_RID: types.RID) void {
+        const method_bind = methodBind(godot_class_name, "add_excluded_object", 2722037293);
+        var a0: types.RID = p_RID;
+        const call_args = [_]c.GDExtensionConstTypePtr{ &a0 };
+        api_mod.godot.object_method_bind_ptrcall.?(method_bind, self.object.ptr, &call_args, null);
+    }
+
+    pub fn @"remove_excluded_object"(self: SpringArm3D, p_RID: types.RID) bool {
+        const method_bind = methodBind(godot_class_name, "remove_excluded_object", 3521089500);
+        var a0: types.RID = p_RID;
+        const call_args = [_]c.GDExtensionConstTypePtr{ &a0 };
+        var out: u8 = std.mem.zeroes(u8);
+        api_mod.godot.object_method_bind_ptrcall.?(method_bind, self.object.ptr, &call_args, @ptrCast(&out));
+        return out != 0;
     }
 
     pub fn @"set_collision_mask"(self: SpringArm3D, p_mask: i64) void {
