@@ -61088,6 +61088,20 @@ pub const Node3D = struct {
         pub const basis: i64 = 2;
     };
 
+    pub fn @"set_transform"(self: Node3D, p_local: types.Transform3D) void {
+        const method_bind = methodBind(godot_class_name, "set_transform", 2952846383);
+        var a0: types.Transform3D = p_local;
+        const call_args = [_]c.GDExtensionConstTypePtr{ &a0 };
+        api_mod.godot.object_method_bind_ptrcall.?(method_bind, self.object.ptr, &call_args, null);
+    }
+
+    pub fn @"get_transform"(self: Node3D) types.Transform3D {
+        const method_bind = methodBind(godot_class_name, "get_transform", 3229777777);
+        var out: types.Transform3D = std.mem.zeroes(types.Transform3D);
+        api_mod.godot.object_method_bind_ptrcall.?(method_bind, self.object.ptr, null, @ptrCast(&out));
+        return out;
+    }
+
     pub fn @"set_position"(self: Node3D, p_position: types.Vector3) void {
         const method_bind = methodBind(godot_class_name, "set_position", 3460891852);
         var a0: types.Vector3 = p_position;
@@ -61174,6 +61188,55 @@ pub const Node3D = struct {
         return out;
     }
 
+    pub fn @"set_quaternion"(self: Node3D, p_quaternion: types.Quaternion) void {
+        const method_bind = methodBind(godot_class_name, "set_quaternion", 1727505552);
+        var a0: types.Quaternion = p_quaternion;
+        const call_args = [_]c.GDExtensionConstTypePtr{ &a0 };
+        api_mod.godot.object_method_bind_ptrcall.?(method_bind, self.object.ptr, &call_args, null);
+    }
+
+    pub fn @"get_quaternion"(self: Node3D) types.Quaternion {
+        const method_bind = methodBind(godot_class_name, "get_quaternion", 1222331677);
+        var out: types.Quaternion = std.mem.zeroes(types.Quaternion);
+        api_mod.godot.object_method_bind_ptrcall.?(method_bind, self.object.ptr, null, @ptrCast(&out));
+        return out;
+    }
+
+    pub fn @"set_basis"(self: Node3D, p_basis: types.Basis) void {
+        const method_bind = methodBind(godot_class_name, "set_basis", 1055510324);
+        var a0: types.Basis = p_basis;
+        const call_args = [_]c.GDExtensionConstTypePtr{ &a0 };
+        api_mod.godot.object_method_bind_ptrcall.?(method_bind, self.object.ptr, &call_args, null);
+    }
+
+    pub fn @"get_basis"(self: Node3D) types.Basis {
+        const method_bind = methodBind(godot_class_name, "get_basis", 2716978435);
+        var out: types.Basis = std.mem.zeroes(types.Basis);
+        api_mod.godot.object_method_bind_ptrcall.?(method_bind, self.object.ptr, null, @ptrCast(&out));
+        return out;
+    }
+
+    pub fn @"set_global_transform"(self: Node3D, p_global: types.Transform3D) void {
+        const method_bind = methodBind(godot_class_name, "set_global_transform", 2952846383);
+        var a0: types.Transform3D = p_global;
+        const call_args = [_]c.GDExtensionConstTypePtr{ &a0 };
+        api_mod.godot.object_method_bind_ptrcall.?(method_bind, self.object.ptr, &call_args, null);
+    }
+
+    pub fn @"get_global_transform"(self: Node3D) types.Transform3D {
+        const method_bind = methodBind(godot_class_name, "get_global_transform", 3229777777);
+        var out: types.Transform3D = std.mem.zeroes(types.Transform3D);
+        api_mod.godot.object_method_bind_ptrcall.?(method_bind, self.object.ptr, null, @ptrCast(&out));
+        return out;
+    }
+
+    pub fn @"get_global_transform_interpolated"(self: Node3D) types.Transform3D {
+        const method_bind = methodBind(godot_class_name, "get_global_transform_interpolated", 4183770049);
+        var out: types.Transform3D = std.mem.zeroes(types.Transform3D);
+        api_mod.godot.object_method_bind_ptrcall.?(method_bind, self.object.ptr, null, @ptrCast(&out));
+        return out;
+    }
+
     pub fn @"set_global_position"(self: Node3D, p_position: types.Vector3) void {
         const method_bind = methodBind(godot_class_name, "set_global_position", 3460891852);
         var a0: types.Vector3 = p_position;
@@ -61184,6 +61247,20 @@ pub const Node3D = struct {
     pub fn @"get_global_position"(self: Node3D) types.Vector3 {
         const method_bind = methodBind(godot_class_name, "get_global_position", 3360562783);
         var out: types.Vector3 = std.mem.zeroes(types.Vector3);
+        api_mod.godot.object_method_bind_ptrcall.?(method_bind, self.object.ptr, null, @ptrCast(&out));
+        return out;
+    }
+
+    pub fn @"set_global_basis"(self: Node3D, p_basis: types.Basis) void {
+        const method_bind = methodBind(godot_class_name, "set_global_basis", 1055510324);
+        var a0: types.Basis = p_basis;
+        const call_args = [_]c.GDExtensionConstTypePtr{ &a0 };
+        api_mod.godot.object_method_bind_ptrcall.?(method_bind, self.object.ptr, &call_args, null);
+    }
+
+    pub fn @"get_global_basis"(self: Node3D) types.Basis {
+        const method_bind = methodBind(godot_class_name, "get_global_basis", 2716978435);
+        var out: types.Basis = std.mem.zeroes(types.Basis);
         api_mod.godot.object_method_bind_ptrcall.?(method_bind, self.object.ptr, null, @ptrCast(&out));
         return out;
     }
