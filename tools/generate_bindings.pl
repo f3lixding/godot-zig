@@ -55,12 +55,25 @@ my %builtin_variant = (
   StringName => 'c.GDEXTENSION_VARIANT_TYPE_STRING_NAME',
   Vector2 => 'c.GDEXTENSION_VARIANT_TYPE_VECTOR2',
   Vector2i => 'c.GDEXTENSION_VARIANT_TYPE_VECTOR2I',
+  Rect2 => 'c.GDEXTENSION_VARIANT_TYPE_RECT2',
+  Rect2i => 'c.GDEXTENSION_VARIANT_TYPE_RECT2I',
   Vector3 => 'c.GDEXTENSION_VARIANT_TYPE_VECTOR3',
   Vector3i => 'c.GDEXTENSION_VARIANT_TYPE_VECTOR3I',
+  Transform2D => 'c.GDEXTENSION_VARIANT_TYPE_TRANSFORM2D',
   Vector4 => 'c.GDEXTENSION_VARIANT_TYPE_VECTOR4',
   Vector4i => 'c.GDEXTENSION_VARIANT_TYPE_VECTOR4I',
-  Color => 'c.GDEXTENSION_VARIANT_TYPE_COLOR',
+  Plane => 'c.GDEXTENSION_VARIANT_TYPE_PLANE',
+  Quaternion => 'c.GDEXTENSION_VARIANT_TYPE_QUATERNION',
   AABB => 'c.GDEXTENSION_VARIANT_TYPE_AABB',
+  Basis => 'c.GDEXTENSION_VARIANT_TYPE_BASIS',
+  Transform3D => 'c.GDEXTENSION_VARIANT_TYPE_TRANSFORM3D',
+  Projection => 'c.GDEXTENSION_VARIANT_TYPE_PROJECTION',
+  Color => 'c.GDEXTENSION_VARIANT_TYPE_COLOR',
+  StringName => 'c.GDEXTENSION_VARIANT_TYPE_STRING_NAME',
+  NodePath => 'c.GDEXTENSION_VARIANT_TYPE_NODE_PATH',
+  RID => 'c.GDEXTENSION_VARIANT_TYPE_RID',
+  Callable => 'c.GDEXTENSION_VARIANT_TYPE_CALLABLE',
+  Signal => 'c.GDEXTENSION_VARIANT_TYPE_SIGNAL',
   Array => 'c.GDEXTENSION_VARIANT_TYPE_ARRAY',
   Dictionary => 'c.GDEXTENSION_VARIANT_TYPE_DICTIONARY',
   PackedVector3Array => 'c.GDEXTENSION_VARIANT_TYPE_PACKED_VECTOR3_ARRAY',
@@ -69,8 +82,10 @@ my %builtin_variant = (
 
 my %zig_builtin = (
   bool => 'bool', int => 'i64', float => 'f64', String => 'types.String', StringName => 'types.StringName',
-  Vector2 => 'types.Vector2', Vector2i => 'types.Vector2i', Vector3 => 'types.Vector3', Vector3i => 'types.Vector3i',
-  Vector4 => 'types.Vector4', Vector4i => 'types.Vector4i', Color => 'types.Color', AABB => 'types.AABB', Dictionary => 'types.Dictionary',
+  Vector2 => 'types.Vector2', Vector2i => 'types.Vector2i', Rect2 => 'types.Rect2', Rect2i => 'types.Rect2i',
+  Vector3 => 'types.Vector3', Vector3i => 'types.Vector3i', Transform2D => 'types.Transform2D', Vector4 => 'types.Vector4', Vector4i => 'types.Vector4i',
+  Plane => 'types.Plane', Quaternion => 'types.Quaternion', AABB => 'types.AABB', Basis => 'types.Basis', Transform3D => 'types.Transform3D', Projection => 'types.Projection',
+  Color => 'types.Color', NodePath => 'types.NodePath', RID => 'types.RID', Callable => 'types.Callable', Signal => 'types.Signal', Dictionary => 'types.Dictionary',
   Array => 'collections.Array', PackedByteArray => 'collections.PackedByteArray', PackedVector3Array => 'collections.PackedVector3Array', PackedInt32Array => 'collections.PackedInt32Array',
 );
 
@@ -124,6 +139,8 @@ sub variant_arg_expr {
   return "Variant.fromBool($name)" if $t eq 'bool';
   return "Variant.fromFloat($name)" if $t eq 'float';
   return "Variant.fromString($name)" if $t eq 'String';
+  return "Variant.fromStringName($name)" if $t eq 'StringName';
+  return "Variant.from($name)" if defined($t) && exists $builtin_variant{$t};
   return undef;
 }
 sub arg_expr {
