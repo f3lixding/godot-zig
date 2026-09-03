@@ -254,13 +254,19 @@ pub fn registerMethod0(comptime T: type, class_name_text: [:0]const u8, method_n
 
 pub fn NativeClass(comptime T: type, comptime parent_name_text: [:0]const u8, comptime class_name_text: [:0]const u8) type {
     return struct {
-        pub fn create(_: ?*anyopaque, _: c.GDExtensionBool) callconv(.c) c.GDExtensionObjectPtr {
+        pub fn create(class_userdata: ?*anyopaque, _: c.GDExtensionBool) callconv(.c) c.GDExtensionObjectPtr {
             var parent_name = api_mod.godot.stringName(parent_name_text);
             defer api_mod.godot.destroy(c.GDEXTENSION_VARIANT_TYPE_STRING_NAME, &parent_name);
             const object = api_mod.godot.classdb_construct_object.?(&parent_name);
 
             const self = api_mod.godot.alloc(T);
-            if (@hasDecl(T, "init")) self.* = T.init(object) else self.* = std.mem.zeroes(T);
+            if (@hasDecl(T, "initWithUserdata")) {
+                self.* = T.initWithUserdata(object, class_userdata);
+            } else if (@hasDecl(T, "init")) {
+                self.* = T.init(object);
+            } else {
+                self.* = std.mem.zeroes(T);
+            }
 
             var class_name = api_mod.godot.stringName(class_name_text);
             defer api_mod.godot.destroy(c.GDEXTENSION_VARIANT_TYPE_STRING_NAME, &class_name);
