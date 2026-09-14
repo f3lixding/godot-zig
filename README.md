@@ -13,7 +13,7 @@ The package exposes:
 - light wrappers for common classes like `Object`, `Node`, `Node3D`, `CharacterBody3D`, and `Input`
 - helpers for native class registration and extension entry points
 
-> Current ABI target: Godot 4.x, 64-bit, single-precision builds. If using a custom double-precision Godot build, builtin type layouts must be regenerated/adjusted from `extension_api.json`.
+> Current API/ABI target: Godot 4.7, 64-bit, single-precision builds. This package uses the Godot 4.7 `classdb_register_extension_class6` interface. If using a custom double-precision Godot build, builtin type layouts must be regenerated/adjusted from `extension_api.json`.
 
 ## Consuming from another Zig package
 
@@ -52,7 +52,8 @@ fn initialize(level: godot.c.GDExtensionInitializationLevel) callconv(.c) void {
 }
 
 fn deinitialize(level: godot.c.GDExtensionInitializationLevel) callconv(.c) void {
-    _ = level;
+    if (level != godot.c.GDEXTENSION_INITIALIZATION_SCENE) return;
+    // Unregister native classes here, in reverse registration order.
 }
 
 pub export fn my_extension_init(
@@ -76,7 +77,8 @@ In your `.gdextension` file, use the exported symbol name:
 ```ini
 [configuration]
 entry_symbol = "my_extension_init"
-compatibility_minimum = "4.4"
+compatibility_minimum = "4.7"
+reloadable = true
 
 [libraries]
 linux.debug.x86_64 = "res://bin/libmy_game_native.so"
@@ -100,11 +102,18 @@ const MyBody = extern struct {
     }
 };
 
+const NativeMyBody = godot.class.NativeClass(MyBody, "CharacterBody3D", "MyBody");
+
 fn initialize(level: godot.c.GDExtensionInitializationLevel) callconv(.c) void {
     if (level != godot.c.GDEXTENSION_INITIALIZATION_SCENE) return;
 
-    godot.class.NativeClass(MyBody, "CharacterBody3D", "MyBody").register();
+    NativeMyBody.register();
     godot.class.registerMethod0(MyBody, "MyBody", "speed", .float, MyBody.speed);
+}
+
+fn deinitialize(level: godot.c.GDExtensionInitializationLevel) callconv(.c) void {
+    if (level != godot.c.GDEXTENSION_INITIALIZATION_SCENE) return;
+    NativeMyBody.unregister();
 }
 ```
 
@@ -146,6 +155,96 @@ pub fn deinit(self: *MyBody) void {
 ```
 
 These names are `godot-zig` conventions used by `NativeClass.create()` and `NativeClass.free()`. Godot scene callbacks such as `_ready` are separate virtual callbacks that run after construction.
+
+## Hot reloading
+
+Hot reload is available in editor builds. It requires all of the following:
+
+1. Set `reloadable = true` under `[configuration]` in the consuming project's `.gdextension` file.
+2. Use `.scene` or `.editor` as the minimum initialization level. Extensions initialized at `.core` or `.servers` require an editor restart.
+3. Register classes during initialization and unregister them at the same level during deinitialization.
+4. Unregister derived extension classes before their extension parents.
+
+`NativeClass` installs the required recreation callback automatically. During reload, Godot keeps the engine object alive, frees its old Zig instance, loads the new library, and calls `T.init(object)` or `T.initWithUserdata(object, class_userdata)` to allocate a new Zig instance around that same object.
+
+For multiple classes, teardown must be the reverse of registration:
+
+```zig
+const NativeBase = godot.class.NativeClass(Base, "Node", "NativeBase");
+const NativeChild = godot.class.NativeClass(Child, "NativeBase", "NativeChild");
+
+fn initialize(level: godot.c.GDExtensionInitializationLevel) callconv(.c) void {
+    if (level != godot.c.GDEXTENSION_INITIALIZATION_SCENE) return;
+    NativeBase.register();
+    NativeChild.register();
+}
+
+fn deinitialize(level: godot.c.GDExtensionInitializationLevel) callconv(.c) void {
+    if (level != godot.c.GDEXTENSION_INITIALIZATION_SCENE) return;
+    NativeChild.unregister();
+    NativeBase.unregister();
+}
+```
+
+### Preserving native state
+
+Plain Zig fields are initialized again during recreation. To preserve a field, expose it as a stored Godot property. The current property helper supports `bool`, `i64`, and `f64`:
+
+```zig
+const Player = extern struct {
+    object: godot.c.GDExtensionObjectPtr,
+    health: f64,
+
+    pub fn init(object: godot.c.GDExtensionObjectPtr) Player {
+        return .{ .object = object, .health = 100.0 };
+    }
+
+    pub fn getHealth(self: *Player) callconv(.c) f64 {
+        return self.health;
+    }
+
+    pub fn setHealth(self: *Player, value: f64) callconv(.c) void {
+        self.health = value;
+    }
+};
+
+const NativePlayer = godot.class.NativeClass(Player, "Node", "Player");
+
+// After NativePlayer.register():
+godot.class.registerProperty(
+    Player,
+    "Player",
+    "health",
+    .float,
+    Player.getHealth,
+    Player.setHealth,
+);
+```
+
+Godot snapshots stored properties before unloading and applies them through their setters after recreation. Resources that cannot be represented as properties should be rebuilt after reload.
+
+A class can declare an optional post-reload hook:
+
+```zig
+pub fn extensionReloaded(self: *Player) void {
+    // Rebuild transient caches, handles, or other derived state here.
+    _ = self;
+}
+```
+
+For access to all Godot notifications instead, declare:
+
+```zig
+pub fn notification(self: *Player, what: i32, reversed: bool) void {
+    _ = self;
+    _ = what;
+    _ = reversed;
+}
+```
+
+The helper invokes `extensionReloaded` for `godot.class.notification_extension_reloaded` after Godot restores stored properties. Native threads, callbacks, and module-level resources must still be stopped or released by the extension's deinitializer before the old dynamic library is unloaded.
+
+Godot cannot change an extension class's native parent during hot reload; restart the editor after making that kind of class hierarchy change.
 
 ## Overriding Godot virtual methods
 

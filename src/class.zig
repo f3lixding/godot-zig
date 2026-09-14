@@ -7,6 +7,10 @@ const signal = @import("signal.zig");
 
 pub const BindingCallbacks = c.GDExtensionInstanceBindingCallbacks{ .create_callback = null, .free_callback = null, .reference_callback = null };
 
+/// Sent by Godot after a live extension instance has been recreated and its
+/// stored properties have been restored.
+pub const notification_extension_reloaded: i32 = 2;
+
 pub const MethodReturn = enum { void, bool, int, float };
 
 pub fn variantType(comptime ret: MethodReturn) c.GDExtensionVariantType {
@@ -91,6 +95,35 @@ pub fn Method0(comptime T: type, comptime ret: MethodReturn, comptime function: 
         pub fn ptrcall(_: ?*anyopaque, instance: c.GDExtensionClassInstancePtr, _: [*c]const c.GDExtensionConstTypePtr, out: c.GDExtensionTypePtr) callconv(.c) void {
             const self: *T = @ptrCast(@alignCast(instance.?));
             if (ret == .void) function(self) else writePtr(out, ret, function(self));
+        }
+    };
+}
+
+pub fn Method1(comptime T: type, comptime arg: MethodReturn, comptime function: *const fn (*T, ReturnZig(arg)) callconv(.c) void) type {
+    if (arg == .void) @compileError("method argument cannot be void");
+
+    return struct {
+        pub fn call(_: ?*anyopaque, instance: c.GDExtensionClassInstancePtr, args: [*c]const c.GDExtensionConstVariantPtr, argc: c.GDExtensionInt, _: c.GDExtensionVariantPtr, err: [*c]c.GDExtensionCallError) callconv(.c) void {
+            if (argc != 1) {
+                err.*.@"error" = if (argc > 1) c.GDEXTENSION_CALL_ERROR_TOO_MANY_ARGUMENTS else c.GDEXTENSION_CALL_ERROR_TOO_FEW_ARGUMENTS;
+                err.*.expected = 1;
+                return;
+            }
+            const self: *T = @ptrCast(@alignCast(instance.?));
+            const raw: *const types.Variant = @ptrCast(@alignCast(args[0].?));
+            const value = Variant{ .value = raw.* };
+            function(self, value.to(ReturnZig(arg)));
+        }
+
+        pub fn ptrcall(_: ?*anyopaque, instance: c.GDExtensionClassInstancePtr, args: [*c]const c.GDExtensionConstTypePtr, _: c.GDExtensionTypePtr) callconv(.c) void {
+            const self: *T = @ptrCast(@alignCast(instance.?));
+            const value: ReturnZig(arg) = switch (arg) {
+                .bool => @as(*const u8, @ptrCast(@alignCast(args[0].?))).* != 0,
+                .int => @as(*const i64, @ptrCast(@alignCast(args[0].?))).*,
+                .float => @as(*const f64, @ptrCast(@alignCast(args[0].?))).*,
+                .void => unreachable,
+            };
+            function(self, value);
         }
     };
 }
@@ -252,13 +285,68 @@ pub fn registerMethod0(comptime T: type, class_name_text: [:0]const u8, method_n
     api_mod.godot.classdb_register_extension_class_method.?(api_mod.godot.library, &class_name, &info);
 }
 
+pub fn registerMethod1(comptime T: type, class_name_text: [:0]const u8, method_name_text: [:0]const u8, comptime arg: MethodReturn, comptime function: *const fn (*T, ReturnZig(arg)) callconv(.c) void) void {
+    if (arg == .void) @compileError("method argument cannot be void");
+
+    var method_name = api_mod.godot.stringName(method_name_text);
+    var class_name = api_mod.godot.stringName(class_name_text);
+    defer api_mod.godot.destroy(c.GDEXTENSION_VARIANT_TYPE_STRING_NAME, &method_name);
+    defer api_mod.godot.destroy(c.GDEXTENSION_VARIANT_TYPE_STRING_NAME, &class_name);
+
+    var argument_info = makePropertyInfo("value", variantType(arg), "");
+    defer destroyPropertyInfo(&argument_info);
+    var argument_metadata = [_]c.GDExtensionClassMethodArgumentMetadata{c.GDEXTENSION_METHOD_ARGUMENT_METADATA_NONE};
+
+    var info: c.GDExtensionClassMethodInfo = std.mem.zeroes(c.GDExtensionClassMethodInfo);
+    info.name = &method_name;
+    info.call_func = Method1(T, arg, function).call;
+    info.ptrcall_func = Method1(T, arg, function).ptrcall;
+    info.method_flags = c.GDEXTENSION_METHOD_FLAGS_DEFAULT;
+    info.argument_count = 1;
+    info.arguments_info = &argument_info;
+    info.arguments_metadata = &argument_metadata;
+    api_mod.godot.classdb_register_extension_class_method.?(api_mod.godot.library, &class_name, &info);
+}
+
+/// Register a stored property backed by a zero-argument getter and a
+/// one-argument setter. Godot snapshots stored properties before hot reload
+/// and applies them to the recreated instance afterwards.
+pub fn registerProperty(
+    comptime T: type,
+    comptime class_name_text: [:0]const u8,
+    comptime property_name_text: [:0]const u8,
+    comptime kind: MethodReturn,
+    comptime getter: *const fn (*T) callconv(.c) ReturnZig(kind),
+    comptime setter: *const fn (*T, ReturnZig(kind)) callconv(.c) void,
+) void {
+    if (kind == .void) @compileError("property type cannot be void");
+
+    const getter_name: [:0]const u8 = "get_" ++ property_name_text;
+    const setter_name: [:0]const u8 = "set_" ++ property_name_text;
+    registerMethod0(T, class_name_text, getter_name, kind, getter);
+    registerMethod1(T, class_name_text, setter_name, kind, setter);
+
+    var class_name = api_mod.godot.stringName(class_name_text);
+    var property_info = makePropertyInfo(property_name_text, variantType(kind), "");
+    var getter_string_name = api_mod.godot.stringName(getter_name);
+    var setter_string_name = api_mod.godot.stringName(setter_name);
+    defer api_mod.godot.destroy(c.GDEXTENSION_VARIANT_TYPE_STRING_NAME, &class_name);
+    defer destroyPropertyInfo(&property_info);
+    defer api_mod.godot.destroy(c.GDEXTENSION_VARIANT_TYPE_STRING_NAME, &getter_string_name);
+    defer api_mod.godot.destroy(c.GDEXTENSION_VARIANT_TYPE_STRING_NAME, &setter_string_name);
+
+    api_mod.godot.classdb_register_extension_class_property.?(
+        api_mod.godot.library,
+        &class_name,
+        &property_info,
+        &setter_string_name,
+        &getter_string_name,
+    );
+}
+
 pub fn NativeClass(comptime T: type, comptime parent_name_text: [:0]const u8, comptime class_name_text: [:0]const u8) type {
     return struct {
-        pub fn create(class_userdata: ?*anyopaque, _: c.GDExtensionBool) callconv(.c) c.GDExtensionObjectPtr {
-            var parent_name = api_mod.godot.stringName(parent_name_text);
-            defer api_mod.godot.destroy(c.GDEXTENSION_VARIANT_TYPE_STRING_NAME, &parent_name);
-            const object = api_mod.godot.classdb_construct_object.?(&parent_name);
-
+        fn allocateInstance(object: c.GDExtensionObjectPtr, class_userdata: ?*anyopaque) *T {
             const self = api_mod.godot.alloc(T);
             if (@hasDecl(T, "initWithUserdata")) {
                 self.* = T.initWithUserdata(object, class_userdata);
@@ -267,12 +355,32 @@ pub fn NativeClass(comptime T: type, comptime parent_name_text: [:0]const u8, co
             } else {
                 self.* = std.mem.zeroes(T);
             }
+            return self;
+        }
 
+        fn attachInstance(object: c.GDExtensionObjectPtr, self: *T) void {
             var class_name = api_mod.godot.stringName(class_name_text);
             defer api_mod.godot.destroy(c.GDEXTENSION_VARIANT_TYPE_STRING_NAME, &class_name);
             api_mod.godot.object_set_instance.?(object, &class_name, self);
             api_mod.godot.object_set_instance_binding.?(object, api_mod.godot.library, self, &BindingCallbacks);
+        }
+
+        pub fn create(class_userdata: ?*anyopaque, _: c.GDExtensionBool) callconv(.c) c.GDExtensionObjectPtr {
+            var parent_name = api_mod.godot.stringName(parent_name_text);
+            defer api_mod.godot.destroy(c.GDEXTENSION_VARIANT_TYPE_STRING_NAME, &parent_name);
+            const object = api_mod.godot.classdb_construct_object.?(&parent_name);
+
+            const self = allocateInstance(object, class_userdata);
+            attachInstance(object, self);
             return object;
+        }
+
+        /// Rebuild only the Zig instance around an existing Godot object. Godot
+        /// uses this callback while hot-reloading a reloadable extension.
+        pub fn recreate(class_userdata: ?*anyopaque, object: c.GDExtensionObjectPtr) callconv(.c) c.GDExtensionClassInstancePtr {
+            const self = allocateInstance(object, class_userdata);
+            attachInstance(object, self);
+            return self;
         }
 
         pub fn free(_: ?*anyopaque, instance: c.GDExtensionClassInstancePtr) callconv(.c) void {
@@ -281,6 +389,12 @@ pub fn NativeClass(comptime T: type, comptime parent_name_text: [:0]const u8, co
                 if (@hasDecl(T, "deinit")) self.deinit();
                 api_mod.godot.free(self);
             }
+        }
+
+        fn notification(instance: c.GDExtensionClassInstancePtr, what: i32, reversed: c.GDExtensionBool) callconv(.c) void {
+            const self: *T = @ptrCast(@alignCast(instance.?));
+            if (@hasDecl(T, "notification")) self.notification(what, reversed != 0);
+            if (what == notification_extension_reloaded and @hasDecl(T, "extensionReloaded")) self.extensionReloaded();
         }
 
         pub fn register() void {
@@ -299,9 +413,19 @@ pub fn NativeClass(comptime T: type, comptime parent_name_text: [:0]const u8, co
             info.class_userdata = class_userdata;
             info.create_instance_func = create;
             info.free_instance_func = free;
+            info.recreate_instance_func = recreate;
+            if (@hasDecl(T, "notification") or @hasDecl(T, "extensionReloaded")) info.notification_func = notification;
             if (@hasDecl(T, "getVirtualCallData")) info.get_virtual_call_data_func = T.getVirtualCallData;
             if (@hasDecl(T, "callVirtualWithData")) info.call_virtual_with_data_func = T.callVirtualWithData;
             api_mod.godot.classdb_register_extension_class6.?(api_mod.godot.library, &class_name, &parent_name, &info);
+        }
+
+        /// Unregister during the same initialization level at which this class
+        /// was registered. Derived extension classes must be unregistered first.
+        pub fn unregister() void {
+            var class_name = api_mod.godot.stringName(class_name_text);
+            defer api_mod.godot.destroy(c.GDEXTENSION_VARIANT_TYPE_STRING_NAME, &class_name);
+            api_mod.godot.classdb_unregister_extension_class.?(api_mod.godot.library, &class_name);
         }
     };
 }
@@ -339,4 +463,39 @@ fn compileClassUserdataRegistration(context: ?*anyopaque) void {
 
 test "native class userdata registration compiles" {
     _ = &compileClassUserdataRegistration;
+}
+
+const TestReloadable = struct {
+    object: c.GDExtensionObjectPtr,
+    health: f64,
+
+    pub fn init(object: c.GDExtensionObjectPtr) @This() {
+        return .{ .object = object, .health = 100 };
+    }
+
+    pub fn getHealth(self: *@This()) callconv(.c) f64 {
+        return self.health;
+    }
+
+    pub fn setHealth(self: *@This(), health: f64) callconv(.c) void {
+        self.health = health;
+    }
+
+    pub fn extensionReloaded(_: *@This()) void {}
+};
+
+fn compileHotReloadRegistration() void {
+    const Native = NativeClass(TestReloadable, "Object", "TestReloadable");
+    Native.register();
+    registerProperty(TestReloadable, "TestReloadable", "health", .float, TestReloadable.getHealth, TestReloadable.setHealth);
+    Native.unregister();
+}
+
+test "hot reload callbacks and stored properties compile" {
+    const Native = NativeClass(TestReloadable, "Object", "TestReloadable");
+    const Setter = Method1(TestReloadable, .float, TestReloadable.setHealth);
+    _ = &Native.recreate;
+    _ = &Setter.call;
+    _ = &Setter.ptrcall;
+    _ = &compileHotReloadRegistration;
 }

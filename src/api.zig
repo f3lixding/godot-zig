@@ -31,6 +31,7 @@ pub const Interface = struct {
     classdb_register_extension_class_method: c.GDExtensionInterfaceClassdbRegisterExtensionClassMethod = null,
     classdb_register_extension_class_property: c.GDExtensionInterfaceClassdbRegisterExtensionClassProperty = null,
     classdb_register_extension_class_signal: c.GDExtensionInterfaceClassdbRegisterExtensionClassSignal = null,
+    classdb_unregister_extension_class: c.GDExtensionInterfaceClassdbUnregisterExtensionClass = null,
 
     object_method_bind_ptrcall: c.GDExtensionInterfaceObjectMethodBindPtrcall = null,
     object_method_bind_call: c.GDExtensionInterfaceObjectMethodBindCall = null,
@@ -85,6 +86,7 @@ pub const Interface = struct {
         self.classdb_register_extension_class_method = proc(c.GDExtensionInterfaceClassdbRegisterExtensionClassMethod, get_proc_address, "classdb_register_extension_class_method");
         self.classdb_register_extension_class_property = proc(c.GDExtensionInterfaceClassdbRegisterExtensionClassProperty, get_proc_address, "classdb_register_extension_class_property");
         self.classdb_register_extension_class_signal = proc(c.GDExtensionInterfaceClassdbRegisterExtensionClassSignal, get_proc_address, "classdb_register_extension_class_signal");
+        self.classdb_unregister_extension_class = proc(c.GDExtensionInterfaceClassdbUnregisterExtensionClass, get_proc_address, "classdb_unregister_extension_class");
         self.object_method_bind_ptrcall = proc(c.GDExtensionInterfaceObjectMethodBindPtrcall, get_proc_address, "object_method_bind_ptrcall");
         self.object_method_bind_call = proc(c.GDExtensionInterfaceObjectMethodBindCall, get_proc_address, "object_method_bind_call");
         self.object_set_instance = proc(c.GDExtensionInterfaceObjectSetInstance, get_proc_address, "object_set_instance");
@@ -153,7 +155,7 @@ pub const Interface = struct {
             c.GDEXTENSION_VARIANT_TYPE_NODE_PATH,
             2,
         ).?;
-        const args = [_]c.GDExtensionConstTypePtr{ &string_value };
+        const args = [_]c.GDExtensionConstTypePtr{&string_value};
         constructor(&value, &args);
         return value;
     }
