@@ -13,6 +13,68 @@ pub const notification_extension_reloaded: i32 = 2;
 
 pub const MethodReturn = enum { void, bool, int, float };
 
+const ClassRegistration = struct {
+    level: c.GDExtensionInitializationLevel,
+    unregister_fn: *const fn () void,
+};
+
+var class_registrations: std.ArrayList(ClassRegistration) = .empty;
+var current_initialization_level: ?c.GDExtensionInitializationLevel = null;
+
+/// Internal extension lifecycle hook. Native classes must be registered from
+/// inside an initialization callback so their level can be tracked.
+pub fn beginInitialization(level: c.GDExtensionInitializationLevel) void {
+    std.debug.assert(current_initialization_level == null);
+    current_initialization_level = level;
+}
+
+/// Internal extension lifecycle hook.
+pub fn endInitialization() void {
+    std.debug.assert(current_initialization_level != null);
+    current_initialization_level = null;
+}
+
+fn trackClassRegistration(unregister_fn: *const fn () void) void {
+    const level = current_initialization_level orelse
+        @panic("NativeClass.register must be called from the extension initialization callback");
+    class_registrations.append(std.heap.c_allocator, .{
+        .level = level,
+        .unregister_fn = unregister_fn,
+    }) catch @panic("out of memory while tracking a native class registration");
+}
+
+fn forgetClassRegistration(unregister_fn: *const fn () void) void {
+    var i = class_registrations.items.len;
+    while (i > 0) {
+        i -= 1;
+        if (class_registrations.items[i].unregister_fn == unregister_fn) {
+            _ = class_registrations.orderedRemove(i);
+            return;
+        }
+    }
+}
+
+/// Unregister classes from this initialization level in reverse registration
+/// order. Called automatically by `extension.entry` during deinitialization.
+pub fn unregisterLevel(level: c.GDExtensionInitializationLevel) void {
+    var i = class_registrations.items.len;
+    while (i > 0) {
+        i -= 1;
+        if (class_registrations.items[i].level == level) {
+            const unregister_fn = class_registrations.items[i].unregister_fn;
+            _ = class_registrations.orderedRemove(i);
+            unregister_fn();
+        }
+    }
+}
+
+/// Release registry storage after the final initialization level is torn down.
+pub fn deinitRegistrationRegistry() void {
+    std.debug.assert(class_registrations.items.len == 0);
+    class_registrations.deinit(std.heap.c_allocator);
+    class_registrations = .empty;
+}
+
 pub fn variantType(comptime ret: MethodReturn) c.GDExtensionVariantType {
     return switch (ret) {
         .void => c.GDEXTENSION_VARIANT_TYPE_NIL,
@@ -418,14 +480,20 @@ pub fn NativeClass(comptime T: type, comptime parent_name_text: [:0]const u8, co
             if (@hasDecl(T, "getVirtualCallData")) info.get_virtual_call_data_func = T.getVirtualCallData;
             if (@hasDecl(T, "callVirtualWithData")) info.call_virtual_with_data_func = T.callVirtualWithData;
             api_mod.godot.classdb_register_extension_class6.?(api_mod.godot.library, &class_name, &parent_name, &info);
+            trackClassRegistration(unregisterRaw);
         }
 
-        /// Unregister during the same initialization level at which this class
-        /// was registered. Derived extension classes must be unregistered first.
-        pub fn unregister() void {
+        fn unregisterRaw() void {
             var class_name = api_mod.godot.stringName(class_name_text);
             defer api_mod.godot.destroy(c.GDEXTENSION_VARIANT_TYPE_STRING_NAME, &class_name);
             api_mod.godot.classdb_unregister_extension_class.?(api_mod.godot.library, &class_name);
+        }
+
+        /// Unregister a class early. Normally `extension.entry` unregisters all
+        /// classes automatically during deinitialization.
+        pub fn unregister() void {
+            forgetClassRegistration(unregisterRaw);
+            unregisterRaw();
         }
     };
 }
@@ -498,4 +566,30 @@ test "hot reload callbacks and stored properties compile" {
     _ = &Setter.call;
     _ = &Setter.ptrcall;
     _ = &compileHotReloadRegistration;
+}
+
+var test_unregister_order: [2]u8 = undefined;
+var test_unregister_count: usize = 0;
+
+fn testUnregisterFirst() void {
+    test_unregister_order[test_unregister_count] = 1;
+    test_unregister_count += 1;
+}
+
+fn testUnregisterSecond() void {
+    test_unregister_order[test_unregister_count] = 2;
+    test_unregister_count += 1;
+}
+
+test "class registrations are unregistered automatically in reverse order" {
+    test_unregister_count = 0;
+    beginInitialization(c.GDEXTENSION_INITIALIZATION_SCENE);
+    trackClassRegistration(testUnregisterFirst);
+    trackClassRegistration(testUnregisterSecond);
+    endInitialization();
+
+    unregisterLevel(c.GDEXTENSION_INITIALIZATION_SCENE);
+    try std.testing.expectEqualSlices(u8, &.{ 2, 1 }, &test_unregister_order);
+    try std.testing.expectEqual(@as(usize, 0), class_registrations.items.len);
+    deinitRegistrationRegistry();
 }

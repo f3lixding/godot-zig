@@ -53,7 +53,8 @@ fn initialize(level: godot.c.GDExtensionInitializationLevel) callconv(.c) void {
 
 fn deinitialize(level: godot.c.GDExtensionInitializationLevel) callconv(.c) void {
     if (level != godot.c.GDEXTENSION_INITIALIZATION_SCENE) return;
-    // Unregister native classes here, in reverse registration order.
+    // Release module-level resources here. Native classes are unregistered
+    // automatically after this callback returns.
 }
 
 pub export fn my_extension_init(
@@ -113,7 +114,7 @@ fn initialize(level: godot.c.GDExtensionInitializationLevel) callconv(.c) void {
 
 fn deinitialize(level: godot.c.GDExtensionInitializationLevel) callconv(.c) void {
     if (level != godot.c.GDEXTENSION_INITIALIZATION_SCENE) return;
-    NativeMyBody.unregister();
+    // NativeMyBody is unregistered automatically.
 }
 ```
 
@@ -158,16 +159,19 @@ These names are `godot-zig` conventions used by `NativeClass.create()` and `Nati
 
 ## Hot reloading
 
-Hot reload is available in editor builds. It requires all of the following:
+Hot reload is available in editor debug builds. It requires all of the following:
 
 1. Set `reloadable = true` under `[configuration]` in the consuming project's `.gdextension` file.
 2. Use `.scene` or `.editor` as the minimum initialization level. Extensions initialized at `.core` or `.servers` require an editor restart.
-3. Register classes during initialization and unregister them at the same level during deinitialization.
-4. Unregister derived extension classes before their extension parents.
+3. Register native classes from the extension initialization callback, with extension parents before their children.
 
-`NativeClass` installs the required recreation callback automatically. During reload, Godot keeps the engine object alive, frees its old Zig instance, loads the new library, and calls `T.init(object)` or `T.initWithUserdata(object, class_userdata)` to allocate a new Zig instance around that same object.
+The editor detects a rebuilt debug library and reloads it automatically; calling `GDExtensionManager.reload_extension()` yourself is only necessary for custom tooling. See Godot's [GDExtension file format](https://docs.godotengine.org/en/4.7/engine_details/engine_api/gdextension/gdextension_file.html) and [C++ example](https://docs.godotengine.org/en/4.7/tutorials/scripting/cpp/gdextension_cpp_example.html).
 
-For multiple classes, teardown must be the reverse of registration:
+Like `godot-cpp`, `godot-zig` records every `NativeClass` registration and unregisters classes automatically, in reverse registration order, after the corresponding user deinitialization callback returns. `NativeClass.unregister()` remains available only for intentionally removing a class early.
+
+`NativeClass` also installs the required recreation callback automatically. During reload, Godot keeps the engine object alive, frees its old Zig instance, loads the new library, and calls `T.init(object)` or `T.initWithUserdata(object, class_userdata)` to allocate a new Zig instance around that same object.
+
+For extension class inheritance, register the parent first; teardown is automatic:
 
 ```zig
 const NativeBase = godot.class.NativeClass(Base, "Node", "NativeBase");
@@ -180,9 +184,8 @@ fn initialize(level: godot.c.GDExtensionInitializationLevel) callconv(.c) void {
 }
 
 fn deinitialize(level: godot.c.GDExtensionInitializationLevel) callconv(.c) void {
-    if (level != godot.c.GDEXTENSION_INITIALIZATION_SCENE) return;
-    NativeChild.unregister();
-    NativeBase.unregister();
+    _ = level;
+    // NativeChild and then NativeBase are unregistered automatically.
 }
 ```
 
@@ -242,7 +245,7 @@ pub fn notification(self: *Player, what: i32, reversed: bool) void {
 }
 ```
 
-The helper invokes `extensionReloaded` for `godot.class.notification_extension_reloaded` after Godot restores stored properties. Native threads, callbacks, and module-level resources must still be stopped or released by the extension's deinitializer before the old dynamic library is unloaded.
+The helper invokes `extensionReloaded` for `godot.class.notification_extension_reloaded` after Godot restores stored properties. This wraps Godot's documented [`Object.NOTIFICATION_EXTENSION_RELOADED`](https://docs.godotengine.org/en/4.7/classes/class_object.html#class-object-constant-notification-extension-reloaded). Native threads, callbacks, and module-level resources must still be stopped or released by the extension's deinitializer before the old dynamic library is unloaded.
 
 Godot cannot change an extension class's native parent during hot reload; restart the editor after making that kind of class hierarchy change.
 

@@ -1,5 +1,6 @@
 const c = @import("c.zig").c;
 const api = @import("api.zig");
+const class = @import("class.zig");
 
 pub const InitLevel = enum(c_int) {
     core = c.GDEXTENSION_INITIALIZATION_CORE,
@@ -32,11 +33,17 @@ pub fn entry(
     api.init(get_proc_address, library);
     const Callbacks = struct {
         fn initialize(_: ?*anyopaque, level: c.GDExtensionInitializationLevel) callconv(.c) void {
+            class.beginInitialization(level);
+            defer class.endInitialization();
             initializeFn(level);
         }
         fn deinitialize(_: ?*anyopaque, level: c.GDExtensionInitializationLevel) callconv(.c) void {
             deinitializeFn(level);
-            if (level == @intFromEnum(minimum_level)) api.deinit();
+            class.unregisterLevel(level);
+            if (level == @intFromEnum(minimum_level)) {
+                class.deinitRegistrationRegistry();
+                api.deinit();
+            }
         }
     };
     initialization.*.minimum_initialization_level = @intFromEnum(minimum_level);
