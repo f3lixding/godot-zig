@@ -93,6 +93,26 @@ pub const Object = struct {
         return .{ .value = out };
     }
 
+    /// Returns an owned copy of a property value. The caller must destroy it.
+    pub fn get(self: Object, property: types.StringName) Variant {
+        const method = api_mod.godot.bind("Object", "get", 2760726917);
+        var property_variant = Variant.fromStringName(property);
+        defer property_variant.destroy();
+        return self.callVariant1(method, &property_variant);
+    }
+
+    /// Sets a property through Object.set. This also supports dynamic properties,
+    /// such as AnimationTree's `parameters/...` paths.
+    pub fn set(self: Object, property: types.StringName, value: anytype) void {
+        const method = api_mod.godot.bind("Object", "set", 3776071444);
+        var property_variant = Variant.fromStringName(property);
+        defer property_variant.destroy();
+        var value_variant = Variant.from(value);
+        defer value_variant.destroy();
+        var result = self.callVariant2(method, &property_variant, &value_variant);
+        result.destroy();
+    }
+
     pub fn connectSignal(self: Object, comptime Signal: type, callable: Callable) i64 {
         const method = api_mod.godot.bind("Object", "connect", 1518946055);
         var signal_name = api_mod.godot.stringName(signal.name(Signal));
@@ -164,6 +184,14 @@ fn compileSignalApi(object: Object, callable: Callable, payload: TestSignal) voi
     object.disconnectSignal(TestSignal, callable);
 }
 
-test "typed signal object API compiles" {
+fn compilePropertyApi(object: Object, property: types.StringName) void {
+    object.set(property, @as(f32, 0.5));
+    var value = object.get(property);
+    defer value.destroy();
+    _ = value.to(f32);
+}
+
+test "object APIs compile" {
     _ = &compileSignalApi;
+    _ = &compilePropertyApi;
 }
