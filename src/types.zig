@@ -71,13 +71,45 @@ pub const Vector3i = extern struct { x: i32 = 0, y: i32 = 0, z: i32 = 0 };
 pub const Vector4 = extern struct { x: f32 = 0, y: f32 = 0, z: f32 = 0, w: f32 = 0 };
 pub const Vector4i = extern struct { x: i32 = 0, y: i32 = 0, z: i32 = 0, w: i32 = 0 };
 pub const Plane = extern struct { normal: Vector3 = .{}, d: f32 = 0 };
-pub const Quaternion = extern struct { x: f32 = 0, y: f32 = 0, z: f32 = 0, w: f32 = 1 };
+pub const Quaternion = extern struct {
+    x: f32 = 0,
+    y: f32 = 0,
+    z: f32 = 0,
+    w: f32 = 1,
+
+    /// Composes this rotation with `other` using the Hamilton product.
+    pub fn multiply(self: Quaternion, other: Quaternion) Quaternion {
+        return .{
+            .x = self.w * other.x + self.x * other.w + self.y * other.z - self.z * other.y,
+            .y = self.w * other.y - self.x * other.z + self.y * other.w + self.z * other.x,
+            .z = self.w * other.z + self.x * other.y - self.y * other.x + self.z * other.w,
+            .w = self.w * other.w - self.x * other.x - self.y * other.y - self.z * other.z,
+        };
+    }
+};
 pub const AABB = extern struct { position: Vector3 = .{}, size: Vector3 = .{} };
 pub const Basis = extern struct { rows: [3]Vector3 = .{ .{}, .{}, .{} } };
 pub const Transform2D = extern struct { columns: [3]Vector2 = .{ .{}, .{}, .{} } };
 pub const Transform3D = extern struct { basis: Basis = .{}, origin: Vector3 = .{} };
 pub const Projection = extern struct { columns: [4]Vector4 = .{ .{}, .{}, .{}, .{} } };
 pub const Color = extern struct { r: f32 = 0, g: f32 = 0, b: f32 = 0, a: f32 = 1 };
+
+test "Quaternion.multiply composes rotations" {
+    const identity = Quaternion{};
+    const quarter_turn_y = Quaternion{
+        .y = @sqrt(@as(f32, 0.5)),
+        .w = @sqrt(@as(f32, 0.5)),
+    };
+
+    try std.testing.expectEqual(quarter_turn_y, identity.multiply(quarter_turn_y));
+    try std.testing.expectEqual(quarter_turn_y, quarter_turn_y.multiply(identity));
+
+    const half_turn_y = quarter_turn_y.multiply(quarter_turn_y);
+    try std.testing.expectApproxEqAbs(@as(f32, 0.0), half_turn_y.x, 0.00001);
+    try std.testing.expectApproxEqAbs(@as(f32, 1.0), half_turn_y.y, 0.00001);
+    try std.testing.expectApproxEqAbs(@as(f32, 0.0), half_turn_y.z, 0.00001);
+    try std.testing.expectApproxEqAbs(@as(f32, 0.0), half_turn_y.w, 0.00001);
+}
 
 test "common Godot ABI sizes" {
     try std.testing.expectEqual(@as(usize, 8), @sizeOf(StringName));
