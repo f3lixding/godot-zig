@@ -131,6 +131,12 @@ pub const Array = struct {
         method.?(&self.value, &args, null, 2);
     }
 
+    pub fn setPackedVector2Array(self: *Array, array_type: MeshArrayType, value: *PackedVector2Array) void {
+        var variant = value.toVariant();
+        defer variant.destroy();
+        self.setVariant(@intFromEnum(array_type), &variant);
+    }
+
     pub fn setPackedVector3Array(self: *Array, array_type: MeshArrayType, value: *PackedVector3Array) void {
         var variant = value.toVariant();
         defer variant.destroy();
@@ -145,6 +151,83 @@ pub const Array = struct {
     pub fn indices(self: *Array) PackedInt32Array {
         var v = self.getMeshArray(.index);
         return v.toPackedInt32Array();
+    }
+};
+
+pub const PackedVector2Array = struct {
+    value: types.PackedVector2Array = std.mem.zeroes(types.PackedVector2Array),
+    variant_value: ?types.Variant = null,
+    internal: ?c.GDExtensionConstTypePtr = null,
+
+    pub fn init() PackedVector2Array {
+        var value: types.PackedVector2Array = std.mem.zeroes(types.PackedVector2Array);
+        api_mod.godot.variant_get_ptr_constructor.?(c.GDEXTENSION_VARIANT_TYPE_PACKED_VECTOR2_ARRAY, 0).?(&value, null);
+        return .{ .value = value };
+    }
+
+    pub fn fromSlice(values: []const types.Vector2) PackedVector2Array {
+        var array = init();
+        _ = array.resize(@intCast(values.len));
+        for (values, 0..) |value, i| array.set(@intCast(i), value);
+        return array;
+    }
+
+    pub fn fromVariant(variant: *Variant) PackedVector2Array {
+        const getter = api_mod.godot.variant_get_ptr_internal_getter.?(c.GDEXTENSION_VARIANT_TYPE_PACKED_VECTOR2_ARRAY).?;
+        const internal = getter(&variant.value);
+        return .{ .variant_value = variant.value, .internal = internal };
+    }
+
+    pub fn ptr(self: *PackedVector2Array) c.GDExtensionConstTypePtr {
+        return self.internal orelse &self.value;
+    }
+
+    pub fn mutPtr(self: *PackedVector2Array) c.GDExtensionTypePtr {
+        return @constCast(self.ptr());
+    }
+
+    pub fn toVariant(self: *PackedVector2Array) Variant {
+        var out: types.Variant = std.mem.zeroes(types.Variant);
+        const constructor = api_mod.godot.get_variant_from_type_constructor.?(
+            c.GDEXTENSION_VARIANT_TYPE_PACKED_VECTOR2_ARRAY,
+        ).?;
+        constructor(&out, self.mutPtr());
+        return .{ .value = out };
+    }
+
+    pub fn destroy(self: *PackedVector2Array) void {
+        if (self.variant_value) |*v| {
+            api_mod.godot.variant_destroy.?(v);
+            self.variant_value = null;
+        } else {
+            api_mod.godot.destroy(c.GDEXTENSION_VARIANT_TYPE_PACKED_VECTOR2_ARRAY, &self.value);
+        }
+    }
+
+    pub fn size(self: *PackedVector2Array) i64 {
+        const method = builtinMethod(c.GDEXTENSION_VARIANT_TYPE_PACKED_VECTOR2_ARRAY, "size", 3173160232);
+        var out: i64 = 0;
+        method.?(self.mutPtr(), null, &out, 0);
+        return out;
+    }
+
+    pub fn resize(self: *PackedVector2Array, new_size: i64) i64 {
+        const method = builtinMethod(c.GDEXTENSION_VARIANT_TYPE_PACKED_VECTOR2_ARRAY, "resize", 848867239);
+        var size_arg = new_size;
+        const args = [_]c.GDExtensionConstTypePtr{&size_arg};
+        var out: i64 = 0;
+        method.?(self.mutPtr(), &args, &out, 1);
+        return out;
+    }
+
+    pub fn get(self: *PackedVector2Array, index: i64) types.Vector2 {
+        const p = api_mod.godot.packed_vector2_array_operator_index_const.?(self.ptr(), index);
+        return @as(*const types.Vector2, @ptrCast(@alignCast(p))).*;
+    }
+
+    pub fn set(self: *PackedVector2Array, index: i64, value: types.Vector2) void {
+        const p = api_mod.godot.packed_vector2_array_operator_index.?(self.mutPtr(), index);
+        @as(*types.Vector2, @ptrCast(@alignCast(p))).* = value;
     }
 };
 
@@ -225,11 +308,21 @@ pub const PackedVector3Array = struct {
     }
 };
 
+fn compilePackedVector2Mutation(values: []const types.Vector2, arrays: *Array) void {
+    var vector_array = PackedVector2Array.fromSlice(values);
+    defer vector_array.destroy();
+    arrays.setPackedVector2Array(.tex_uv, &vector_array);
+}
+
 fn compilePackedVector3Mutation(values: []const types.Vector3, arrays: *Array) void {
     var vector_array = PackedVector3Array.fromSlice(values);
     defer vector_array.destroy();
     arrays.setPackedVector3Array(.vertex, &vector_array);
     arrays.setPackedVector3Array(.normal, &vector_array);
+}
+
+test "packed Vector2 construction and Array replacement compile" {
+    _ = &compilePackedVector2Mutation;
 }
 
 test "packed Vector3 construction and Array replacement compile" {

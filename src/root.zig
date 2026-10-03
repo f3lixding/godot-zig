@@ -43,6 +43,7 @@ pub const SpringArm3D = generated.classes.SpringArm3D;
 pub const RID = types.RID;
 pub const Array = collections.Array;
 pub const PackedByteArray = collections.PackedByteArray;
+pub const PackedVector2Array = collections.PackedVector2Array;
 pub const PackedVector3Array = collections.PackedVector3Array;
 pub const PackedInt32Array = collections.PackedInt32Array;
 pub const Input = generated.classes.Input;

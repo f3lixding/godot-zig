@@ -27,28 +27,72 @@ pub const Variant = struct {
         return .{ .value = out };
     }
 
-    pub fn fromVector2(value: types.Vector2) Variant { return fromBuiltin(value, c.GDEXTENSION_VARIANT_TYPE_VECTOR2); }
-    pub fn fromVector2i(value: types.Vector2i) Variant { return fromBuiltin(value, c.GDEXTENSION_VARIANT_TYPE_VECTOR2I); }
-    pub fn fromRect2(value: types.Rect2) Variant { return fromBuiltin(value, c.GDEXTENSION_VARIANT_TYPE_RECT2); }
-    pub fn fromRect2i(value: types.Rect2i) Variant { return fromBuiltin(value, c.GDEXTENSION_VARIANT_TYPE_RECT2I); }
-    pub fn fromVector3(value: types.Vector3) Variant { return fromBuiltin(value, c.GDEXTENSION_VARIANT_TYPE_VECTOR3); }
-    pub fn fromVector3i(value: types.Vector3i) Variant { return fromBuiltin(value, c.GDEXTENSION_VARIANT_TYPE_VECTOR3I); }
-    pub fn fromTransform2D(value: types.Transform2D) Variant { return fromBuiltin(value, c.GDEXTENSION_VARIANT_TYPE_TRANSFORM2D); }
-    pub fn fromVector4(value: types.Vector4) Variant { return fromBuiltin(value, c.GDEXTENSION_VARIANT_TYPE_VECTOR4); }
-    pub fn fromVector4i(value: types.Vector4i) Variant { return fromBuiltin(value, c.GDEXTENSION_VARIANT_TYPE_VECTOR4I); }
-    pub fn fromPlane(value: types.Plane) Variant { return fromBuiltin(value, c.GDEXTENSION_VARIANT_TYPE_PLANE); }
-    pub fn fromQuaternion(value: types.Quaternion) Variant { return fromBuiltin(value, c.GDEXTENSION_VARIANT_TYPE_QUATERNION); }
-    pub fn fromAABB(value: types.AABB) Variant { return fromBuiltin(value, c.GDEXTENSION_VARIANT_TYPE_AABB); }
-    pub fn fromBasis(value: types.Basis) Variant { return fromBuiltin(value, c.GDEXTENSION_VARIANT_TYPE_BASIS); }
-    pub fn fromTransform3D(value: types.Transform3D) Variant { return fromBuiltin(value, c.GDEXTENSION_VARIANT_TYPE_TRANSFORM3D); }
-    pub fn fromProjection(value: types.Projection) Variant { return fromBuiltin(value, c.GDEXTENSION_VARIANT_TYPE_PROJECTION); }
-    pub fn fromColor(value: types.Color) Variant { return fromBuiltin(value, c.GDEXTENSION_VARIANT_TYPE_COLOR); }
-    pub fn fromString(value: types.String) Variant { return fromBuiltin(value, c.GDEXTENSION_VARIANT_TYPE_STRING); }
-    pub fn fromStringName(value: types.StringName) Variant { return fromBuiltin(value, c.GDEXTENSION_VARIANT_TYPE_STRING_NAME); }
-    pub fn fromNodePath(value: types.NodePath) Variant { return fromBuiltin(value, c.GDEXTENSION_VARIANT_TYPE_NODE_PATH); }
-    pub fn fromRID(value: types.RID) Variant { return fromBuiltin(value, c.GDEXTENSION_VARIANT_TYPE_RID); }
-    pub fn fromCallable(value: types.Callable) Variant { return fromBuiltin(value, c.GDEXTENSION_VARIANT_TYPE_CALLABLE); }
-    pub fn fromSignal(value: types.Signal) Variant { return fromBuiltin(value, c.GDEXTENSION_VARIANT_TYPE_SIGNAL); }
+    pub fn fromVector2(value: types.Vector2) Variant {
+        return fromBuiltin(value, c.GDEXTENSION_VARIANT_TYPE_VECTOR2);
+    }
+    pub fn fromVector2i(value: types.Vector2i) Variant {
+        return fromBuiltin(value, c.GDEXTENSION_VARIANT_TYPE_VECTOR2I);
+    }
+    pub fn fromRect2(value: types.Rect2) Variant {
+        return fromBuiltin(value, c.GDEXTENSION_VARIANT_TYPE_RECT2);
+    }
+    pub fn fromRect2i(value: types.Rect2i) Variant {
+        return fromBuiltin(value, c.GDEXTENSION_VARIANT_TYPE_RECT2I);
+    }
+    pub fn fromVector3(value: types.Vector3) Variant {
+        return fromBuiltin(value, c.GDEXTENSION_VARIANT_TYPE_VECTOR3);
+    }
+    pub fn fromVector3i(value: types.Vector3i) Variant {
+        return fromBuiltin(value, c.GDEXTENSION_VARIANT_TYPE_VECTOR3I);
+    }
+    pub fn fromTransform2D(value: types.Transform2D) Variant {
+        return fromBuiltin(value, c.GDEXTENSION_VARIANT_TYPE_TRANSFORM2D);
+    }
+    pub fn fromVector4(value: types.Vector4) Variant {
+        return fromBuiltin(value, c.GDEXTENSION_VARIANT_TYPE_VECTOR4);
+    }
+    pub fn fromVector4i(value: types.Vector4i) Variant {
+        return fromBuiltin(value, c.GDEXTENSION_VARIANT_TYPE_VECTOR4I);
+    }
+    pub fn fromPlane(value: types.Plane) Variant {
+        return fromBuiltin(value, c.GDEXTENSION_VARIANT_TYPE_PLANE);
+    }
+    pub fn fromQuaternion(value: types.Quaternion) Variant {
+        return fromBuiltin(value, c.GDEXTENSION_VARIANT_TYPE_QUATERNION);
+    }
+    pub fn fromAABB(value: types.AABB) Variant {
+        return fromBuiltin(value, c.GDEXTENSION_VARIANT_TYPE_AABB);
+    }
+    pub fn fromBasis(value: types.Basis) Variant {
+        return fromBuiltin(value, c.GDEXTENSION_VARIANT_TYPE_BASIS);
+    }
+    pub fn fromTransform3D(value: types.Transform3D) Variant {
+        return fromBuiltin(value, c.GDEXTENSION_VARIANT_TYPE_TRANSFORM3D);
+    }
+    pub fn fromProjection(value: types.Projection) Variant {
+        return fromBuiltin(value, c.GDEXTENSION_VARIANT_TYPE_PROJECTION);
+    }
+    pub fn fromColor(value: types.Color) Variant {
+        return fromBuiltin(value, c.GDEXTENSION_VARIANT_TYPE_COLOR);
+    }
+    pub fn fromString(value: types.String) Variant {
+        return fromBuiltin(value, c.GDEXTENSION_VARIANT_TYPE_STRING);
+    }
+    pub fn fromStringName(value: types.StringName) Variant {
+        return fromBuiltin(value, c.GDEXTENSION_VARIANT_TYPE_STRING_NAME);
+    }
+    pub fn fromNodePath(value: types.NodePath) Variant {
+        return fromBuiltin(value, c.GDEXTENSION_VARIANT_TYPE_NODE_PATH);
+    }
+    pub fn fromRID(value: types.RID) Variant {
+        return fromBuiltin(value, c.GDEXTENSION_VARIANT_TYPE_RID);
+    }
+    pub fn fromCallable(value: types.Callable) Variant {
+        return fromBuiltin(value, c.GDEXTENSION_VARIANT_TYPE_CALLABLE);
+    }
+    pub fn fromSignal(value: types.Signal) Variant {
+        return fromBuiltin(value, c.GDEXTENSION_VARIANT_TYPE_SIGNAL);
+    }
 
     fn fromBuiltin(value: anytype, variant_type: c.GDExtensionVariantType) Variant {
         var out: types.Variant = std.mem.zeroes(types.Variant);
@@ -157,6 +201,10 @@ pub const Variant = struct {
 
     pub fn toPackedByteArray(self: *Variant) @import("collections.zig").PackedByteArray {
         return @import("collections.zig").PackedByteArray.fromVariant(self);
+    }
+
+    pub fn toPackedVector2Array(self: *Variant) @import("collections.zig").PackedVector2Array {
+        return @import("collections.zig").PackedVector2Array.fromVariant(self);
     }
 
     pub fn toPackedVector3Array(self: *Variant) @import("collections.zig").PackedVector3Array {
